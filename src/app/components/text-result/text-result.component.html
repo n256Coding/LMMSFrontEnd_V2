@@ -1,0 +1,9 @@
+<div class="text-result-holder">
+  <div class="card">
+    <div class="card-body">
+      <a href="{{url}}" class="card-text">{{url}}</a>
+      <h5 class="card-title">{{description}}</h5>
+      <bar-rating [(ngModel)]="rating" [max]="5" (rateChange)="updateRatings()"></bar-rating>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.head-container {
+    background-color: blue;
+    box-shadow: 0px 2px 8px 2px gray;
+    position: fixed;
+    width: 100%;
+    height: 110px;
+    z-index: 2;
+}
+
+.brand-logo {
+    height: 50px;
+    width: auto;
+}
+
+.nav-user-control {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.nav-user-control li {
+    margin: 5px;
+    float: right;
+}
+
+.nav-user-control a {
+    color: #ffffff;
+}
+
+.nav-user-control a:hover{
+    color: black;
+}
