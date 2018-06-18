@@ -1,3 +1,28 @@
-<p>
-  video works!
-</p>
+<div id="one">
+  <br>
+  <br>
+  <div class="row" id="two">
+    <div class="col-xs-3 col-sm-1 col-md-3" id="three">&nbsp;</div>
+    <div class="col-xs-6 col-sm-10 col-md-6" id="four">
+      <div class="form-group" id="five">
+        <input type="text" id="search-bar" placeholder="Enter search keyword.." [(ngModel)]="searchKeyword" name="search">
+        <button type="submit" value="Submit" id="submitButton" (click)="search();">
+          <i id="search-icon" class="fa fa-search"></i>
+        </button>
+        <mat-chip-list id="chipsList">
+          <mat-chip class="mat-chip mat-primary mat-standard-chip ng-star-inserted" *ngFor="let filter of selectedFilters; let i = index">{{filter}}
+            <i class="fa fa-close" (click)="remove(i)" id="fa-close"></i>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <div class="form-group" id="error">
+      </div>
+      <div class="btn-div">
+          <button class="btn btn-primary" (click)="openDialog()">Add Filter+</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="info">
+  <span>asd</span>
+</div>

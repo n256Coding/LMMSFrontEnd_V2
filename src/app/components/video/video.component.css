@@ -1,0 +1,142 @@
+/* -----search box----- */
+
+body {
+  padding-top: 75px;
+}
+
+.search-container {
+  width: 490px;
+  display: block;
+  margin: 0 auto;
+}
+
+input#search-bar {
+  margin: 0 auto;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #D0CFCE;
+  outline: none;
+  border-radius: 20px;
+  &:focus {
+    border: 1px solid #008ABF;
+    transition: 0.35s ease;
+    color: #008ABF;
+    &::-webkit-input-placeholder {
+      transition: opacity 0.45s ease;
+      opacity: 0;
+    }
+    &::-moz-placeholder {
+      transition: opacity 0.45s ease;
+      opacity: 0;
+    }
+    &:-ms-placeholder {
+      transition: opacity 0.45s ease;
+      opacity: 0;
+    }
+  }
+}
+
+.search-icon {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  position: relative;
+  float: right;
+  width: 30px;
+  height: 30px;
+  top: -32px;
+  right: -35px;
+}
+
+#submitButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  position: relative;
+  float: right;
+  width: 30px;
+  height: 30px;
+  top: -38px;
+  right: 10px;
+}
+
+.center {
+  width: 500px;
+  height: 200px;
+  padding: 10px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+}
+
+/* chips */
+
+.fa {
+  padding-left: 10px;
+  color: #888;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fa:hover {
+  color: #888;
+}
+
+.btn-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn btn-primary {
+  text-align: center;
+}
+
+/*modal*/
+
+#close {
+  display: none;
+}
+
+#one {
+  background-color: red;
+}
+
+#two {
+  background-color: aqua;
+}
+
+#three {
+  background-color: blueviolet;
+}
+
+#four {
+  background-color: chartreuse;
+}
+
+#five {
+  background-color: coral;
+}
+
+#error {
+  background-color: cornflowerblue;
+}
+
+.info {
+  background-color: darksalmon;
+}

@@ -1,5 +1,5 @@
-@import '../node_modules/ngx-bar-rating/themes/br-default-theme.css';
-
+/* @import '../node_modules/ngx-bar-rating/themes/br-default-theme.css'; */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 .holder {
     margin: 0px;
     padding: 0px;
