@@ -113,6 +113,9 @@ input#search-bar {
   display: none;
 }
 
+/*loading bar*/
+
+/* 
 #one {
   background-color: red;
 }
@@ -133,10 +136,10 @@ input#search-bar {
   background-color: coral;
 }
 
-#error {
-  background-color: cornflowerblue;
-}
+#six {
+  background-color: coral;
+} */
 
-.info {
-  background-color: darksalmon;
+#info {
+  max-height: 500px;
 }

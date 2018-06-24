@@ -1,23 +1,49 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatChipInputEvent } from '@angular/material';
-import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { FilterService } from './filter-service';
+import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { postModel } from "../../models/searchPostModel";
+import { FilterDialog } from "./filter-dialog/filter-dialog.component";
+import { videoService } from "../../services/video-service";
+import { listItem } from "../../models/ListItemModel";
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.css']
 })
-export class VideoComponent implements OnInit{
 
-  selectedFilters: string[] = [];
+export class VideoComponent {
 
-  constructor(public dialog: MatDialog) { }
-
+  selectedFilters: string[];
+  model: postModel;
   searchKeyword: String;
+  loadComponent: boolean = false;
+  hasData: boolean;
 
-  search() {
-   
+  listItems: listItem[];
+
+  constructor(public dialog: MatDialog, private videoService: videoService) {
+    this.model = new postModel();
+  }
+
+  searchInDB() {
+    this.model.userId = "u0001";
+    this.model.filters = this.selectedFilters;
+    this.model.searchKeyword = this.searchKeyword;
+
+    this.videoService.searchVideosInDatabase(this.model)
+      .subscribe(data => {
+        this.listItems = data;
+        this.loadComponent = true;
+        if (data.length > 0) {
+          this.hasData = true;
+        } else {
+          this.hasData = false;
+        }
+      },
+        err => {
+          console.log('raw error =>', err)
+        }
+      );
   }
 
   openDialog(): void {
@@ -39,55 +65,5 @@ export class VideoComponent implements OnInit{
       this.selectedFilters.splice(i, 1);
     }
   }
-
-  ngOnInit() {
-   
-  }
 }
 
-//dialog component
-@Component({
-  selector: 'filter-dialog',
-  templateUrl: './filter-dialog.html',
-  styleUrls: ['./filter-dialog.css']
-})
-export class FilterDialog implements OnInit {
-
-  filterFormGroup: FormGroup
-  filters: any;
-  selected: any;
-
-  constructor(
-    public dialogRef: MatDialogRef<FilterDialog>, @Inject(MAT_DIALOG_DATA) public data: any, public FilterService: FilterService, private formBuilder: FormBuilder) { }
-
-  ngOnInit() {
-    this.filterFormGroup = this.formBuilder.group({
-      filters: this.formBuilder.array([])
-
-    });
-
-    setTimeout((res) => {
-      this.filters = ["Duration < 10 mins", "Duration < 20 mins", "IDE : Eclipse", "IDE : Intellij (Idea, Pycharm, webstorm)", "IDE : Visual studio", "IDE : Net beans", "IDE : Visual studio Code", "IDE : Android studio"];
-    });
-  }
-
-  onChange(event) {
-    const filters = <FormArray>this.filterFormGroup.get('filters') as FormArray;
-
-    if (event.checked) {
-      filters.push(new FormControl(event.source.value))
-    } else {
-      const i = filters.controls.findIndex(x => x.value === event.source.value);
-      filters.removeAt(i);
-    }
-  }
-
-  submit() {
-    this.dialogRef.close(this.filterFormGroup.value);
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
