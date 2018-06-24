@@ -25,6 +25,7 @@ import { ListItemComponent } from './components/video/list-item/list-item.compon
 import { HttpModule } from '@angular/http';
 import { FilterDialog } from "./components/video/filter-dialog/filter-dialog.component";
 import { videoService } from './services/video-service';
+import { ProcessingComponent } from './components/video/processing/processing.component';
 
 //enableProdMode();
 
@@ -40,7 +41,8 @@ import { videoService } from './services/video-service';
     TextResultComponent,
     TextRequestComponent,
     FilterDialog,
-    ListItemComponent
+    ListItemComponent,
+    ProcessingComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,7 @@ import { videoService } from './services/video-service';
     BrowserAnimationsModule,
     HttpModule
   ],
-  entryComponents: [FilterDialog, VideoComponent, ListItemComponent],
+  entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
   providers: [TextResourceService, DataService, videoService],
   bootstrap: [AppComponent]
 })

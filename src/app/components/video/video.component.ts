@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { postModel } from "../../models/searchPostModel";
 import { FilterDialog } from "./filter-dialog/filter-dialog.component";
@@ -20,6 +20,7 @@ export class VideoComponent {
   hasData: boolean;
 
   listItems: listItem[];
+  message: string;
 
   constructor(public dialog: MatDialog, private videoService: videoService) {
     this.model = new postModel();

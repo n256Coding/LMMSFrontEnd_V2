@@ -1,6 +1,6 @@
 <div [hidden]="!hasData">
-  <h5>We identified following results for your search criteria.
-    <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Analyze for new results </button>
+  <h5>We identified following results for your search criteria. If you need more. start new search
+    <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
   </h5>
   <div *ngFor="let listitem of listItems">
     <div class="row">
@@ -105,8 +105,8 @@
 </div>
 <div id="asd" [hidden]="hasData">
   <div class="row">
-      <h5>We coudn't identify results for your search criteria.Would you like us to start a new search for you..?
-        <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Analyze for new results </button>
-      </h5>
+    <h5>We coudn't identify results for your search criteria. Would you like us to start a new search for you..?
+      <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
+    </h5>
   </div>
 </div>

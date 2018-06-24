@@ -16,7 +16,7 @@ export class videoService {
         return this.http.post<listItem[]>('/api/index/evideos', model);
     }
 
-    searchNewVideos(model: postModel) {
-        this.http.post('/api/index/tvideos', model);
+    searchNewVideos(model: postModel) : Observable<string>{
+        return this.http.post<string>('/api/index/tvideos', model);
     }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { listItem } from '../../../models/ListItemModel';
 import { videoService } from "../../../services/video-service";
 import { postModel } from "../../../models/searchPostModel";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-list-item',
@@ -19,12 +20,18 @@ export class ListItemComponent implements OnChanges {
     errorMessage: string;
     emptyData: boolean = true;
 
-    constructor(private _videoService: videoService) {
-    }
+    constructor(private _videoService: videoService, private router: Router) { }
 
     searchNewVideos() {
-        console.log("searching new videos");
-        this._videoService.searchNewVideos(this.postModel);
+        this._videoService
+            .searchNewVideos(this.postModel)
+            .subscribe(data => {
+                console.log(data);
+                this.router.navigateByUrl('/video/processing');
+            }, err => {
+                console.log(err);
+            });
+
     }
 
     navigate(url: string) {
