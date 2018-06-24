@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Credential } from '../../models/credential';
 
 @Component({
   selector: 'app-moodle',
@@ -8,6 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class MoodleComponent implements OnInit {
 
   constructor() { }
+
+  checkValue = "";
+  creds = new Credential();
+
+  selectedOption(event) {
+    this.checkValue = event.target.value;
+    // alert("clicked !! "+ event.target.value);
+  }
 
   ngOnInit() {
   }
