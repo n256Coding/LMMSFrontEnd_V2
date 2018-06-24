@@ -6,13 +6,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TextRequestComponent } from './components/text-request/text-request.component';
 
+import {SlideStandardReportComponent} from './components/slide-standard-report/slide-standard-report.component';
+import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
+
 const routes: Routes = [
   { path : '', redirectTo : '/text-request', pathMatch : 'full' },
   { path : 'text-responce',  component : TextComponent },
   { path : 'text-request', component : TextRequestComponent },
   { path : 'video', component : VideoComponent },
   { path : 'moodle', component : MoodleComponent },
-  { path : 'slide', component : SlideComponent }
+  { path : 'slide', component : SlideComponent },
+  {path: 'report',component: SlideStandardReportComponent},
+  {path: 'customReportSlide',component: SlideCustomReportComponent}
 ];
 
 @NgModule({

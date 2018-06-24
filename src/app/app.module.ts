@@ -14,9 +14,16 @@ import { AppRoutingModule } from './/app-routing.module';
 import { TextComponent } from './components/text/text.component';
 import { VideoComponent } from './components/video/video.component';
 import { MoodleComponent } from './components/moodle/moodle.component';
-import { SlideComponent } from './components/slide/slide.component';
 import { TextResultComponent } from './components/text-result/text-result.component';
 import { TextRequestComponent } from './components/text-request/text-request.component';
+
+//slide
+import {ReactiveFormsModule} from '@angular/forms' 
+import { SlideComponent } from './components/slide/slide.component';
+import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
+import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
+
+
 
 
 @NgModule({
@@ -29,14 +36,18 @@ import { TextRequestComponent } from './components/text-request/text-request.com
     MoodleComponent,
     SlideComponent,
     TextResultComponent,
-    TextRequestComponent
+    TextRequestComponent,
+    SlideStandardReportComponent,
+    SlideCustomReportComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BarRatingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [TextResourceService, DataService],
   bootstrap: [AppComponent]
