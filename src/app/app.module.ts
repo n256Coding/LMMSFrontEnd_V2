@@ -5,12 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode } from '@angular/core';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as bootstrap from "bootstrap";
 
 import { AppComponent } from './app.component';
 import { HeadComponent } from './components/head/head.component';
 import { FootComponent } from './components/foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { TextComponent } from './components/text/text.component';
 import { VideoComponent } from './components/video/video.component';
 import { MoodleComponent } from './components/moodle/moodle.component';
@@ -18,7 +19,6 @@ import { TextResultComponent } from './components/text-result/text-result.compon
 import { TextRequestComponent } from './components/text-request/text-request.component';
 
 //slide
-import {ReactiveFormsModule} from '@angular/forms'
 import { SlideComponent } from './components/slide/slide.component';
 import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
 import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
@@ -50,7 +50,7 @@ import { ProcessingComponent } from './components/video/processing/processing.co
     TextRequestComponent,
     FilterDialog,
     ListItemComponent,
-    ProcessingComponent
+    ProcessingComponent,
     TextRequestComponent,
     SlideStandardReportComponent,
     SlideCustomReportComponent
@@ -64,7 +64,7 @@ import { ProcessingComponent } from './components/video/processing/processing.co
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    HttpModule
+    HttpModule,
     FormsModule,
     ReactiveFormsModule
 
