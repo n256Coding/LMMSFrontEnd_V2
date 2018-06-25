@@ -1,0 +1,48 @@
+<div class="container">
+  <br>
+  <h2>Custom Validation Report</h2>
+</div>
+
+
+<div *ngIf="showSpinner">
+  <div class="loader"></div>
+</div>
+
+
+<div class="container">
+
+
+  {{reportList[0].maxSlideNo}}
+
+
+
+  <ol style='text-align: left'>
+
+    <li *ngFor='let reportItem of reportList'>
+      <div class="card">
+        <div class="card-body">
+          <strong>SlideNo            : </strong>{{reportItem.slideNo}}<br> 
+          <strong>Header             : </strong>{{reportItem.header}}<br> 
+          <strong>HeaderText         : </strong>{{reportItem.headertext}}<br>
+          <strong>Footer             : </strong>{{reportItem.footer}}<br> 
+          <strong>FooterText         : </strong>{{reportItem.footertext}}<br> 
+          <strong>Num of Pages       : </strong>{{reportItem.pageNumber}}<br>          
+          <strong>Contrast           : </strong>{{reportItem.contrast}}<br> 
+          <strong>Family             : </strong>{{reportItem.fontFamily}}<br> 
+          <strong>FontSize           : </strong>{{reportItem.fontSize}}<br>          
+          <strong>Content Position   : </strong>{{reportItem.position}}<br> 
+          <strong>Words Per Slide    : </strong>{{reportItem.words}}<br> 
+          <strong>Bullerts Per Slide : </strong>{{reportItem.bullters}}<br> 
+          <strong>Logo Positions     : </strong>{{reportItem.picPositions}}<br>
+
+        </div>
+      </div>
+    </li>
+  </ol>
+
+
+  <br>
+  <div class="container">
+    <button class="btn btn-success" (click)='goBack()'>Back to Home</button>
+  </div>
+</div>
