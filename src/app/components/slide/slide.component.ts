@@ -284,4 +284,29 @@ export class SlideComponent implements OnInit {
     this.changeToThird = "no Change";
   }
 
+    selectDocTempalte: string;
+  onSelectDocTemplate(materialTempale: string): void {
+    this.selectDocTempalte = materialTempale;
+  }
+
+selectDocHeader: string;
+  onDocHeaderCheck(header: string): void {
+
+    if (this.selectDocHeader === 'on') {
+      this.selectDocHeader = 'off';
+    } else {
+      this.selectDocHeader = header;
+    }
+  }
+
+  selectDocFooter: string;
+  onDocFooterCheck(footer: string): void {
+
+    if (this.selectDocFooter === 'on') {
+      this.selectDocFooter = 'off';
+    } else {
+      this.selectDocFooter = footer;
+    }
+  }
+
 }
