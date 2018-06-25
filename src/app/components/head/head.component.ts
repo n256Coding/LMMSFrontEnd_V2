@@ -1,4 +1,6 @@
+import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
+import { UserSessionService } from '../../services/user-session.service';
 
 @Component({
   selector: 'app-head',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeadComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userSession: UserSessionService) { }
+
+  hello() {
+
+  }
 
   ngOnInit() {
+    const user = new User();
+    user.id = '5b25204baf2fc52278dd7ed4';
+    user.userName = 'Default User';
+    this.userSession.changeUser(user);
   }
 
 }

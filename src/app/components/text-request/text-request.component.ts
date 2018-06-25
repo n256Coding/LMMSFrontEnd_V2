@@ -17,24 +17,38 @@ export class TextRequestComponent implements OnInit {
   inputValue = 'java';
   isPdf = false;
 
+  errorContentHidden = true;
+
+  setErrorContentStatus(status: boolean) {
+    this.errorContentHidden = status;
+  }
+
   clickMe() {
     alert(this.inputValue + 'isPdf: ' + this.isPdf);
   }
 
   search() {
+    $('#exampleModal').modal({
+      backdrop: 'static',
+      keyboard: false,
+      show: true
+    });
     this.textService.searchResource(this.inputValue, this.isPdf).subscribe(
       data => {
+        $('#exampleModal').modal('hide');
         this.dataService.changeMessage(data);
         this.router.navigateByUrl('/text-responce');
       },
       err => {
-        alert('cannot connect to server');
+        this.errorContentHidden = false;
       },
       () => {
         console.log('function completed');
       }
     );
   }
+
+
 
   ngOnInit() {
   }

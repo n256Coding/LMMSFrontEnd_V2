@@ -1,3 +1,4 @@
+import { UserSessionService } from './services/user-session.service';
 import { DataService } from './services/data.service';
 import { TextResourceService } from './services/text-resource.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,7 +39,7 @@ import { TextRequestComponent } from './components/text-request/text-request.com
     BarRatingModule,
     FormsModule
   ],
-  providers: [TextResourceService, DataService],
+  providers: [TextResourceService, DataService, UserSessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

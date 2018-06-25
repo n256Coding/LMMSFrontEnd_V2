@@ -4,6 +4,7 @@
       <a href="{{url}}" class="card-text">{{url}}</a>
       <h5 class="card-title">{{description}}</h5>
       <bar-rating [(ngModel)]="rating" [max]="5" (rateChange)="updateRatings()"></bar-rating>
+      <input type="hidden" [value]="_id"/>
     </div>
   </div>
 </div>

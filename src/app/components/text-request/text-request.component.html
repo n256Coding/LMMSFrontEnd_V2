@@ -25,3 +25,28 @@
   </div>
 </div>
 <br>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">LMMS Project</h5>
+      </div>
+      <div class="modal-body">
+        <div class="progressContent" [hidden]="!errorContentHidden">
+          <h1>Processing your request...</h1>
+          <h2>Please Wait</h2>
+          <p class="fa fa-refresh fa-spin" style="font-size:250px;"></p>
+        </div>
+        <div class="errorContent" [hidden]="errorContentHidden">
+          <h1>Cannot connect to server.</h1>
+          <p class="fa fa-frown-o" style="font-size:250px;"></p>
+        </div>
+        <div class="modal-footer" [hidden]="errorContentHidden">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="setErrorContentStatus(true)">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
