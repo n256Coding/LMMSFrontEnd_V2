@@ -18,6 +18,7 @@ import { SlideComponent } from './components/slide/slide.component';
 import { TextResultComponent } from './components/text-result/text-result.component';
 import { TextRequestComponent } from './components/text-request/text-request.component';
 
+import { MoodleService } from './services/moodle.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { TextRequestComponent } from './components/text-request/text-request.com
     BarRatingModule,
     FormsModule
   ],
-  providers: [TextResourceService, DataService],
+  providers: [TextResourceService, DataService, MoodleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

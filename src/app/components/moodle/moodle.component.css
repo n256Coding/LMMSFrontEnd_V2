@@ -13,10 +13,35 @@
 .margin-top-10{
     margin-top: 10px;
 }
+.margin-left-10{
+    margin-left: 10px;
+}
+.margin-bottom-10{
+    margin-bottom: 10px; 
+}
 .border-style-1{
     border: 2px solid rgba(139, 139, 139, 0.479);
     padding: 8px;
 }
 .progress-bar-height{
-    height: 10px;
+    height: 8px;
+}
+
+.parent{
+    display: flex;
+}
+.movies{
+    background: rgba(165, 165, 168, 0.651);
+    padding: 0.9em;
+    margin: 1em;
+    max-width: 100em;
+}
+
+.movieListItem{
+    font-size: 14px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #cce5ff;
+    padding: 0.3em ;
+    margin: 0.5em;
+    text-align: left;
 }
