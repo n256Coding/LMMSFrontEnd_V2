@@ -1,7 +1,7 @@
 <div class="text-result-holder">
   <div class="card">
     <div class="card-body">
-      <a href="{{url}}" class="card-text">{{url}}</a>
+      <a href="{{url}}" class="card-text" target="_blank">{{url}}</a>
       <h5 class="card-title">{{description}}</h5>
       <bar-rating [(ngModel)]="rating" [max]="5" (rateChange)="updateRatings()"></bar-rating>
       <input type="hidden" [value]="_id"/>
