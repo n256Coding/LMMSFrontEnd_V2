@@ -2,7 +2,7 @@ import { UserSessionService } from './services/user-session.service';
 import { DataService } from './services/data.service';
 import { TextResourceService } from './services/text-resource.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as bootstrap from "bootstrap";
@@ -36,6 +36,7 @@ import { videoService } from './services/video-service';
 import { ProcessingComponent } from './components/video/processing/processing.component';
 
 //enableProdMode();
+import { MoodleService } from './services/moodle.service';
 
 @NgModule({
   declarations: [
@@ -61,16 +62,14 @@ import { ProcessingComponent } from './components/video/processing/processing.co
     AppRoutingModule,
     BarRatingModule,
     FormsModule,
-    ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
     HttpModule,
-    FormsModule,
     ReactiveFormsModule
 
   ],
   entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
-  providers: [TextResourceService, DataService, UserSessionService, videoService],
+  providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
