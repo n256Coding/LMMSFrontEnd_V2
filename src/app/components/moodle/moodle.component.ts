@@ -14,6 +14,7 @@ export class MoodleComponent implements OnInit {
 
   checkValue = "";
   standardType = "";
+
   creds :Credential;
   resources : MoodleResults; 
 
@@ -26,7 +27,11 @@ export class MoodleComponent implements OnInit {
 
   selectedMoodleStandard(event) {
     this.standardType = event.target.value;
-    alert( this.standardType)
+    // alert( this.standardType)
+  }
+
+  selectedValidationOption(event){
+
   }
 
   displayMoodleResults(): void{

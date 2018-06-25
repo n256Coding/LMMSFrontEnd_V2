@@ -26,12 +26,17 @@
 .progress-bar-height{
     height: 8px;
 }
-
+.text-right{
+    text-align: right;
+}
+.margin-right-10{
+    margin-right: 10px;
+}
 .parent{
     display: flex;
 }
 .movies{
-    background: rgba(165, 165, 168, 0.651);
+    background: rgba(228, 228, 231, 0.932);
     padding: 0.9em;
     margin: 1em;
     max-width: 100em;
@@ -40,8 +45,19 @@
 .movieListItem{
     font-size: 14px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background: #cce5ff;
+    background: #c6c7c9f1;
     padding: 0.3em ;
     margin: 0.5em;
     text-align: left;
 }
+.quiz-div-style{
+    /* margin: 15px 0 0 0 ; */
+}
+
+.file-uploader-style{
+    border: 2px solid rgba(139, 139, 139, 0.479);
+    left: 10px;
+    padding: 6px;
+    margin-bottom: 10px;
+}
+

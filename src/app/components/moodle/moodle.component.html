@@ -45,13 +45,61 @@
                     <option value="moodle_custom_validation">Custom Validation</option>
                   </select>
               </div>
-
+              <!-- moodle settings -->
+              <div>
+                <hr>
+                  <div class="moodle-div-style" *ngIf="standardType === 'moodle_custom_validation' ">
+                    <h4>Custom Validation Settings<hr></h4>
+                    <div class="form-group row">
+                      <label for="weekly_lesson_type" class="col-sm-9 col-xs-9 col-form-label">Weekly Lesson Type</label>
+                      <div class="col-sm-3 col-xs-3">
+                        <select id="weekly_lesson_type" class="form-control">
+                          <option selected>Topic wise (ex:- Java Development)</option>
+                          <option>Date wise (ex:- 1 January - 7 January)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="weekly_main_desc" class="col-sm-9 col-xs-9 col-form-label">Check main Weekly Description</label>
+                        <div class="col-sm-3 col-xs-3">
+                          <select id="weekly_main_desc" class="form-control">
+                            <option selected>Yes</option>
+                            <option>No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <label for="check_resource_name" class="col-sm-9 col-xs-9 col-form-label">Check resource's naming convension</label>
+                          <div class="col-sm-3 col-xs-3">
+                            <select id="check_resource_name" class="form-control">
+                              <option selected>Yes</option>
+                              <option>No</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="check_resource_desc" class="col-sm-9 col-xs-9 col-form-label">Check resources description</label>
+                            <div class="col-sm-3 col-xs-3">
+                              <select id="check_resource_desc" class="form-control">
+                                <option selected>Yes</option>
+                                <option>No</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                              <div class="col-sm-12 col-xs-12 text-right">
+                                <button type="button" class="btn btn-primary margin-right-10">Apply Settings</button>
+                              </div>
+                            </div>
+                  </div>
+              </div>
+              <!-- end moodle settings -->
             </div>
             <!-- //validation type selection div -->
 
             <small id="emailHelp" class="form-text text-muted">Credintials are not saving</small>
             <button type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button>
-            <button type="button" class="btn btn-primary margin-top-10 margin-left-10" (click)="displayMoodleResults()">Start Analyze</button>
+            <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()">Start Analyze</button>
           </div>
     </div>
     <!-- display results -->
@@ -69,17 +117,76 @@
   <!-- question file analyzer row -->
   <div class="row" *ngIf="checkValue === 'quiz_file_view' ">
     <div class="col-sm-12 col-xs-12">
-        <form id="question-file-validator">
-          <h4>Moodle Question File Analyzer</h4>
-          <div class="form-group">
+        <h4>Moodle Question File Analyzer</h4>
+        <div id="question-file-validator" class="row">
+          <div class="col-md-9 col-sm-9 col-xs-12 file-uploader-style">
             <input type="file" class="form-control-file" id="exampleFormControlFile1">
           </div>
-          <button class="btn btn-primary margin-bottom-10">Upload</button>
-          <div class="progress progress-bar-height">
-              <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+          <div class="col-md-3 col-sm-3 col-xs-12 ">
+            <button class="btn btn-primary  margin-left-10">Upload</button>
           </div>
-        </form>
+          <div class="col-sm-12 col-xs-12 ">
+              <div class="progress progress-bar-height">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+              </div>
+          </div>
+        </div>
     </div>
+
+    <!-- question settings -->
+<div class="col-md-12 col-md-12 col-xs-12 ">
+    <hr>
+      <div class="quiz-div-style">
+        <h4>Question Analyzing Settings<hr></h4>
+        <div class="form-group row">
+          <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">MCQ Question Type</label>
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <select id="mcq_type" class="form-control">
+              <option selected>Single Answers</option>
+              <option>Multiple Answers</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="question_amount" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of questions</label>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <select id="question_amount" class="form-control">
+                <option selected>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+              <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of answers (MCQ only)</label>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <select id="check_resource_name" class="form-control">
+                  <option selected>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers for each MCQ question</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="check_resource_desc" class="form-control">
+                    <option selected>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-primary margin-right-10">Apply Settings</button>
+                    <button type="submit" class="btn btn-success margin-left-10">Start Analyze</button>
+                  </div>
+                </div>
+      </div>
+  </div>
+<!-- question settings end -->
+
   </div>
   <!-- //question file analyzer row -->
 
