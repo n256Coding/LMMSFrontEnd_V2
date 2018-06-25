@@ -18,14 +18,14 @@ export class MoodleService {
   constructor(private http : HttpClient) { }
 
   addValidateData(newMoodle: Credential):Observable<Credential>{
-    return this.http.post<Credential>('http://localhost:8080/moodle/savecredentials',newMoodle,httpOptions).pipe(
+    return this.http.post<Credential>('http://localhost:8082/moodle/savecredentials',newMoodle,httpOptions).pipe(
       tap((moodle:Credential) => console.log(`Inserted - ${JSON.stringify(moodle)}`)),
       catchError(error => of(new Credential()))
     );
   }
 
   getMoodleResults():Observable<MoodleResults>{
-    return this.http.get<MoodleResults>('http://localhost:8080/moodle/validateresult').pipe(
+    return this.http.get<MoodleResults>('http://localhost:8082/moodle/validateresult').pipe(
       tap((validateResult => console.log(`validateResult = ${JSON.stringify(validateResult)}`)),
     catchError(error => of()))
     );
