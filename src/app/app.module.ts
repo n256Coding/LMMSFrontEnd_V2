@@ -2,10 +2,9 @@ import { UserSessionService } from './services/user-session.service';
 import { DataService } from './services/data.service';
 import { TextResourceService } from './services/text-resource.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { BarRatingModule } from 'ngx-bar-rating';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeadComponent } from './components/head/head.component';
@@ -19,13 +18,24 @@ import { TextResultComponent } from './components/text-result/text-result.compon
 import { TextRequestComponent } from './components/text-request/text-request.component';
 
 //slide
-import {ReactiveFormsModule} from '@angular/forms' 
+import {ReactiveFormsModule} from '@angular/forms'
 import { SlideComponent } from './components/slide/slide.component';
 import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
 import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
 
 
 
+import { MaterialModule } from './app.material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
+
+import { ListItemComponent } from './components/video/list-item/list-item.component';
+import { HttpModule } from '@angular/http';
+import { FilterDialog } from "./components/video/filter-dialog/filter-dialog.component";
+import { videoService } from './services/video-service';
+import { ProcessingComponent } from './components/video/processing/processing.component';
+
+//enableProdMode();
 
 @NgModule({
   declarations: [
@@ -38,6 +48,10 @@ import { SlideCustomReportComponent } from './components/slide-custom-report/sli
     SlideComponent,
     TextResultComponent,
     TextRequestComponent,
+    FilterDialog,
+    ListItemComponent,
+    ProcessingComponent
+    TextRequestComponent,
     SlideStandardReportComponent,
     SlideCustomReportComponent
   ],
@@ -47,10 +61,16 @@ import { SlideCustomReportComponent } from './components/slide-custom-report/sli
     AppRoutingModule,
     BarRatingModule,
     FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    HttpModule
+    FormsModule,
     ReactiveFormsModule
 
   ],
-  providers: [TextResourceService, DataService, UserSessionService],
+  entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
+  providers: [TextResourceService, DataService, UserSessionService, videoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

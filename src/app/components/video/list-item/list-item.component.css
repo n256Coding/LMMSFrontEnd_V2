@@ -1,0 +1,31 @@
+
+#one {
+  padding: 10px;
+}
+
+#three {
+  background-color: burlywood;
+} 
+
+.row {
+  background-color: #007bff;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.list-group-item.active {
+  background-color: white;
+  border-color: white;
+}
+
+#thumbnail {
+  height: 50%;
+  width: 100%;
+  margin: auto;
+  background-color: white;
+}
+
+#asd {
+  background-color: #007bff;
+}

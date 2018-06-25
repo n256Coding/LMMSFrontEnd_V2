@@ -1,0 +1,112 @@
+<div [hidden]="!hasData">
+  <h5>We identified following results for your search criteria. If you need more. start new search
+    <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
+  </h5>
+  <div *ngFor="let listitem of listItems">
+    <div class="row">
+      <div class="col-sm-3">
+        <div id="thumbnail">
+          <img src={{listitem.thumbnailUrl}} alt="empty">
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <h4 class="list-group-item-heading">{{listitem.title}}</h4>
+        <p class="list-group-item-text">{{listitem.description}}</p>
+        <p class="list-group-item-text">Duration : {{listitem.duration}}</p>
+        <button type="button" class="btn btn-info" (click)="navigate(listitem.videoUrl);"> Watch </button>
+      </div>
+      <div class="col-sm-4" id="filterDiv" align="Right">
+        <ul>
+          <table style="width:100%">
+            <tr>
+              <td>
+                <li>Quality</li>
+              </td>
+              <td>:</td>
+              <td>{{listitem.filter1}}</td>
+            </tr>
+            <tr>
+              <td>
+                <li>presesnter visibility</li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter2}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>code visibility</li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter3}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>IDE(Elipse)</li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter4}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>IDE(Intellij) </li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter5}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>IDE(Visual studio) </li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter6}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>IDE(Net beans) </li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter7}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>IDE(Visual studio Code) </li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter8}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>IDE(Android studio) </li>
+              </td>
+              <td>:</td>
+              <td>
+                {{listitem.filter9}}
+              </td>
+            </tr>
+          </table>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="asd" [hidden]="hasData">
+  <div class="row">
+    <h5>We coudn't identify results for your search criteria. Would you like us to start a new search for you..?
+      <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
+    </h5>
+  </div>
+</div>

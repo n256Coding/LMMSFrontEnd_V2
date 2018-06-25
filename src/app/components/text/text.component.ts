@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { InsiteSearchResult } from './../../models/insiteSearchResult';
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-text',

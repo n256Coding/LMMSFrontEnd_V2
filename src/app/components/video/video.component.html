@@ -1,3 +1,42 @@
-<p>
-  video works!
-</p>
+<div id="one">
+  <br>
+  <br>
+  <div class="row" id="two">
+    <div class="col-xs-3 col-sm-1 col-md-3" id="three">&nbsp;</div>
+    <div class="col-xs-6 col-sm-10 col-md-6" id="four">
+      <div class="form-group" id="five">
+        <input type="text" id="search-bar" placeholder="Enter search keyword.." [(ngModel)]="searchKeyword" name="search"
+          minlength="2" maxlength="30" #search = "ngModel">
+        <button type="submit" value="Submit" id="submitButton" (click)="searchInDB();">
+          <i id="search-icon" class="fa fa-search"></i>
+        </button>
+        <br><br>
+        <div *ngIf="search.errors && (search.dirty || search.touched)" class="alert alert-danger">
+          <div [hidden]="!search.errors.required">
+            Search keyword is required!
+          </div>
+          <div [hidden]="!search.errors.minlength">
+            Search keyword must be at least 3 characters long.
+          </div>
+        </div>
+        <mat-chip-list id="chipsList">
+          <mat-chip class="mat-chip mat-primary mat-standard-chip ng-star-inserted" *ngFor="let filter of selectedFilters; let i = index">{{filter}}
+            <i class="fa fa-close" (click)="remove(i)" id="fa-close"></i>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <div class="btn-div">
+        <button class="btn btn-primary" (click)="openDialog()">Add Filter+</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10" id="info">
+      <app-list-item *ngIf="loadComponent" [listItemsData]="listItems" [postModel]="model" [hasData]="hasData"></app-list-item>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
