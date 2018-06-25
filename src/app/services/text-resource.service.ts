@@ -7,7 +7,7 @@ import { OperationStatus } from '../models/operationStatus';
 
 @Injectable()
 export class TextResourceService {
-  textSearchUrl = 'http://localhost:8080/api/resource';
+  textSearchUrl = 'http://localhost:8081/api/resource';
 
 
   constructor(private http: HttpClient) { }

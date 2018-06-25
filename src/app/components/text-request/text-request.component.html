@@ -1,7 +1,6 @@
 <div>
   <br>
-  <h1 class="display-3 text-center">Resources
-    <sup>TM</sup>
+  <h1 class="display-3 text-center">Text Materials
   </h1>
   <div class="row">
     <div class="col-xs-3 col-sm-1 col-md-3">&nbsp;</div>
@@ -13,14 +12,14 @@
   </div>
   <div class="row">
     <div class="col-xs-3 col-sm-1 col-md-3">&nbsp;</div>
-    <div class="col-xs-6 col-sm-10 col-md-6">
-      <!-- <a class="btn btn-primary" (click)="search()" href="/text-responce">Search</a> -->
+    <div class="col-xs-6 col-sm-10 col-md-5">
       <a class="btn btn-primary" (click)="search()">Search</a>
-      <!-- <button (click)="clickMe()">Hello World</button> -->
     </div>
-    <div class="col-xs-3 col-sm-1 col-md-3">
-      <span>PDF </span>
-      <input type="checkbox" name="Hello" id="" value="hello" [(ngModel)]="isPdf">
+    <div class="col-xs-3 col-sm-1 col-md-4">
+      <span>E-Books </span>
+      <input type="radio" name="Hello" value="ebook" [(ngModel)]="contentType">
+      <br><span> Web Tutorials </span>
+      <input type="radio" name="Hello" value="web" [(ngModel)]="contentType">
     </div>
   </div>
 </div>

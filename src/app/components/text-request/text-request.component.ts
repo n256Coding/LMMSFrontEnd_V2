@@ -16,7 +16,8 @@ export class TextRequestComponent implements OnInit {
     private dataService: DataService) { }
 
   inputValue = 'java';
-  isPdf = false;
+  isPdf: boolean;
+  contentType = "web";
 
   errorContentHidden = true;
 
@@ -34,6 +35,11 @@ export class TextRequestComponent implements OnInit {
       keyboard: false,
       show: true
     });
+    if(this.contentType == 'ebook'){
+      this.isPdf = true;
+    }else{
+      this.isPdf = false;
+    }
     this.textService.searchResource(this.inputValue, this.isPdf).subscribe(
       data => {
         $('#exampleModal').modal('hide');
