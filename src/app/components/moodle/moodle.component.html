@@ -98,15 +98,15 @@
             <!-- //validation type selection div -->
 
             <small id="emailHelp" class="form-text text-muted">Credintials are not saving</small>
-            <button type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button>
-            <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()">Start Analyze</button>
+            <button id="test" type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button>
+            <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()" >Start Analyze</button>
           </div>
     </div>
     <!-- display results -->
     <div class="parent">
       <ol class="movies">
         <li class="movieListItem" *ngFor="let eachResource of resources" >
-          Resource - {{eachResource.name}} | {{eachResource.description}}
+          {{eachResource.name}} | {{eachResource.description}}
         </li>
       </ol> 
     </div>
