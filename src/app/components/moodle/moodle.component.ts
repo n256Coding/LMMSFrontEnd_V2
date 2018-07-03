@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Credential } from '../../models/credential';
 import { MoodleResults } from '../../models/moodleResults';
 import { MoodleService } from './../../services/moodle.service';
+import { Router } from '@angular/router';
+import { ResourcesList } from '../../models/resourcesList';
+import { MoodleResultService } from './../../services/moodle-result.service';
+
 
 @Component({
   selector: 'app-moodle',
@@ -10,13 +14,14 @@ import { MoodleService } from './../../services/moodle.service';
 })
 export class MoodleComponent implements OnInit {
 
-  constructor(private moodleService: MoodleService) { }
+  constructor(private moodleService: MoodleService, private router: Router,
+    private moodleResultService: MoodleResultService) { }
 
   checkValue = "";
   standardType = "";
 
   creds :Credential;
-  resources : MoodleResults = new MoodleResults(); 
+  resources : ResourcesList = new ResourcesList();
 
   m_username; m_loginUrl; m_pwd ; m_pageUrl; 
 
@@ -35,7 +40,17 @@ export class MoodleComponent implements OnInit {
   }
 
   displayMoodleResults(): void{
-    this.moodleService.getMoodleResults().subscribe(res => this.resources = res)
+    this.moodleService.getMoodleResults().subscribe(
+      res => {
+        // this.resources = res
+        this.router.navigateByUrl('/moodle-result');
+        this.moodleResultService.changeMessage(res);
+       // $('#moodleLoadingModal').modal('hide');
+      
+      },err =>{
+      alert("cannot connect to the server !!!");
+      }
+    );
   }
 
   sendMoodleCredentials(){

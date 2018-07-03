@@ -99,10 +99,10 @@
 
             <small id="emailHelp" class="form-text text-muted">Credintials are not saving</small>
             <button id="test" type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button>
-            <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()" >Start Analyze</button>
+            <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()" data-toggle="modal" data-target="#moodleLoadingModal" >Start Analyze</button>
           </div>
     </div>
-    <!-- display results -->
+    <!-- display results --
     <div class="parent">
       <ol class="movies">
         {{resources.sectionType}}
@@ -195,3 +195,16 @@
 </div>
 <!-- //main -->
 
+<!-- Moodle Loading Modal -->
+<div class="modal fade" id="moodleLoadingModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="text-center">
+              <img src="../../../assets/moodle-images/loading-3.gif" width="250px" height="250px">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Moodle Loading Modal Ends -->

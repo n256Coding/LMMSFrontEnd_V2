@@ -5,6 +5,7 @@ import { Credential } from '../models/credential';
 import { MoodleResults } from '../models/moodleResults';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ResourcesList } from '../models/resourcesList';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -24,8 +25,8 @@ export class MoodleService {
     );
   }
 
-  getMoodleResults():Observable<MoodleResults>{
-    return this.http.get<MoodleResults>('http://localhost:8080/moodle/validateresult').pipe(
+  getMoodleResults():Observable<ResourcesList>{
+    return this.http.get<ResourcesList>('http://localhost:8080/moodle/validateresult').pipe(
       tap((validateResult => console.log(`validateResult = ${JSON.stringify(validateResult)}`)),
     catchError(error => of()))
     );

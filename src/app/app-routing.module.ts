@@ -5,6 +5,7 @@ import { TextComponent } from './components/text/text.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TextRequestComponent } from './components/text-request/text-request.component';
+import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 
 const routes: Routes = [
   { path : '', redirectTo : '/text-request', pathMatch : 'full' },
@@ -12,7 +13,10 @@ const routes: Routes = [
   { path : 'text-request', component : TextRequestComponent },
   { path : 'video', component : VideoComponent },
   { path : 'moodle', component : MoodleComponent },
-  { path : 'slide', component : SlideComponent }
+  { path : 'slide', component : SlideComponent },
+
+  { path : '', redirectTo: '/moodle-result' ,pathMatch : 'full'},
+  { path : 'moodle-result', component : MoodleResultComponent }
 ];
 
 @NgModule({
