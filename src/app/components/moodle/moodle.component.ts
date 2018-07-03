@@ -16,7 +16,7 @@ export class MoodleComponent implements OnInit {
   standardType = "";
 
   creds :Credential;
-  resources : MoodleResults; 
+  resources : MoodleResults = new MoodleResults(); 
 
   m_username; m_loginUrl; m_pwd ; m_pageUrl; 
 

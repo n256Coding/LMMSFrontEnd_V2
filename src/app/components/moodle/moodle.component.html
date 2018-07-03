@@ -105,7 +105,8 @@
     <!-- display results -->
     <div class="parent">
       <ol class="movies">
-        <li class="movieListItem" *ngFor="let eachResource of resources" >
+        {{resources.sectionType}}
+        <li class="movieListItem" *ngFor="let eachResource of resources.resourcesList" >
           {{eachResource.name}} | {{eachResource.description}}
         </li>
       </ol> 
