@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ResourcesList } from '../../models/resourcesList';
 import { MoodleResultService } from './../../services/moodle-result.service';
 
+declare var $: any;
 
 @Component({
   selector: 'app-moodle',
@@ -19,6 +20,7 @@ export class MoodleComponent implements OnInit {
 
   checkValue = "";
   standardType = "";
+  
 
   creds :Credential;
   resources : ResourcesList = new ResourcesList();
@@ -45,7 +47,7 @@ export class MoodleComponent implements OnInit {
         // this.resources = res
         this.router.navigateByUrl('/moodle-result');
         this.moodleResultService.changeMessage(res);
-       // $('#moodleLoadingModal').modal('hide');
+       $('#moodleLoadingModal').modal('hide');
       
       },err =>{
       alert("cannot connect to the server !!!");

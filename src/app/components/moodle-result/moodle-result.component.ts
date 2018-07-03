@@ -21,7 +21,6 @@ export class MoodleResultComponent implements OnInit {
       res => {
         if (res.sectionType === undefined) {
           this.router.navigateByUrl('/moodle');
-          // $('#moodleLoadingModal').modal('hide');
 
         } else {
           this.resources = res;
