@@ -42,6 +42,8 @@ export class MoodleComponent implements OnInit {
   }
 
   displayMoodleResults(): void{
+    $('#moodleLoadingModal').modal('show');
+    
     this.moodleService.getMoodleResults().subscribe(
       res => {
         // this.resources = res
