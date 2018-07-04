@@ -37,6 +37,8 @@ import { ProcessingComponent } from './components/video/processing/processing.co
 
 //enableProdMode();
 import { MoodleService } from './services/moodle.service';
+import { LoginComponent } from './components/login/login.component';
+import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { MoodleService } from './services/moodle.service';
     ProcessingComponent,
     TextRequestComponent,
     SlideStandardReportComponent,
-    SlideCustomReportComponent
+    SlideCustomReportComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +68,8 @@ import { MoodleService } from './services/moodle.service';
     MaterialModule,
     BrowserAnimationsModule,
     HttpModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    StorageServiceModule
   ],
   entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
   providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService],

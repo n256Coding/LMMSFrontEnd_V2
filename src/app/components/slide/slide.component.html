@@ -39,12 +39,12 @@
 
 
 
-  <div  *ngIf="changeToSecond === 'Change'" class="container"> 
+  <div  *ngIf="changeToSecond === 'Change'" class="container">
   <div class="container">
     <p>Choose your master slide</p>
-    <p>*Make sure your master slide does not containt any textual content.It only have one slide and that describe color template
+    <p>*Make sure your master slide does not contain any textual content.It only have one slide and that describe color template
       and logos that you need to check.And name should be <strong>master-(your_slide_name).ppt</strong></p>
-       
+
 
     <div class="display-3 text-center">
       <div *ngIf="currentMasterSlideUpload" class="progress">
@@ -69,7 +69,7 @@
 <div *ngIf="changeToThird === 'Change'" class="container">
   <div>
     <div class="container">
-      <p>Choose your template type</p>
+      <p>Choose your validation type</p>
       <form>
         <select class="custom-select custom-select mb-3">
             <option *ngFor="let template of templates" [value]="template.value" (click)="onSelectTemplate(template.value)">
@@ -84,12 +84,12 @@
       <form [formGroup]='standardSlideForm' (ngSubmit)="startStandardSlideValidation(audiance.value)">
 
         <div class="form-group">
-          <label>Expected Audiance Size</label>
+          <label>Expected Audience Size</label>
           <input type="number" class="form-control" formControlName="standardaudiancesize" #audiance>
 
           <div *ngIf="standardSlideForm.controls['standardaudiancesize'].touched && !standardSlideForm.controls['standardaudiancesize'].valid">
-            <span *ngIf="standardSlideForm.controls['standardaudiancesize'].hasError('required')" style="color: red">  
-            *Please enter expected audiance size  
+            <span *ngIf="standardSlideForm.controls['standardaudiancesize'].hasError('required')" style="color: red">
+            *Please enter expected audience size
             </span>
           </div>
 
@@ -114,8 +114,8 @@
           <input type="number" formControlName='noofslides' class="form-control" #noofslide>
 
           <div *ngIf="customForm.controls['noofslides'].touched && !customForm.controls['noofslides'].valid">
-            <span *ngIf="customForm.controls['noofslides'].hasError('required') " style="color: red">  
-            *Please enter required no of slides  
+            <span *ngIf="customForm.controls['noofslides'].hasError('required') " style="color: red">
+            *Please enter required no of slides
             </span>
           </div>
 
@@ -126,32 +126,32 @@
           <input type="number" formControlName='noofwords' class="form-control" #noofword>
 
           <div *ngIf="customForm.controls['noofwords'].touched && !customForm.controls['noofwords'].valid">
-            <span *ngIf="customForm.controls['noofwords'].hasError('required') " style="color: red">  
-            *Please enter required no of words per slide  
+            <span *ngIf="customForm.controls['noofwords'].hasError('required') " style="color: red">
+            *Please enter required no of words per slide
             </span>
           </div>
 
         </div>
 
         <div class="form-group">
-          <label>No of bullerts per slide:</label>
+          <label>No of bullets per slide:</label>
           <input type="number" formControlName='noofbullerts' class="form-control" #bullert>
 
           <div *ngIf="customForm.controls['noofbullerts'].touched && !customForm.controls['noofbullerts'].valid">
-            <span *ngIf="customForm.controls['noofbullerts'].hasError('required') " style="color: red">  
-            *Please enter required no of bullerts per slide  
+            <span *ngIf="customForm.controls['noofbullerts'].hasError('required') " style="color: red">
+            *Please enter required no of bullerts per slide
             </span>
           </div>
 
         </div>
 
         <div class="form-group">
-          <label>Expected Audiance Size:</label>
+          <label>Expected Audience Size:</label>
           <input type="number" formControlName='audianceSize' class="form-control" #caudiance>
 
           <div *ngIf="customForm.controls['audianceSize'].touched && !customForm.controls['audianceSize'].valid">
-            <span *ngIf="customForm.controls['audianceSize'].hasError('required') " style="color: red">  
-            *Please enter expected audiance size  
+            <span *ngIf="customForm.controls['audianceSize'].hasError('required') " style="color: red">
+            *Please enter expected audience size
             </span>
           </div>
 
@@ -285,7 +285,7 @@
     <p>Choose your master material</p>
     <p>*Make sure your master material only have one page and that describe color template
       and logos that you need to check.And name should be <strong>master-(your_material_name).doc</strong></p>
-       
+
 
     <div class="display-3 text-center">
       <div *ngIf="currentMasterSlideUpload" class="progress">
@@ -328,7 +328,7 @@
 
         <button class="btn btn-primary" (click)="startStandardDocValidation()">Start Validation</button>
 
-     
+
     </div>
 
 
@@ -347,7 +347,7 @@
             </option>
         </select>
 
- 
+
 
         <div class="form-check-inline">
           <label class="form-check-label">

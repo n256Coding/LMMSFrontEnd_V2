@@ -75,8 +75,8 @@ export class SlideComponent implements OnInit {
   ];
 
   templates = [
-    { value: 'standard', viewValue: 'Standard Template' },
-    { value: 'custom', viewValue: 'Customizable Template' }
+    { value: 'standard', viewValue: 'Standard Method' },
+    { value: 'custom', viewValue: 'Customizable Method' }
   ];
 
   //master file
@@ -264,7 +264,7 @@ export class SlideComponent implements OnInit {
   }
 
   constructor(private frmbuilder: FormBuilder, private slideService: SlideService) {
-    
+
     this.customForm = frmbuilder.group({
       noofslides: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])],
       noofwords: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])],

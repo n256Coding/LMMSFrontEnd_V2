@@ -9,6 +9,7 @@ import { ProcessingComponent } from './components/video/processing/processing.co
 
 import {SlideStandardReportComponent} from './components/slide-standard-report/slide-standard-report.component';
 import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   { path : '', redirectTo : '/text-request', pathMatch : 'full' },
@@ -18,8 +19,9 @@ const routes: Routes = [
   { path : 'video/processing', component : ProcessingComponent },
   { path : 'moodle', component : MoodleComponent },
   { path : 'slide', component : SlideComponent },
-  {path: 'report',component: SlideStandardReportComponent},
-  {path: 'customReportSlide',component: SlideCustomReportComponent}
+  { path : 'report', component : SlideStandardReportComponent },
+  { path : 'customReportSlide', component : SlideCustomReportComponent },
+  { path : 'loginPage', component : LoginComponent }
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
-import { User } from './../../models/user';
-import { Component, OnInit } from '@angular/core';
-import { UserSessionService } from '../../services/user-session.service';
+import {Component, OnInit, Inject} from "@angular/core";
+import {UserSessionService} from "../../services/user-session.service";
+import {WebStorageService, SESSION_STORAGE} from "angular-webstorage-service";
 
 @Component({
   selector: 'app-head',
@@ -9,17 +9,35 @@ import { UserSessionService } from '../../services/user-session.service';
 })
 export class HeadComponent implements OnInit {
 
-  constructor(private userSession: UserSessionService) { }
-
-  hello() {
-
+  constructor(private userSession: UserSessionService, @Inject(SESSION_STORAGE) private storage: WebStorageService) {
   }
 
   ngOnInit() {
-    const user = new User();
-    user.id = '5b25204baf2fc52278dd7ed4';
-    user.userName = 'Default User';
-    this.userSession.changeUser(user);
+    // this.storage.set('loggedUser', {name:'dfsdgd'});
+  }
+
+  logout() {
+    this.userSession.unauthenticate();
+  }
+
+  authenticated() {
+    console.log('logged User: ');
+    console.log(this.storage.get('loggedUser'));
+    if (this.storage.get('loggedUser') == null) {
+      console.log('its false');
+      return false;
+    } else {
+      console.log('its true');
+      return true;
+    }
+  }
+
+  setSession() {
+    this.storage.set('loggedUser', {name: 'hello'});
+  }
+
+  removeSession() {
+    this.storage.remove('loggedUser');
   }
 
 }

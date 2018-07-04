@@ -29,8 +29,11 @@
   </nav>
 
   <ul class="nav-user-control">
-    <li><a href="#">test@example.com</a></li>
-    <li><a href="#">Login</a></li>
-    <li><a href="#">Register</a></li>
+    <li><a href="">test@example.com</a></li>
+    <li><a href="" [hidden]="authenticated()">Login</a></li>
+    <li><a href="" (click)="logout()" [hidden]="!authenticated()">Logout</a></li>
+    <li><a href="">Register</a></li>
   </ul>
+  <button (click)="setSession()">Logout</button>
+  <button (click)="removeSession()">Check Authenticated</button>
 </div>
