@@ -12,7 +12,7 @@
         $('.loader').delay(150).fadeOut('slow'); // will fade out the white DIV that covers the website.
         $('body').delay(150).css({ 'overflow': 'visible' })
     })
-  
+
   // responsive-menu tigger
     $(".menu").on('click', function() {
         $(".responsive-menu-area").toggleClass("active");
@@ -155,7 +155,7 @@
         WHEN DOCUMENT LOADING
     ==========================================================================*/
 
-    
+
     // Single gallery slider
     function productGallary() {
         if ($('.slider-active2').length && $('.slider-thumbnil-active').length) {
@@ -417,3 +417,4 @@
     });
 
 })(jQuery);
+
