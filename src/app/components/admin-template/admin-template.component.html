@@ -1,0 +1,46 @@
+<div class="container">
+
+  <br>
+  <h2>Lecture Slide Validation</h2>
+  <hr>
+
+  <form [formGroup]='adminForm' (ngSubmit)="admin(template.value)">
+
+    <div class="form-group">
+      <label>Name of the template:</label>
+      <input type="text" formControlName='templateName' class="form-control" #template>
+
+      <div *ngIf="adminForm.controls['templateName'].touched && !adminForm.controls['templateName'].valid">
+        <span *ngIf="adminForm.controls['templateName'].hasError('required') " style="color: red">  
+            *Please enter name of the template
+            </span>
+      </div>
+      <br>
+      <p>Choose your master slide:</p>
+      <p>*Make sure your master slide does not containt any textual content.It only have two slides and first one describe color template
+        and logos that you need to check in first slide and second one describe color template and logos that you need to check in content slides.And name should be <strong>master-(your_slide_name).ppt</strong></p>
+
+      <div class="display-3 text-center">
+        <div *ngIf="currentMasterSlideUpload" class="progress">
+          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterSlide.percentageMasterSlide}}"
+            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterSlide.percentageMasterSlide+'%'}">
+            {{progressMasterSlide.percentageMasterSlide}}%</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" #inputGroupFile04 (change)="selectMasterSlide($event)">
+          <label class="custom-file-label" for="inputGroupFile04">{{inputGroupFile04.value}}</label>
+        </div>
+      </div>
+
+      <br>
+
+    </div>
+
+
+    <input type="submit" value="Upload" class="btn btn-primary" [disabled]="!adminForm.valid || selectedMasterSlide === undefined">
+
+  </form>
+</div>

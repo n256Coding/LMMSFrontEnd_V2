@@ -9,6 +9,8 @@ import { ProcessingComponent } from './components/video/processing/processing.co
 
 import {SlideStandardReportComponent} from './components/slide-standard-report/slide-standard-report.component';
 import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
+import {AdminTemplateComponent} from './components/admin-template/admin-template.component';
+
 import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
   { path : 'loginPage', component : LoginComponent }
+  { path : 'adminTemplate',component: AdminTemplateComponent}
 ];
 
 @NgModule({

@@ -19,9 +19,11 @@ import { TextResultComponent } from './components/text-result/text-result.compon
 import { TextRequestComponent } from './components/text-request/text-request.component';
 
 //slide
+import {ReactiveFormsModule} from '@angular/forms'
 import { SlideComponent } from './components/slide/slide.component';
 import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
 import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
+import { AdminTemplateComponent } from './components/admin-template/admin-template.component';
 
 
 
@@ -57,7 +59,8 @@ import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-
     TextRequestComponent,
     SlideStandardReportComponent,
     SlideCustomReportComponent,
-    LoginComponent
+    LoginComponent,
+    AdminTemplateComponent
   ],
   imports: [
     BrowserModule,

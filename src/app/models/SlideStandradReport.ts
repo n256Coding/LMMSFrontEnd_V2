@@ -13,4 +13,7 @@ export class SlideStandardReport{
 	picPositions:string;
 	headertext:string;
 	footertext:string;
+	flag:string;
+	summary:string;
+	checkingPoints: number;
 }
