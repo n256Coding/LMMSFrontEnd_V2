@@ -22,6 +22,7 @@ import {ReactiveFormsModule} from '@angular/forms'
 import { SlideComponent } from './components/slide/slide.component';
 import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
 import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
+import { AdminTemplateComponent } from './components/admin-template/admin-template.component';
 
 
 
@@ -38,7 +39,8 @@ import { SlideCustomReportComponent } from './components/slide-custom-report/sli
     TextResultComponent,
     TextRequestComponent,
     SlideStandardReportComponent,
-    SlideCustomReportComponent
+    SlideCustomReportComponent,
+    AdminTemplateComponent
   ],
   imports: [
     BrowserModule,

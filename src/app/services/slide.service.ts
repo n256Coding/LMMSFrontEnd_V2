@@ -7,6 +7,7 @@ import {CustomSlide} from '../models/CustomSlide';
 import {catchError,map,tap} from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import {SlideStandardReport} from '../models/SlideStandradReport';
+import {SlideAdminTemplate} from '../models/SlideAdminTemplate';
 
 const httpOptions = {headers:new HttpHeaders({'Content-Type':'application/json'})};
 
@@ -71,6 +72,20 @@ export class SlideService {
         getSlideCustomReport():Observable<SlideStandardReport[]>{
     return this.http.get<SlideStandardReport[]>('//localhost:8090/slide/slideCustom').pipe(
       tap(receivedSlide => console.log(`receivedSlides = ${JSON.stringify(receivedSlide)}`)),
+      catchError(error => of([]))
+    );
+  }
+
+     addAdminTemplate(tempalte: SlideAdminTemplate):Observable<SlideAdminTemplate>{
+      return this.http.post<SlideAdminTemplate>('//localhost:8090/slide/mongo',tempalte,httpOptions).pipe(
+      tap((slide:SlideAdminTemplate) => console.log(`Inserted = ${JSON.stringify(slide)}`)),
+      catchError(error => of(new SlideAdminTemplate()))
+    );
+  }
+
+       getAdminTemplates(name:string):Observable<SlideAdminTemplate[]>{
+    return this.http.get<SlideAdminTemplate[]>('//localhost:8090/slide/mongo/'+name).pipe(
+      tap(receivedSlide => console.log(`receivedCustomSlides = ${JSON.stringify(receivedSlide)}`)),
       catchError(error => of([]))
     );
   }

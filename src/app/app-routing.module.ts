@@ -8,6 +8,8 @@ import { TextRequestComponent } from './components/text-request/text-request.com
 
 import {SlideStandardReportComponent} from './components/slide-standard-report/slide-standard-report.component';
 import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
+import {AdminTemplateComponent} from './components/admin-template/admin-template.component';
+
 
 const routes: Routes = [
   { path : '', redirectTo : '/text-request', pathMatch : 'full' },
@@ -16,8 +18,9 @@ const routes: Routes = [
   { path : 'video', component : VideoComponent },
   { path : 'moodle', component : MoodleComponent },
   { path : 'slide', component : SlideComponent },
-  {path: 'report',component: SlideStandardReportComponent},
-  {path: 'customReportSlide',component: SlideCustomReportComponent}
+  { path : 'report',component: SlideStandardReportComponent},
+  { path : 'customReportSlide',component: SlideCustomReportComponent},
+  { path : 'adminTemplate',component: AdminTemplateComponent}
 ];
 
 @NgModule({
