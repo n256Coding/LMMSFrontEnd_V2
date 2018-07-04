@@ -23,7 +23,7 @@ const routes: Routes = [
   { path : 'slide', component : SlideComponent },
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
-  { path : 'loginPage', component : LoginComponent }
+  { path : 'loginPage', component : LoginComponent },
   { path : 'adminTemplate',component: AdminTemplateComponent}
 ];
 

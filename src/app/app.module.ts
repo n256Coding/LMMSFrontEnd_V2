@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as bootstrap from "bootstrap";
+// import * as bootstrap from "bootstrap";
 
 import { AppComponent } from './app.component';
 import { HeadComponent } from './components/head/head.component';
@@ -19,7 +19,6 @@ import { TextResultComponent } from './components/text-result/text-result.compon
 import { TextRequestComponent } from './components/text-request/text-request.component';
 
 //slide
-import {ReactiveFormsModule} from '@angular/forms'
 import { SlideComponent } from './components/slide/slide.component';
 import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
 import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
