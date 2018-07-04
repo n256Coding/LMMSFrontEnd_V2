@@ -4,9 +4,20 @@
   <meta charset="utf-8">
   <title>LMMS Project (Beta)</title>
   <base href="/">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Coinbuzz Preview</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
   <app-root>
@@ -15,5 +26,56 @@
       <p class="fa fa-refresh fa-spin" style="font-size:250px;"></p>
     </div>
   </app-root>
+  <!-- jquery latest version -->
+  <script src="assets/js/vendor/jquery-2.2.4.min.js "></script>
+  <!-- popper.min.js -->
+  <script src="assets/js/vendor/popper.min.js "></script>
+  <!-- bootstrap js -->
+  <script src="assets/js/bootstrap.min.js "></script>
+  <!-- owl.carousel.2.0.0-beta.2.4 css -->
+  <script src="assets/js/owl.carousel.min.js "></script>
+  <!-- swiper.min.js -->
+  <script src="assets/js/swiper.min.js "></script>
+  <!-- mailchimp.js -->
+  <script src="assets/js/mailchimp.js"></script>
+  <!-- plugins js -->
+  <script src="assets/js/jquery.canvasjs.min.js"></script>
+  <!-- metisMenu.min.js -->
+  <script src="assets/js/metisMenu.min.js"></script>
+  <!-- plugins js -->
+  <script src="assets/js/plugins.js "></script>
+  <script>
+    // chart
+    window.onload = function () {
+      var limit = 10000;    //increase number of dataPoints by increasing the limit
+      var y = 100;
+      var data = [];
+      var dataSeries = { type: "line" };
+      var dataPoints = [];
+      for (var i = 0; i < limit; i += 1) {
+        y += Math.round(Math.random() * 10 - 5);
+        dataPoints.push({
+          x: i,
+          y: y
+        });
+      }
+      dataSeries.dataPoints = dataPoints;
+      data.push(dataSeries);
+
+      //Better to construct options first and then pass it as a parameter
+      var options = {
+        zoomEnabled: true,
+        animationEnabled: true,
+        axisY: {
+          includeZero: false
+        },
+        data: data  // random data
+      };
+
+      $("#chartContainer").CanvasJSChart(options);
+    }
+  </script>
+  <!-- main js -->
+  <script src="assets/js/scripts.js "></script>
 </body>
 </html>

@@ -1,7 +1,17 @@
-div {
-    width: 100%;
-    height: 100px;
-    margin-top: 250px;
-    padding: 0px;
-    background-color: black
-}
+@import "../../../assets/css/bootstrap.min.css";
+@import "../../../assets/css/animate.css";
+/*@import "../../../assets/css/owl.carousel.min.css";*/
+@import "../../../assets/css/swiper.min.css";
+@import "../../../assets/css/font-awesome.min.css";
+/*@import "../../../assets/css/flaticon.css";*/
+@import "../../../assets/css/magnific-popup.css";
+@import "../../../assets/css/metisMenu.min.css";
+@import "../../../assets/css/styles.css";
+
+/*div {*/
+    /*width: 100%;*/
+    /*height: 100px;*/
+    /*margin-top: 250px;*/
+    /*padding: 0px;*/
+    /*background-color: black*/
+/*}*/

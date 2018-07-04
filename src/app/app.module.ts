@@ -39,6 +39,7 @@ import { ProcessingComponent } from './components/video/processing/processing.co
 import { MoodleService } from './services/moodle.service';
 import { LoginComponent } from './components/login/login.component';
 import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-
     TextRequestComponent,
     SlideStandardReportComponent,
     SlideCustomReportComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

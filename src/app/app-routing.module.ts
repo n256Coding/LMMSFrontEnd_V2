@@ -10,9 +10,10 @@ import { ProcessingComponent } from './components/video/processing/processing.co
 import {SlideStandardReportComponent} from './components/slide-standard-report/slide-standard-report.component';
 import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
 import {LoginComponent} from "./components/login/login.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
-  { path : '', redirectTo : '/text-request', pathMatch : 'full' },
+  { path : '', redirectTo : '/home', pathMatch : 'full' },
   { path : 'text-responce',  component : TextComponent },
   { path : 'text-request', component : TextRequestComponent },
   { path : 'video', component : VideoComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path : 'slide', component : SlideComponent },
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
-  { path : 'loginPage', component : LoginComponent }
+  { path : 'loginPage', component : LoginComponent },
+  { path : 'home', component : HomeComponent }
 ];
 
 @NgModule({
