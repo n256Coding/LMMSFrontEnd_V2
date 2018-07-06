@@ -169,7 +169,8 @@ div {
     background: #f4f4f4;
 }
 .bg-2{
-    background: #ff7700;
+    /* background: #ff7700; */
+    background: #47b9da;
 }
 
 .bg-fff {
@@ -355,7 +356,7 @@ a#scrollUp:hover {
     display: block;
     color: #fff;
     font-weight: 700;
-    background: #ff7700;
+    background: #1e799e;
     height: 40px;
     border-radius: 5px;
     text-align: center;
@@ -390,15 +391,18 @@ a#scrollUp:hover {
     z-index: 99;
 }
 .slider-content h2{
-    font-size: 80px;
+    /* font-size: 80px; */
+    font-size: 50px;
     font-weight: 700;
-    line-height: 85px;
+    /* line-height: 85px; */
+    line-height: 60px;
     color: #fff;
     margin-bottom: 25px;
+    margin-top: 25px;
 }
 .slider-content h2 span{
     display: inline-block;
-    background: #ff7700;
+    /* background: #ff7700; */
     padding: 10px 10px;
 }
 .slider-content p{
@@ -409,18 +413,18 @@ a#scrollUp:hover {
 }
 .slider-content a{
     padding: 15px 30px;
-    background: #ff7700;
+    background: #3299c2;
     display: inline-block;
     color: #fff;
     text-transform: uppercase;
     font-weight: 600;
     border-radius: 5px;
     font-size: 16px;
-    border: 2px solid #ff7700;
 }
 .slider-content a:hover{
-    background: transparent;
-    color: #ff7700;
+    background: #1e799e;
+    color: #fff;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .slider-active .owl-dots{
     position: absolute;
@@ -439,7 +443,7 @@ a#scrollUp:hover {
     border-radius: 5px;
 }
 .slider-active .owl-dot.active{
-    background: #ff7700;
+    background: #1e799e;
     width: 30px;
 }
 /*--------slider-area end--------*/
@@ -495,7 +499,7 @@ a#scrollUp:hover {
     display: block;
     font-size: 18px;
     font-weight: 400;
-    color: #ff7700;
+    color: #1e799e;
     text-transform: uppercase;
     line-height: 28px;
 }
@@ -509,17 +513,17 @@ a#scrollUp:hover {
 .featured-content-wrap a{
     display: inline-block;
     padding: 15px 30px;
-    background: #ff7700;
+    background: #1e799e;
     color: #fff;
     text-transform: uppercase;
-    border: 2px solid #ff7700;
+    border: 2px solid #1e799e;
     text-transform: uppercase;
     font-weight: 500;
     border-radius: 5px;
 }
 .featured-content-wrap a:hover{
     background: transparent;
-    color: #ff7700;
+    color: #1e799e;
 }
 /*--------about-area end--------*/
 
@@ -552,7 +556,7 @@ a#scrollUp:hover {
 }
 .service-wrap a{
     display: inline-block;
-    color: #ff7700;
+    color: #1e799e;
     font-size: 18px;
     margin-top: 10px;
 }
@@ -571,7 +575,7 @@ a#scrollUp:hover {
     left: 0;
     bottom: 0;
     width: 0;
-    background: #ff7700;
+    background: #1e799e;
     height: 3px;
     content: "";
 }
@@ -589,7 +593,7 @@ a#scrollUp:hover {
 }
 .service-items span:before{
     font-size: 40px;
-    color: #ff7700;
+    color: #1e799e;
 }
 /*--------service-area end--------*/
 
@@ -674,7 +678,7 @@ a#scrollUp:hover {
     font-size: 40px;
 }
 .test-active .owl-nav div:hover{
-    color: #ff7700;
+    color: #1e799e;
 }
 .test-active .owl-nav div.owl-next{
     left: auto;
@@ -1047,7 +1051,7 @@ a#scrollUp:hover {
 
 /*--------footer-area start --------*/
 .footer-area{
-    background: url(../images/bg/4.jpg) no-repeat center center / cover;
+    background: url(../images/bg/10.jpg) no-repeat center center / cover;
 }
 .footer-top{
     padding: 100px 0px 70px;
@@ -1082,7 +1086,7 @@ a#scrollUp:hover {
     top: 5%;
     height: 90%;
     width: 105px;
-    background: #ff7700;
+    background: #1e799e;
     color: #fff;
     text-transform: uppercase;
     font-weight: 500;
@@ -1097,7 +1101,7 @@ a#scrollUp:hover {
     color: #fff;
 }
 .footer-menu ul li:hover a{
-    color: #ff7700;
+    color: #1e799e;
 }
 .footer-menu ul li a i{
     margin-right: 10px;
@@ -1127,7 +1131,7 @@ a#scrollUp:hover {
     color: #fff;
 }
 .footer-contact ul.footer-contact-info li span{
-    color: #ff7700;
+    color: #1e799e;
 }
 .footer-contact h5{
     font-size: 18px;
@@ -1154,7 +1158,7 @@ a#scrollUp:hover {
     font-weight: 500;
 }
 .footer-bottom p span{
-    color: #ff7700;
+    color: #1e799e;
 }
 /*--------footer-area end --------*/
 
@@ -1169,7 +1173,7 @@ a#scrollUp:hover {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    background: #ff7700;
+    background: #1e799e;
     cursor: pointer;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
@@ -1214,6 +1218,8 @@ ul.menu.active {
 
 .header-bottom {
     position: relative;
+    z-index: 999;
+    box-shadow:  0 10px 40px 0 rgba(0, 0, 0, 0.6);
 }
 
 .responsive-menu-area {
@@ -1221,7 +1227,7 @@ ul.menu.active {
     left: 0;
     width: 100%;
     z-index: 99;
-    background: #ff7700;
+    background: #1e799e;
     top: 100%;
     padding: 20px 0;
     transition: all .3s;
@@ -1274,7 +1280,7 @@ ul.menu.active {
     color: #fff;
 }
 .header-area2 .mainmenu li > ul li:hover a{
-    color: #ff7700;
+    color: #1e799e;
 }
 .header-area2 .mainmenu li a:before,
 .header-area2 .mainmenu li.active a:before{
@@ -1298,7 +1304,7 @@ ul.menu.active {
 .slider-area2 .slider-content span{
     display: block;
     background: transparent;
-    color: #ff7700;
+    color: #1e799e;
     font-style: italic;
     padding: 0;
 }
@@ -1325,7 +1331,7 @@ ul.menu.active {
     -moz-transform: translateY(-50%);
 }
 .slider-active .owl-nav div:hover{
-    background: #ff7700;
+    background: #1e799e;
     color: #fff;
 }
 .slider-active .owl-nav div.owl-next{
@@ -1749,17 +1755,17 @@ ul.menu.active {
 }
 .quote-wrap a{
     padding: 10px 30px;
-    background: #ff7700;
+    background: #1e799e;
     color: #fff;
     border-radius: 5px;
     font-weight: 500;
     display: inline-block;
-    border: 2px solid #ff7700;
+    border: 2px solid #1e799e;
     text-transform: uppercase;
 }
 .quote-wrap a:hover{
     background: transparent;
-    color: #ff7700;
+    color: #1e799e;
 }
 .section-title2 h2{
     color: #fff;
@@ -1796,7 +1802,7 @@ ul.menu.active {
 }
 .breadcumb-area ul li span,
 .breadcumb-area ul li a:hover{
-    color: #ff7700;
+    color: #1e799e;
 }
 /*---------breadcumb-area end---------*/
 .calculate-area.calculate-area2.bg-1{
@@ -1848,7 +1854,7 @@ ul.menu.active {
 }
 .service-details ul li i{
     font-size: 24px;
-    color: #ff7700;
+    color: #1e799e;
     position: absolute;
     left: 0;
     top:0;
@@ -1869,7 +1875,7 @@ ul.menu.active {
     box-shadow: 0px 0px 20px rgba(0,0,0,.15);
 }
 .shop-wrap:hover{
-    border-color: #ff7700;
+    border-color: #1e799e;
 }
 .shop-img{
     height: 320px;
@@ -1885,7 +1891,7 @@ ul.menu.active {
     position: absolute;
     left: -100%;
     bottom: 0;
-    background: #ff7700;
+    background: #1e799e;
     width: 45px;
     height: 120px;
     display: flex;
@@ -1925,7 +1931,7 @@ ul.menu.active {
 .shop-content ul li.pull-left{
     font-size: 18px;
     font-weight: 500;
-    color: #ff7700;
+    color: #1e799e;
 }
 .shop-content ul li i{
     color: #ffbb19;
