@@ -1,21 +1,38 @@
 <div >
-  <form name="f" (submit)="login()" method="post">
+  <form name="f" (submit)="login()" class="form-signin">
+    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <fieldset>
-      <legend>Please Login</legend>
-      <div  class="alert alert-error">
-        Invalid username and password.
-      </div>
-      <div class="alert alert-success">
-        You have been logged out.
-      </div>
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" [(ngModel)]="credentials.username"/>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" [(ngModel)]="credentials.password"/>
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      <div class="form-actions">
-        <button type="submit" class="btn">Log in</button>
-      </div>
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="username" class="sr-only">Username</label>
+    <input type="email" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </fieldset>
   </form>
+  <!--<form name="f" (submit)="login()" method="post">-->
+    <!--<fieldset>-->
+      <!--<legend>Please Login</legend>-->
+      <!--<div  class="alert alert-error">-->
+        <!--Invalid username and password.-->
+      <!--</div>-->
+      <!--<div class="alert alert-success">-->
+        <!--You have been logged out.-->
+      <!--</div>-->
+      <!--<label for="username">Username</label>-->
+      <!--<input type="text" id="username" name="username" [(ngModel)]="credentials.username"/>-->
+      <!--<label for="password">Password</label>-->
+      <!--<input type="password" id="password" name="password" [(ngModel)]="credentials.password"/>-->
+      <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+      <!--<div class="form-actions">-->
+        <!--<button type="submit" class="btn">Log in</button>-->
+      <!--</div>-->
+    <!--</fieldset>-->
+  <!--</form>-->
 </div>
