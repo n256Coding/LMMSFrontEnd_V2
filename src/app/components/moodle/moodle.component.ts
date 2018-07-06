@@ -22,7 +22,7 @@ export class MoodleComponent implements OnInit {
   standardType = "";
   
 
-  creds :Credential;
+  creds :Credential[] = [];
   resources : ResourcesList = new ResourcesList();
 
   m_username; m_loginUrl; m_pwd ; m_pageUrl; 
@@ -52,26 +52,44 @@ export class MoodleComponent implements OnInit {
        $('#moodleLoadingModal').modal('hide');
       
       },err =>{
-      alert("cannot connect to the server !!!");
+      alert("cannot connect to the moodle server !!!");
+      $('#moodleLoadingModal').modal('hide');
       }
     );
   }
 
-  sendMoodleCredentials(){
-    const newMoodle: Credential = new Credential();
-    newMoodle.username = this.m_username;
-    newMoodle.pwd = this.m_pwd;
-    newMoodle.loginUrl = this.m_loginUrl;
-    newMoodle.pageUrl = this.m_pageUrl;
-    this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
-        console.log("inserted");
-      });
-  }
+  // sendMoodleCredentials(){
+  //   const newMoodle: Credential = new Credential();
+  //   newMoodle.username = this.m_username;
+  //   newMoodle.pwd = this.m_pwd;
+  //   newMoodle.loginUrl = this.m_loginUrl;
+  //   newMoodle.pageUrl = this.m_pageUrl;
+  //   this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
+  //       console.log("inserted");
+  //     });
+  // }
 
   checkData(){
     console.log(this.m_username)
   }
 
+
+
+  startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl){
+    const newMoodle: Credential = new Credential();
+    newMoodle.username = userName.value;
+    newMoodle.pwd = userPwd.value;
+    newMoodle.loginUrl = loginUrl.value;
+    newMoodle.pageUrl = pageUrl.value;
+    this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
+        console.log("inserted credentials");
+      
+      },err =>{
+        alert("cannot connect to the moodle server !!!");
+      }
+    );
+    this.displayMoodleResults();
+  }
 
 
   ngOnInit() {

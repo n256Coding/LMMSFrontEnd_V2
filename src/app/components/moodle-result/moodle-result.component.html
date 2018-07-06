@@ -6,7 +6,7 @@
             <img src="../../../assets/moodle-images/loading-3.gif" width="250px" height="250px">
         </div>
     </div>
-  </div> -->
+  </div> --
 
   <div class="parent">
       <ul>
@@ -18,7 +18,7 @@
           {{eachResource.name}} | {{eachResource.description}}
           {{eachResource.sectionType}}
          </li>
-      </ol> -->
+      </ol> --
     </div>
     
     <div>
@@ -29,3 +29,28 @@
       </ol> 
     </div>
     <!-- display results end -->
+
+    <div class="container" style="padding: 20px;">
+      <h2>Hover Rows</h2>
+      <p>The .table-hover class enables a hover state on table rows:</p>            
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Resources</th>
+            <th>Name standard</th>
+            <th>Description standard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eachResource of resources.resourcesList">
+            <td>{{eachResource.resourceName}}</td>
+            <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-warning" style="color: white">Incorrect</span></h5></td>
+            <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
+            
+            <td *ngIf="eachResource.description === 'no_recource_desc'"><h5><span class="badge badge-warning" style="color: white">Incorrect</span></h5></td>
+            <td *ngIf="eachResource.description === 'resource_desc'"><h5><span class="badge badge-success">Correct</span></h5></td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>

@@ -17,26 +17,48 @@
   <!-- Moodle page validator row -->
   <div class="row" *ngIf="checkValue === 'moodle_page_view' ">
     <div class="col-sm-12 col-xs-12">
-        <div id="moodle-page-validator">
+        <form id="moodle-page-validator" #moodle="ngForm" (ngSubmit)="startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl)">
           <h4>Moodle Page Validator</h4>
             <div class="form-group">
               <label for="moodle_login_url">Moodle Login URL</label>
-              <input [(ngModel)]="m_loginUrl"  type="text" class="form-control" id="moodle_login_url"  placeholder="http://example.com/login.php">
+              <input [(ngModel)]="m_loginUrl" name="m_loginUrl" #loginUrl="ngModel" type="url" class="form-control" id="moodle_login_url" pattern="(http:\/\/|https:\/\/).*" placeholder="http://example.com/login.php" required>
+              <div  *ngIf="loginUrl?.touched && loginUrl.errors?.required" class="invalid-message">
+                    Moodle site's login URL required !!!
+              </div>
+              <div  *ngIf="loginUrl.errors?.pattern" class="invalid-message">
+                Invalid login URL !!!
+              </div>
             </div>
+           
             <div class="form-group">
               <label for="moodle_login_username">User Name</label>
-              <input [(ngModel)]="m_username" type="text" class="form-control" id="moodle_login_username"  placeholder="user">
+              <input [(ngModel)]="m_username" name="m_username" #userName="ngModel" type="text"  class="form-control" id="moodle_login_username"  placeholder="user" required>
+              
+              <div  *ngIf="userName?.touched && userName.errors?.required" class="invalid-message">
+                Moodle site's username required !!!
+              </div>
             </div>
+            
             <div class="form-group">
                 <label for="moodle_login_pwd">Password</label>
-                <input [(ngModel)]="m_pwd" type="password" class="form-control" id="moodle_login_pwd" placeholder="Password">
-            </div>
+                <input [(ngModel)]="m_pwd" name="m_pwd" #userPwd="ngModel" type="password" class="form-control" id="moodle_login_pwd" placeholder="Password" required>
+                <div  *ngIf="userPwd?.touched && userPwd.errors?.required" class="invalid-message">
+                  Moodle site's password required !!!
+                </div>
+            
+              </div>
             <!-- <small id="emailHelp" class="form-text text-muted">Only for Login</small> -->
             <div class="form-group">
                 <label for="moodle_course_url">Moodle Course Page URL</label>
-                <input [(ngModel)]="m_pageUrl" type="text" class="form-control" id="moodle_course_url" placeholder="http://example.com/course/view.php">
+                <input [(ngModel)]="m_pageUrl" name="m_pageUrl" #pageUrl="ngModel" type="url" class="form-control" id="moodle_course_url" pattern="(http:\/\/|https:\/\/).*" placeholder="http://example.com/course/view.php" required>
+                <div  *ngIf="pageUrl?.touched && pageUrl.errors?.required" class="invalid-message">
+                  Moodle page URL required !!!
+                </div>
+                <div  *ngIf="pageUrl.errors?.pattern" class="invalid-message">
+                  Invalid page URL !!!
+                </div>
             </div>
-            <!-- validation type selection div -->
+            <!-- validation type selection div --> 
             <div class="border-style-1">
               <div class="form-group">
                   <label for="standardType">select Validation Type</label>
@@ -45,7 +67,7 @@
                     <option value="moodle_custom_validation">Custom Validation</option>
                   </select>
               </div>
-              <!-- moodle settings -->
+               <!-- moodle settings  -->
               <div>
                 <hr>
                   <div class="moodle-div-style" *ngIf="standardType === 'moodle_custom_validation' ">
@@ -95,23 +117,13 @@
               </div>
               <!-- end moodle settings -->
             </div>
-            <!-- //validation type selection div -->
-
-            <small id="emailHelp" class="form-text text-muted">Credintials are not saving</small>
-            <button id="test" type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button>
-            <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()" >Start Analyze</button>
-          </div>
+            <!-- end validation type selection div -->
+            <button type="submit" class="btn btn-primary margin-top-10" [disabled]="moodle.invalid">Submit & Analyze</button>
+            <!-- <small id="emailHelp" class="form-text text-muted">Credintials are not saving</small> -->
+            <!-- <button id="test" type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button> -->
+            <!-- <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()" >Start Analyze</button> -->
+          </form>
     </div>
-    <!-- display results --
-    <div class="parent">
-      <ol class="movies">
-        {{resources.sectionType}}
-        <li class="movieListItem" *ngFor="let eachResource of resources.resourcesList" >
-          {{eachResource.name}} | {{eachResource.description}}
-        </li>
-      </ol> 
-    </div>
-    <!-- display results end -->
   </div>
   <!-- //moodle page validaton row -->
 
