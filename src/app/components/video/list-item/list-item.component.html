@@ -1,8 +1,8 @@
 <div [hidden]="!hasData">
-  <h5>We identified following results for your search criteria. If you need more. start new search
+  <h5>We identified following results for your search criteria. If you need more. start a new search
     <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
   </h5>
-  <div *ngFor="let listitem of listItems">
+  <ng-container *ngFor="let listitem of listItems">
     <div class="row">
       <div class="col-sm-3">
         <div id="thumbnail">
@@ -30,83 +30,107 @@
                 <li>presesnter visibility</li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter2}}
+              <td *ngIf="listitem.filter2; else wrong">
+                <i class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>code visibility</li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter3}}
+              <td *ngIf="listitem.filter3; else wrong">
+                <i class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>IDE(Elipse)</li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter4}}
+              <td *ngIf="!listitem.filter4; else wrong">
+                <i class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>IDE(Intellij) </li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter5}}
+              <td *ngIf="!listitem.filter5; else wrong">
+                <i class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>IDE(Visual studio) </li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter6}}
+              <td *ngIf="!listitem.filter6; else wrong">
+                <i class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>IDE(Net beans) </li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter7}}
+              <td *ngIf="!listitem.filter7; else wrong">
+                <i class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>IDE(Visual studio Code) </li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter8}}
+              <td *ngIf="!listitem.filter8; else wrong">
+                <i id="cor" class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
             <tr>
               <td>
                 <li>IDE(Android studio) </li>
               </td>
               <td>:</td>
-              <td>
-                {{listitem.filter9}}
+              <td *ngIf="!listitem.filter9; else wrong">
+                <i id="cor" class="cor fa fa-check-circle"></i>
               </td>
+              <ng-template #wrong>
+                <i class="wro fa fa-times-circle"></i>
+              </ng-template>
             </tr>
           </table>
         </ul>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 <div id="asd" [hidden]="hasData">
   <div class="row">
-    <h5>We coudn't identify results for your search criteria. Would you like us to start a new search for you..?
-      <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
-    </h5>
+    <h5>We coudn't identify results for your search criteria. Would you like us to start a new search for you..?</h5>
+    <br>
+    <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
   </div>
 </div>
