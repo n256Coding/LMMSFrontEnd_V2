@@ -2,6 +2,7 @@
 
 .main-view{
     padding: 5% 10%;
+    min-height: 500px;
 }
 
 .dis-none{

@@ -21,7 +21,8 @@ export class MoodleResultComponent implements OnInit {
       res => {
         if (res.sectionType === undefined) {
           this.router.navigateByUrl('/moodle');
-
+          // this.router.navigateByUrl('/moodle-result');
+          
         } else {
           this.resources = res;
           console.log('SectionType: '+this.resources.sectionType);
