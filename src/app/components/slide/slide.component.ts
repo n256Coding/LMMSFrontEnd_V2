@@ -3,6 +3,7 @@ import { SlideService } from './../../services/slide.service';
 import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import { SlideStandard } from '../../models/StandardSlide';
 import { CustomSlide } from '../../models/CustomSlide';
+import { SlideAdminTemplate } from '../../models/SlideAdminTemplate';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 
 @Component({
@@ -34,6 +35,7 @@ export class SlideComponent implements OnInit {
   headertext: string = "null";
   numbering: string = "off";
 
+  receviedTempales: SlideAdminTemplate[];
 
   families = [
     { value: 'Agency FB', viewValue: 'Agency FB' },
@@ -75,8 +77,8 @@ export class SlideComponent implements OnInit {
   ];
 
   templates = [
-    { value: 'standard', viewValue: 'Standard Method' },
-    { value: 'custom', viewValue: 'Customizable Method' }
+    { value: 'standard', viewValue: 'Standard Template' },
+    { value: 'custom', viewValue: 'Customizable Template' }
   ];
 
   //master file
@@ -130,6 +132,7 @@ export class SlideComponent implements OnInit {
   //original file
   selectFile(event) {
     this.selectedFiles = event.target.files;
+    this.currentFileUpload=undefined;
   }
 
   upload() {
@@ -152,7 +155,8 @@ export class SlideComponent implements OnInit {
   startStandardSlideValidation(audiance: number) {
     const newSlide: SlideStandard = new SlideStandard();
     newSlide.materialName = this.currentFileUpload.name;
-    newSlide.masterFirstName = this.currentMasterSlideUpload.name;
+    newSlide.masterFirstName = this.selectAdminTemp;
+    //newSlide.masterFirstName = this.currentMasterSlideUpload.name;
     newSlide.masterSubName = "Default.ppt";
     newSlide.audianceSize = audiance;
     this.slideService.addSandardSlide(newSlide)
@@ -191,7 +195,8 @@ export class SlideComponent implements OnInit {
     newSlide.fcolorcheck = this.selectFColor;
     newSlide.fcolor = this.fcolor;
     newSlide.materialName = this.currentFileUpload.name;
-    newSlide.masterFirstName = this.currentMasterSlideUpload.name;
+    newSlide.masterFirstName = this.selectAdminTemp;
+    //newSlide.masterFirstName = this.currentMasterSlideUpload.name;
     newSlide.masterSubName = "Default.ppt";
 
 
@@ -208,6 +213,8 @@ export class SlideComponent implements OnInit {
   onSelectMaterial(lectureMaterial: string): void {
     this.selectMaterial = lectureMaterial;
   }
+
+  
   selectTempalte: string;
   onSelectTemplate(materialTempale: string): void {
     this.selectTempalte = materialTempale;
@@ -264,6 +271,8 @@ export class SlideComponent implements OnInit {
   }
 
   constructor(private frmbuilder: FormBuilder, private slideService: SlideService) {
+    
+    this.getAdminTemplatesFromDb();
 
     this.customForm = frmbuilder.group({
       noofslides: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])],
@@ -276,6 +285,8 @@ export class SlideComponent implements OnInit {
     this.standardSlideForm = frmbuilder.group({
       standardaudiancesize: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])]
     });
+
+    
   }
 
 
@@ -307,6 +318,21 @@ selectDocHeader: string;
     } else {
       this.selectDocFooter = footer;
     }
+  }
+
+  getAdminTemplatesFromDb(): void {
+    this.receviedTempales=null;
+    this.slideService.getAdminTemplates("sliit").subscribe(
+      (updatedReport) => {
+
+        this.receviedTempales = updatedReport;
+      
+      });
+  }
+
+  selectAdminTemp: string;
+  onSelectAdminTemplate(adminTemplate: string): void {
+    this.selectAdminTemp = adminTemplate;
   }
 
 }
