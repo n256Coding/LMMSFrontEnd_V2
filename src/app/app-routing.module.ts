@@ -7,12 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { TextRequestComponent } from './components/text-request/text-request.component';
 import { ProcessingComponent } from './components/video/processing/processing.component';
 
-import {SlideStandardReportComponent} from './components/slide-standard-report/slide-standard-report.component';
-import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
-import {AdminTemplateComponent} from './components/admin-template/admin-template.component';
-
-import {LoginComponent} from "./components/login/login.component";
-
 const routes: Routes = [
   { path : '', redirectTo : '/text-request', pathMatch : 'full' },
   { path : 'text-responce',  component : TextComponent },
@@ -20,11 +14,7 @@ const routes: Routes = [
   { path : 'video', component : VideoComponent },
   { path : 'video/processing', component : ProcessingComponent },
   { path : 'moodle', component : MoodleComponent },
-  { path : 'slide', component : SlideComponent },
-  { path : 'report', component : SlideStandardReportComponent },
-  { path : 'customReportSlide', component : SlideCustomReportComponent },
-  { path : 'loginPage', component : LoginComponent },
-  { path : 'adminTemplate',component: AdminTemplateComponent}
+  { path : 'slide', component : SlideComponent }
 ];
 
 @NgModule({

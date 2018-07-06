@@ -1,11 +1,10 @@
 <h1 class="display-4">Resources Found!!</h1>
 <h5>Original query <a href="#">{{results.originalQuery}}</a></h5>
 <h5>Did you mean? <a href="#">{{results.spellCorrectedQuery}}</a></h5>
-<h5>{{results.count}} results found!</h5>
+<h5>{{results.count}} of results found!</h5>
 <br>
 
-<app-text-result *ngFor="let resultItem of results.resultItems"
+<app-text-result *ngFor="let resultItem of results.resultItems" 
     [url]="resultItem.url"
     [description]="resultItem.description"
-    [rating]="resultItem.rating"
-    [_id]="resultItem._id"></app-text-result>
+    [rating]="resultItem.rating"></app-text-result>

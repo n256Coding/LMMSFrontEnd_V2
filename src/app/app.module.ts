@@ -1,30 +1,21 @@
-import { UserSessionService } from './services/user-session.service';
 import { DataService } from './services/data.service';
 import { TextResourceService } from './services/text-resource.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import * as bootstrap from "bootstrap";
 
 import { AppComponent } from './app.component';
 import { HeadComponent } from './components/head/head.component';
 import { FootComponent } from './components/foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './/app-routing.module';
 import { TextComponent } from './components/text/text.component';
 import { VideoComponent } from './components/video/video.component';
 import { MoodleComponent } from './components/moodle/moodle.component';
+import { SlideComponent } from './components/slide/slide.component';
 import { TextResultComponent } from './components/text-result/text-result.component';
 import { TextRequestComponent } from './components/text-request/text-request.component';
-
-//slide
-import { SlideComponent } from './components/slide/slide.component';
-import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
-import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
-import { AdminTemplateComponent } from './components/admin-template/admin-template.component';
-
-
 
 import { MaterialModule } from './app.material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,9 +28,6 @@ import { videoService } from './services/video-service';
 import { ProcessingComponent } from './components/video/processing/processing.component';
 
 //enableProdMode();
-import { MoodleService } from './services/moodle.service';
-import { LoginComponent } from './components/login/login.component';
-import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
 
 @NgModule({
   declarations: [
@@ -54,12 +42,7 @@ import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-
     TextRequestComponent,
     FilterDialog,
     ListItemComponent,
-    ProcessingComponent,
-    TextRequestComponent,
-    SlideStandardReportComponent,
-    SlideCustomReportComponent,
-    LoginComponent,
-    AdminTemplateComponent
+    ProcessingComponent
   ],
   imports: [
     BrowserModule,
@@ -67,14 +50,13 @@ import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-
     AppRoutingModule,
     BarRatingModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    HttpModule,
-    ReactiveFormsModule,
-    StorageServiceModule
+    HttpModule
   ],
   entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
-  providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService],
+  providers: [TextResourceService, DataService, videoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
