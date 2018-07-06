@@ -1,3 +1,448 @@
-<p>
-  slide works!
-</p>
+<div class="container">
+
+  <br>
+  <h2>Lecture Slide Validation</h2>
+  <hr>
+
+</div>
+
+<button routerLink='/adminTemplate'>click</button>
+<!--
+<div class="container">
+  <p>Choose your leacture material type</p>
+  <form>
+    <select class="custom-select custom-select mb-3">
+      <option *ngFor="let material of materials" [value]="material.value" (click)="onSelectMaterial(material.value)">
+      {{ material.viewValue }}
+    </option>
+    </select>
+  </form>
+</div>
+-->
+
+<div class="container">
+  <p>Choose your slide template</p>
+  <form>
+    <select class="custom-select custom-select mb-3">
+      <option *ngFor="let temp of receviedTempales" [value]="temp.actualName" (click)="onSelectAdminTemplate(temp.actualName)">
+      {{ temp.name }}
+    </option>
+    </select>
+  </form>
+</div>
+
+
+<!--
+<div *ngIf="selectMaterial === 'slide'" class="container"> -->
+<div *ngIf="selectAdminTemp" class="container">
+
+  <p>Choose your lecture slide</p>
+
+  <div class="display-3 text-center">
+    <div *ngIf="currentFileUpload" class="progress">
+      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+        {{progress.percentage}}%</div>
+    </div>
+  </div>
+
+
+  <div class="input-group">
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
+      <label class="custom-file-label" for="inputGroupFile04">{{inputGroupFile04.value}}</label>
+    </div>
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+    </div>
+  </div>
+
+  <!--
+  <div class="form-control">
+    <div class="text-center">
+      <label class="btn btn-primary">
+         <input type="file" (change)="selectFile($event)">
+      </label> <br>
+      <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload Lecture Slide</button>
+    </div>
+  </div>
+  -->
+
+</div>
+<br>
+
+
+<!--
+<div *ngIf="changeToSecond === 'Change'" class="container">
+  <div class="container">
+    <p>Choose your master slide</p>
+    <p>*Make sure your master slide does not containt any textual content.It only have one slide and that describe color template
+      and logos that you need to check.And name should be <strong>master-(your_slide_name).ppt</strong></p>
+
+
+    <div class="display-3 text-center">
+      <div *ngIf="currentMasterSlideUpload" class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterSlide.percentageMasterSlide}}"
+          aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterSlide.percentageMasterSlide+'%'}">
+          {{progressMasterSlide.percentageMasterSlide}}%</div>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="text-center">
+        <label class="btn btn-primary">
+         <input type="file" (change)="selectMasterSlide($event)">
+      </label> <br>
+        <button class="btn btn-success" [disabled]="!selectedMasterSlide" (click)="uploadMasterSlide()">Upload Master Slide</button>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+<!--
+<div *ngIf="changeToThird === 'Change'" class="container"> -->
+<div *ngIf="changeToSecond === 'Change'" class="container">
+  <div>
+    <div class="container">
+      <p>Choose your template type</p>
+      <form>
+        <select class="custom-select custom-select mb-3">
+            <option *ngFor="let template of templates" [value]="template.value" (click)="onSelectTemplate(template.value)">
+            {{ template.viewValue }}
+            </option>
+          </select>
+      </form>
+    </div>
+
+    <div *ngIf="selectTempalte === 'standard'" class="container">
+
+      <form [formGroup]='standardSlideForm' (ngSubmit)="startStandardSlideValidation(audiance.value)">
+
+        <div class="form-group">
+          <label>Expected Audiance Size</label>
+          <input type="number" class="form-control" formControlName="standardaudiancesize" #audiance>
+
+          <div *ngIf="standardSlideForm.controls['standardaudiancesize'].touched && !standardSlideForm.controls['standardaudiancesize'].valid">
+            <span *ngIf="standardSlideForm.controls['standardaudiancesize'].hasError('required')" style="color: red">
+            *Please enter expected audiance size
+            </span>
+          </div>
+
+        </div>
+        <br>
+
+        <div *ngIf="permissionToReport !== 'Okay'">
+          <input type="submit" value="Start Validation" class="btn btn-primary" [disabled]='!standardSlideForm.valid'>
+        </div>
+
+
+      </form>
+    </div>
+
+
+
+    <div *ngIf="selectTempalte === 'custom'" class="container">
+
+      <form [formGroup]='customForm' (ngSubmit)="startCustomSlideValidation(noofslide.value,
+        noofword.value,bullert.value,caudiance.value,fontfamily.value,contentPosition.value,header.value,
+        footer.value)">
+
+        <div class="form-group">
+          <label>Maximum No of Slides:</label>
+          <p style="color: blue">Recommended Standard Value : 28</p>
+          <input type="number" formControlName='noofslides' class="form-control" #noofslide>
+
+          <div *ngIf="customForm.controls['noofslides'].touched && !customForm.controls['noofslides'].valid">
+            <span *ngIf="customForm.controls['noofslides'].hasError('required') " style="color: red">
+            *Please enter required no of slides
+            </span>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label>Maximum No of Words per Slide:</label>
+          <p style="color: blue">Recommended Standard Value : 36</p>
+          <input type="number" formControlName='noofwords' class="form-control" #noofword>
+
+          <div *ngIf="customForm.controls['noofwords'].touched && !customForm.controls['noofwords'].valid">
+            <span *ngIf="customForm.controls['noofwords'].hasError('required') " style="color: red">
+            *Please enter required no of words per slide
+            </span>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label>Maximum No of Bullerts per Slide:</label>
+          <p style="color: blue">Recommended Standard Value : 6</p>
+          <input type="number" formControlName='noofbullerts' class="form-control" #bullert>
+
+          <div *ngIf="customForm.controls['noofbullerts'].touched && !customForm.controls['noofbullerts'].valid">
+            <span *ngIf="customForm.controls['noofbullerts'].hasError('required') " style="color: red">
+            *Please enter required no of bullerts per slide
+            </span>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label>Expected Audiance Size:</label>
+          <input type="number" formControlName='audianceSize' class="form-control" #caudiance>
+
+          <div *ngIf="customForm.controls['audianceSize'].touched && !customForm.controls['audianceSize'].valid">
+            <span *ngIf="customForm.controls['audianceSize'].hasError('required') " style="color: red">
+            *Please enter expected audiance size
+            </span>
+          </div>
+
+        </div>
+
+        <label>Font Family:</label>
+        <p style="color: blue">Recommended Font Family Type : San Serif Font</p>
+        <select class="custom-select custom-select mb-3" #fontfamily>
+            <option *ngFor="let family of families" [value]="family.value" >
+            {{ family.viewValue }}
+            </option>
+        </select>
+
+        <label>Content position:</label>
+        <p style="color: blue">Recommended Content Position : Left Side</p>
+        <select class="custom-select custom-select mb-3" #contentPosition>
+            <option *ngFor="let position of positions" [value]="position.value">
+            {{ position.viewValue }}
+            </option>
+        </select>
+
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"  #header  (click) ="onHeaderCheck(header.value)">Header
+          </label>
+        </div>
+
+        <div class="form-group" *ngIf="selectHeader === 'on'">
+          <label>Header Text:</label>
+          <input type="text" class="form-control" (change)=onHeaderText($event)>
+        </div>
+
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"  #footer  (click) ="onFooterCheck(footer.value)">Footer
+          </label>
+        </div>
+
+        <div class="form-group" *ngIf="selectFooter === 'on'">
+          <label>Footer Text:</label>
+          <input type="text" class="form-control" (change)=onFooterText($event)>
+        </div>
+
+        <div class="form-check-inline disabled">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" (click) ="onNumbering($event)">Slide Numbering
+          </label>
+        </div>
+
+        <div class="form-check-inline disabled">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" #color (click) ="onColorRestriction(color.value)">I need color restriction
+          </label>
+        </div>
+
+        <div class="form-control" *ngIf="restrictionColor === 'on'">
+          <div class="form-group form-check">
+            <label class="form-check-label">
+             <input class="form-check-input" type="checkbox"  (click) ="onbackColorCheck($event)"> Background Color
+          </label>
+          </div>
+
+          <div class="form-control" *ngIf="selectBColor === 'on'">
+            <label>Background Color:</label>
+            <input type="color" class="form-control" (change)=onBackcolor($event)>
+          </div>
+
+          <div class="form-group form-check">
+            <label class="form-check-label">
+             <input class="form-check-input" type="checkbox"  (click) ="onfrontColorCheck($event)" > Foreground Color
+          </label>
+          </div>
+
+          <div class="form-control" *ngIf="selectFColor === 'on'">
+            <label>Foreground Color:</label>
+            <input type="color" class="form-control" (change)=onFrontcolor($event)>
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <div *ngIf="permissionToCustomReport !== 'Okay'">
+          <input type="submit" value="Start Validation" class="btn btn-primary" [disabled]='!customForm.valid'>
+        </div>
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+  <div *ngIf="permissionToReport === 'Okay'" style="text-align: right">
+    <button routerLink='/report' class="btn btn-success">Generate Report</button>
+  </div>
+
+  <div *ngIf="permissionToCustomReport === 'Okay'" style="text-align: right">
+    <button routerLink='/customReportSlide' class="btn btn-success">Generate Report</button>
+  </div>
+
+</div>
+
+
+<!-- tutorial and labs -->
+
+<div *ngIf="selectMaterial === 'tute' || selectMaterial === 'lab' " class="container">
+  <p>Choose your lecture tute or lab</p>
+
+  <div class="display-3 text-center">
+    <div *ngIf="currentDocFileUpload" class="progress">
+      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressDoc.percentageDoc}}"
+        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressDoc.percentageDoc+'%'}">
+        {{progressDoc.percentageDoc}}%</div>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <div class="text-center">
+      <label class="btn btn-primary">
+         <input type="file" (change)="selectDocFile($event)">
+      </label> <br>
+      <button class="btn btn-success" [disabled]="!selectedDocFiles" (click)="uploadDoc()">Upload Lecture Material</button>
+    </div>
+  </div>
+
+  <!--
+</div>  -->
+
+  <!-- <div  *ngIf="changeToSecond === 'Change'" class="container"> -->
+  <div>
+    <div class="container">
+      <p>Choose your master material</p>
+      <p>*Make sure your master material only have one page and that describe color template and logos that you need to check.And
+        name should be <strong>master-(your_material_name).doc</strong></p>
+
+
+      <div class="display-3 text-center">
+        <div *ngIf="currentMasterSlideUpload" class="progress">
+          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterDoc.percentageMasterDoc}}"
+            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterDoc.percentageMasterDoc+'%'}">
+            {{progressMasterDoc.percentageMasterDoc}}%</div>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <div class="text-center">
+          <label class="btn btn-primary">
+         <input type="file" (change)="selectMasterDoc($event)">
+      </label> <br>
+          <button class="btn btn-success" [disabled]="!selectedMasterDoc" (click)="uploadMasterDoc()">Upload Master template</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--
+<div *ngIf="changeToThird === 'Change'" class="container"> -->
+  <div>
+    <div>
+      <div class="container">
+        <p>Choose your template type</p>
+        <form>
+          <select class="custom-select custom-select mb-3">
+            <option *ngFor="let template of templates" [value]="template.value" (click)="onSelectDocTemplate(template.value)">
+            {{ template.viewValue }}
+            </option>
+          </select>
+        </form>
+      </div>
+
+      <div *ngIf="selectDocTempalte === 'standard'" class="container">
+
+
+
+        <button class="btn btn-primary" (click)="startStandardDocValidation()">Start Validation</button>
+
+
+      </div>
+
+
+
+      <div *ngIf="selectDocTempalte === 'custom'" class="container">
+
+        <form [formGroup]='customDocForm' (ngSubmit)="startCustomDocValidation(noofslide.value,
+        noofword.value,bullert.value,caudiance.value,fontfamily.value,contentPosition.value,header.value,
+        footer.value)">
+
+
+          <label>Font Family:</label>
+          <select class="custom-select custom-select mb-3" #fontDocfamily>
+            <option *ngFor="let family of families" [value]="family.value" >
+            {{ family.viewValue }}
+            </option>
+        </select>
+
+
+
+          <div class="form-check-inline">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"  #headerDoc  (click) ="onDocHeaderCheck(headerDoc.value)">Header
+          </label>
+          </div>
+
+          <div class="form-group" *ngIf="selectDocHeader === 'on'">
+            <label>Header Text:</label>
+            <input type="text" class="form-control" (change)=onDocHeaderText($event)>
+          </div>
+
+          <div class="form-check-inline">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"  #footerDoc  (click) ="onDocFooterCheck(footerDoc.value)">Footer
+          </label>
+          </div>
+
+          <div class="form-group" *ngIf="selectDocFooter === 'on'">
+            <label>Footer Text:</label>
+            <input type="text" class="form-control" (change)=onDocFooterText($event)>
+          </div>
+
+          <div class="form-check-inline disabled">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" (click) ="onDocNumbering($event)">Page Numbering
+          </label>
+          </div>
+          <br>
+          <input type="submit" value="Validate" class="btn btn-primary" [disabled]='!customDocForm.valid'>
+
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+
+    <div class="container">
+      <br>
+      <div *ngIf="permissionToDocReport === 'Okay'">
+        <button class="btn btn-success">Generate Report</button>
+      </div>
+
+      <div *ngIf="permissionToDocCustomReport === 'Okay'">
+        <button class="btn btn-success">Generate Report</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- remove-->
+</div>

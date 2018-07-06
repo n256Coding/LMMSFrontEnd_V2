@@ -1,0 +1,63 @@
+/*moodle css file*/
+
+.main-view{
+    padding: 5% 10%;
+}
+
+.dis-none{
+    display: none;
+}
+.btn-margin-10{
+    margin: 10px;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
+.margin-left-10{
+    margin-left: 10px;
+}
+.margin-bottom-10{
+    margin-bottom: 10px; 
+}
+.border-style-1{
+    border: 2px solid rgba(139, 139, 139, 0.479);
+    padding: 8px;
+}
+.progress-bar-height{
+    height: 8px;
+}
+.text-right{
+    text-align: right;
+}
+.margin-right-10{
+    margin-right: 10px;
+}
+.parent{
+    display: flex;
+}
+.movies{
+    background: rgba(228, 228, 231, 0.932);
+    padding: 0.9em;
+    margin: 1em;
+    max-width: 100em;
+}
+
+.movieListItem{
+    font-size: 14px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #c6c7c9f1;
+    padding: 0.3em ;
+    margin: 0.5em;
+    text-align: left;
+}
+.quiz-div-style{
+    /* margin: 15px 0 0 0 ; */
+}
+
+.file-uploader-style{
+    border: 2px solid rgba(139, 139, 139, 0.479);
+    left: 10px;
+    padding: 6px;
+    margin-bottom: 10px;
+}
+

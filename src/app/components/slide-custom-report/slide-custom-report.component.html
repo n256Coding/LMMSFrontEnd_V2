@@ -1,0 +1,316 @@
+<div class="container">
+  <br>
+  <h2>Custom Validation Report</h2>
+  <hr>
+</div>
+
+<div *ngIf="showSpinner">
+  <div class="small-loader"></div>
+</div>
+
+
+
+
+<div class="container" [hidden]="showSpinner">
+  <!-- Control the column width, and how they should appear on different devices -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          <h6 style="text-align: center">Total No of Slide</h6>
+          <h1 class="display-4" style="text-align: center">{{maxNo}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h6 style="text-align: center">Total No of Checking Points</h6>
+          <h1 class="display-4" style="text-align: center">{{totalPoints}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card bg-warning text-white">
+        <div class="card-body">
+          <h6 style="text-align: center">Success Checking Points</h6>
+          <h1 class="display-4" style="text-align: center">{{currentPoints}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card bg-success text-white">
+        <div class="card-body">
+          <h6 style="text-align: center">Success Precentage</h6>
+          <h1 class="display-4" style="text-align: center">{{reportList[maxNo-1].summary}}%</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <h6>Success Points in Each Slide</h6>
+        </div>
+        <div class="card-body">
+
+          <canvas id="barChart" width="300" height="123" class="chartjs-render-monitor" style="display: block; "></canvas>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          <h6>Success Precentage Chart</h6>
+        </div>
+        <div class="card-body">
+
+          <canvas id="pieChart" width="300" height="273" class="chartjs-render-monitor" style="display: block; "></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+
+  <div class="row">
+
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-header">
+          <h6>Quick Status Report</h6>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Slide No</th>
+                <th>Header</th>
+                <th>Header Text</th>
+                <th>Footer</th>
+                <th>Footer Text</th>
+                <th>Page No</th>
+                <th>Contrast</th>
+                <th>Family</th>
+                <th>FontSize</th>
+                <th>Content Position</th>
+                <th>Words</th>
+                <th>Bullerts</th>
+                <th>Logo Position</th>
+                <th>Total Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor='let reportItem of reportList'>
+                <td>
+                  {{reportItem.slideNo}}</td>
+
+                <td>
+                  <div *ngIf="reportItem.header !== 'Header is Available';else content1">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content1> <span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.headertext !== 'Header is matching';else content2">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content2> <span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.footer !== 'Footer is Available';else content3">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content3><span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.footertext !== 'Footer is matching';else content4">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content4><span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.pageNumber !== 'Slide Numbering is Available';else content5">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content5><span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.contrast !== 'Visibility is Good';else content6">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content6><span class="badge badge-success">Success</span></ng-template>
+                </td>
+                <td>
+                  <div *ngIf="reportItem.fontFamily !== 'You are used recommandard San-Serif font';else content7">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content7><span class="badge badge-success">Success</span></ng-template>
+                </td>
+                <td>
+                  <div *ngIf="reportItem.fontSize !== 'you have used proper font Size';else content8">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content8><span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.position !== 'TextBox position is Good';else content9">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content9> <span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.words !== 'Number of words per slide is good';else content10">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content10> <span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.bullters !== 'Number of bullerts per slide is good';else content11">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content11><span class="badge badge-success">Success</span></ng-template>
+                </td>
+
+                <td>
+                  <div *ngIf="reportItem.picPositions !== 'Slide is match with logo and images in Master slide';else content12">
+                    <span class="badge badge-danger">Failed</span></div>
+                  <ng-template #content12> <span class="badge badge-success">Success</span></ng-template>
+                </td>
+                <td>
+                  <div *ngIf="reportItem.flag === 'true';else content13">
+                    <span class="badge badge-success">Success</span></div>
+                  <ng-template #content13> <span class="badge badge-danger">Failed</span></ng-template>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapseOne">
+            <h6 style="text-align: center;color: black">{{reportList[0].maxSlideNo}} (Click Here For More Details)</h6>
+          </a>
+        </div>
+        <div id="collapseOne" class="collapse" data-parent="#accordion">
+          <div class="card-body">
+
+            <br>
+
+            <div id="accordion">
+              <ol style='text-align: left'>
+                <li *ngFor='let reportItem of reportList' class="list-group">
+                  <div class="card">
+
+
+                    <div class="card-header" *ngIf="reportItem.flag === 'true'">
+                      <div class="list-group-item list-group-item-success">
+
+                        <strong>Slide No : </strong>{{reportItem.slideNo}}
+                        <div style='text-align: right'>
+                          <span class="badge badge-success">Success</span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="card-header" *ngIf="reportItem.flag === 'false'">
+                      <div class="list-group-item list-group-item-danger">
+
+                        <strong>SlideNo : </strong>{{reportItem.slideNo}}
+                        <div style='text-align: right'>
+                          <span style='text-align: right' class="badge badge-danger">Failed</span>
+                        </div>
+
+                      </div>
+                    </div>
+
+
+
+                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                      <div class="card-body">
+
+                        <div *ngIf="reportItem.header !== 'Header is Available';else content14" style="color: red">
+                          <strong>Header : </strong>{{reportItem.header}}<br></div>
+                        <ng-template #content14><strong>Header : </strong>{{reportItem.header}}<br></ng-template>
+
+                        <div *ngIf="reportItem.headertext !== 'Header is matching';else content15" style="color: red">
+                          <strong>HeaderText : </strong>{{reportItem.headertext}}<br></div>
+                        <ng-template #content15> <strong>HeaderText : </strong>{{reportItem.headertext}}<br></ng-template>
+
+                        <div *ngIf="reportItem.footer !== 'Footer is Available';else content16" style="color: red">
+                          <strong>Footer : </strong>{{reportItem.footer}}<br> </div>
+                        <ng-template #content16><strong>Footer : </strong>{{reportItem.footer}}<br></ng-template>
+
+                        <div *ngIf="reportItem.footertext !== 'Footer is matching';else content17" style="color: red">
+                          <strong>FooterText : </strong>{{reportItem.footertext}}<br></div>
+                        <ng-template #content17> <strong>FooterText : </strong>{{reportItem.footertext}}<br></ng-template>
+
+                        <div *ngIf="reportItem.pageNumber !== 'Slide Numbering is Available';else content18" style="color: red">
+                          <strong>Page Numbering : </strong>{{reportItem.pageNumber}}<br></div>
+                        <ng-template #content18><strong>Page Numbering : </strong>{{reportItem.pageNumber}}<br></ng-template>
+
+                        <div *ngIf="reportItem.contrast !== 'Visibility is Good';else content19" style="color: red">
+                          <strong>Contrast : </strong>{{reportItem.contrast}}<br> </div>
+                        <ng-template #content19><strong>Contrast : </strong>{{reportItem.contrast}}<br></ng-template>
+
+                        <div *ngIf="reportItem.fontFamily !== 'You are used recommandard San-Serif font';else content20" style="color: red">
+                          <strong>Family : </strong>{{reportItem.fontFamily}}<br> </div>
+                        <ng-template #content20><strong>Family : </strong>{{reportItem.fontFamily}}<br></ng-template>
+
+                        <div *ngIf="reportItem.fontSize !== 'you have used proper font Size';else content21" style="color: red">
+                          <strong>FontSize : </strong>{{reportItem.fontSize}}<br></div>
+                        <ng-template #content21><strong>FontSize : </strong>{{reportItem.fontSize}}<br></ng-template>
+
+                        <div *ngIf="reportItem.position !== 'TextBox position is Good';else content22" style="color: red">
+                          <strong>Content Position : </strong> {{reportItem.position}}<br></div>
+                        <ng-template #content22><strong>Content Position : </strong> {{reportItem.position}}<br></ng-template>
+
+                        <div *ngIf="reportItem.words !== 'Number of words per slide is good';else content23" style="color: red">
+                          <strong>Words Per Slide : </strong>{{reportItem.words}}<br></div>
+                        <ng-template #content23> <strong>Words Per Slide : </strong>{{reportItem.words}}<br></ng-template>
+
+                        <div *ngIf="reportItem.bullters !== 'Number of bullerts per slide is good';else content24" style="color: red">
+                          <strong>Bullerts Per Slide : </strong>{{reportItem.bullters}}<br></div>
+                        <ng-template #content24><strong>Bullerts Per Slide : </strong>{{reportItem.bullters}}<br></ng-template>
+
+                        <div *ngIf="reportItem.picPositions !== 'Slide match with logo and images in Master slide';else content25" style="color: red">
+                          <strong>Logo Positions : </strong>{{reportItem.picPositions}}<br> </div>
+                        <ng-template #content25> <strong>Logo Positions : </strong>{{reportItem.picPositions}}<br></ng-template>
+
+                      </div>
+                    </div>
+
+                  </div> <br>
+                </li>
+              </ol>
+
+            </div>
+            <br>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="container">
+    <button class="btn btn-success" (click)='goBack()'>Back to Home</button>
+  </div>
+
+</div>

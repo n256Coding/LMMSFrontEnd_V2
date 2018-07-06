@@ -2,6 +2,7 @@ import { DataService } from './../../services/data.service';
 import { TextResourceService } from './../../services/text-resource.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-text-request',
@@ -15,26 +16,46 @@ export class TextRequestComponent implements OnInit {
     private dataService: DataService) { }
 
   inputValue = 'java';
-  isPdf = false;
+  isPdf: boolean;
+  contentType = "web";
+
+  errorContentHidden = true;
+
+  setErrorContentStatus(status: boolean) {
+    this.errorContentHidden = status;
+  }
 
   clickMe() {
     alert(this.inputValue + 'isPdf: ' + this.isPdf);
   }
 
   search() {
+    $('#exampleModal').modal({
+      backdrop: 'static',
+      keyboard: false,
+      show: true
+    });
+    if(this.contentType == 'ebook'){
+      this.isPdf = true;
+    }else{
+      this.isPdf = false;
+    }
     this.textService.searchResource(this.inputValue, this.isPdf).subscribe(
       data => {
+        $('#exampleModal').modal('hide');
         this.dataService.changeMessage(data);
         this.router.navigateByUrl('/text-responce');
       },
       err => {
-        alert('cannot connect to server');
+        this.errorContentHidden = false;
       },
       () => {
         console.log('function completed');
       }
     );
   }
+
+
 
   ngOnInit() {
   }
