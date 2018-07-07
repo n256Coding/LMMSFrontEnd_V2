@@ -12,6 +12,7 @@ import {SlideCustomReportComponent} from './components/slide-custom-report/slide
 import {AdminTemplateComponent} from './components/admin-template/admin-template.component';
 import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
+import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 
 const routes: Routes = [
   { path : '', redirectTo : '/home', pathMatch : 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path : 'video/processing', component : ProcessingComponent },
   { path : 'moodle', component : MoodleComponent },
   { path : 'slide', component : SlideComponent },
+  { path : 'moodle-result', component : MoodleResultComponent }
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
   { path : 'loginPage', component : LoginComponent },

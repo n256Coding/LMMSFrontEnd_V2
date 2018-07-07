@@ -1,0 +1,149 @@
+   
+   <!-- <div class="container" style="padding: 20px;">
+      <h2>Validation Report</h2>
+      <p>Following results are according to the predefined standards.</p>            
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Resources</th>
+            <th>Name standard</th>
+            <th>Description standard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eachResource of resources.resourcesList">
+            <td>{{eachResource.resourceName}}</td>
+            <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-warning" style="color: white">Incorrect</span></h5></td>
+            <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
+            
+            <td *ngIf="eachResource.description === 'no_recource_desc'"><h5><span class="badge badge-warning" style="color: white">Incorrect</span></h5></td>
+            <td *ngIf="eachResource.description === 'resource_desc'"><h5><span class="badge badge-success">Correct</span></h5></td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-sm-10">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Topic Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let eachHeading of resources.headingDetailList">
+              <td>{{eachHeading.headingName}}</td>
+              <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'no_desc')">
+                <h5><span class="badge badge-warning" style="color: white">Not Included</span></h5>
+              </td>
+              <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'desc')">
+                <h5><span class="badge badge-success">Include</span></h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+
+<div class="container-fluid main-margin">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 text-center">
+      <h3>Moodle Page Validation Results</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9 col-sm-9">
+        <div class="card">
+          <div class="card-header">
+            Lecture presentation Format
+          </div>
+          <div class="card-body">
+            <!-- <h5 class="card-title">Topic Type</h5> -->
+            <p class="card-text">Topic Type : {{resources.sectionType}}</p>
+            <p class="card-text" *ngIf="resources.newsForum === 'no forum'"> News Forum : <span class="badge badge-danger">Not Included</span></p>
+            <p class="card-text" *ngIf="resources.newsForum === 'News forum'"> News Forum :<span class="badge badge-success">Include</span></p>
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+              Weekly/Topic wise Lecture Format
+            </div>
+            <div class="card-body">
+             <p style="color: #0f237c">* These results are based on predefined learning standards</p>
+             <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Topic Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let eachHeading of resources.headingDetailList">
+                    <td>{{eachHeading.headingName}}</td>
+                    <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'no_desc')">
+                      <h6><span class="badge badge-warning" style="color: white">Not Included</span></h6>
+                    </td>
+                    <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'desc')">
+                      <h6><span class="badge badge-success">Include</span></h6>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+              Lecture resource/activities Format (Slides /Pdf/ Assignments/ Quizs)
+            </div>
+            <div class="card-body">
+              <p style="color: #0f237c">* These results are based on predefined learning standards</p>
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Resources</th>
+                      <th>Name standard</th>
+                      <th>Description standard</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let eachResource of resources.resourcesList">
+                      <td>{{eachResource.resourceName}}</td>
+                      <td *ngIf="eachResource.name === 'incorrect_name_format'"><h6><span class="badge badge-warning" style="color: white">Incorrect</span></h6></td>
+                      <td *ngIf="eachResource.name === 'correct_name_format'"><h6><span class="badge badge-success">Correct</span></h6></td>
+                      
+                      <td *ngIf="eachResource.description === 'no_recource_desc'"><h6><span class="badge badge-warning" style="color: white">Incorrect</span></h6></td>
+                      <td *ngIf="eachResource.description === 'resource_desc'"><h6><span class="badge badge-success">Correct</span></h6></td>
+                      
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+      
+    </div> 
+    <div class="col-md-3 col-sm-3">
+        <div class="card">
+            <div class="card-header">
+              Overall Result
+            </div>
+            <div class="card-body">
+              <!-- <h5 class="card-title">Topic Type</h5> -->
+            <p> some results display here !!</p>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <a href="moodle" class="btn btn-default" style="margin-top: 15px">Go back</a>
+        
+    </div>
+  </div>
+</div>
+
+
+   

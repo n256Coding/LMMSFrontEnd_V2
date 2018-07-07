@@ -2,6 +2,7 @@
 
 .main-view{
     padding: 5% 10%;
+    min-height: 500px;
 }
 
 .dis-none{
@@ -50,9 +51,9 @@
     margin: 0.5em;
     text-align: left;
 }
-.quiz-div-style{
+/* .quiz-div-style{ */
     /* margin: 15px 0 0 0 ; */
-}
+/* } */
 
 .file-uploader-style{
     border: 2px solid rgba(139, 139, 139, 0.479);
@@ -61,3 +62,15 @@
     margin-bottom: 10px;
 }
 
+/* validation messages */
+.invalid-message{
+    display: block;
+    width: 100%;
+    /* margin-top: .25rem; */
+    font-size: 80%;
+    color: #dc3545;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }

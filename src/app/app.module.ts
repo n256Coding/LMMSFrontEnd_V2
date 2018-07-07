@@ -38,6 +38,8 @@ import { ProcessingComponent } from './components/video/processing/processing.co
 
 //enableProdMode();
 import { MoodleService } from './services/moodle.service';
+import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
+import { MoodleResultService } from './services/moodle-result.service';
 import { LoginComponent } from './components/login/login.component';
 import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
 import { HomeComponent } from './components/home/home.component';
@@ -61,7 +63,9 @@ import { HomeComponent } from './components/home/home.component';
     SlideCustomReportComponent,
     LoginComponent,
     HomeComponent,
-    AdminTemplateComponent
+    AdminTemplateComponent,
+    TextRequestComponent,
+    MoodleResultComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,7 @@ import { HomeComponent } from './components/home/home.component';
     StorageServiceModule
   ],
   entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
-  providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService],
+  providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService, MoodleResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
