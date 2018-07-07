@@ -15,7 +15,7 @@ export class TextRequestComponent implements OnInit {
     private router: Router,
     private dataService: DataService) { }
 
-  inputValue = 'java';
+  inputValue = '';
   isPdf: boolean;
   contentType = "web";
 
@@ -25,9 +25,6 @@ export class TextRequestComponent implements OnInit {
     this.errorContentHidden = status;
   }
 
-  clickMe() {
-    alert(this.inputValue + 'isPdf: ' + this.isPdf);
-  }
 
   search() {
     $('#exampleModal').modal({

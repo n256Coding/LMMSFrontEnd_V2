@@ -22,7 +22,7 @@ const routes: Routes = [
   { path : 'video/processing', component : ProcessingComponent },
   { path : 'moodle', component : MoodleComponent },
   { path : 'slide', component : SlideComponent },
-  { path : 'moodle-result', component : MoodleResultComponent }
+  { path : 'moodle-result', component : MoodleResultComponent },
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
   { path : 'loginPage', component : LoginComponent },

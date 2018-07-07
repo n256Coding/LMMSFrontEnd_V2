@@ -23,7 +23,7 @@ import { SlideComponent } from './components/slide/slide.component';
 import { SlideStandardReportComponent } from './components/slide-standard-report/slide-standard-report.component';
 import { SlideCustomReportComponent } from './components/slide-custom-report/slide-custom-report.component';
 import { AdminTemplateComponent } from './components/admin-template/admin-template.component';
-
+import 'bootstrap';
 
 
 import { MaterialModule } from './app.material.module';
