@@ -42,6 +42,10 @@ body {
     float: right;
 }
 
+.dis-none{
+    display: none;
+}
+
 img {
     max-width: 100%;
     height: auto
@@ -194,7 +198,7 @@ a#scrollUp {
 }
 
 a#scrollUp:hover {
-    background: #ff7700;
+    background: #47b9da;
 }
 
 .flex-style {
@@ -228,7 +232,7 @@ a#scrollUp:hover {
     top: 0;
     width: 2px;
     content: "";
-    background: #ff7700;
+    background: #47b9da;
     height: 100%;
 }
 .contact-info li span{
@@ -269,10 +273,10 @@ a#scrollUp:hover {
     background: #1da1f2;
 }
 .social-icon li.google-plus a{
-    color: #dd4e42;
+    color: #47b9da;
 }
 .social-icon li.google-plus a:hover{
-    background: #dd4e42;
+    background: #47b9da;
 }
 .social-icon li.linkedin a{
     color: #0077b5;
@@ -281,10 +285,10 @@ a#scrollUp:hover {
     background: #0077b5;
 }
 .social-icon li.youtube a{
-    color: #ff0000;
+    color: #47b9da;
 }
 .social-icon li.youtube a:hover{
-    background: #ff0000;
+    background: #47b9da;
 }
 .social-icon li a:hover{
     color: #fff;
@@ -303,7 +307,7 @@ a#scrollUp:hover {
 }
 .mainmenu li:hover > a,
 .mainmenu li.active > a{
-    color: #ff7700;
+    color: #47b9da;
 }
 .mainmenu li > a:before{
     position: absolute;
@@ -311,7 +315,7 @@ a#scrollUp:hover {
     top: 0;
     width: 0;
     height: 2px;
-    background: #ff7700;
+    background: #47b9da;
     content: "";
 }
 .mainmenu li:hover > a:before{
@@ -321,7 +325,7 @@ a#scrollUp:hover {
     position: absolute;
     left: 20px;
     top: 120%;
-    width: 150px;
+    width: 180px;
     background: #fff;
     z-index: 99;
     padding: 10px;
@@ -1060,8 +1064,10 @@ a#scrollUp:hover {
 
 /*--------footer-area start --------*/
 .footer-area{
-    background: url(../images/bg/10.jpg) no-repeat center center / cover;
+    /* background: url(../images/bg/10.jpg) no-repeat center center / cover; */
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) ), url('../images/bg/10.jpg') no-repeat center center / cover;
 }
+
 .footer-top{
     padding: 100px 0px 70px;
 }
@@ -1090,17 +1096,16 @@ a#scrollUp:hover {
     padding: 0px 110px 0px 10px;
 }
 .footer-logo button{
-    position: absolute;
-    right: 3px;
-    top: 5%;
-    height: 90%;
-    width: 105px;
+    position: relative;
+    height: 45px;
+    /* width: 55px; */
     background: #1e799e;
     color: #fff;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
     border: none;
     border-radius: 5px;
+    padding: 0px 15px;
 }
 .footer-menu ul li{
     line-height: 30px;
@@ -1282,7 +1287,7 @@ ul.menu.active {
                 home2 style here
 ==============================================*/
 .header-area2 .logo{
-    padding: 25px 0px 24px;
+    padding: 22px 0px 24px;
 }
 .header-area2 .mainmenu li:hover > a,
 .header-area2 .mainmenu li.active > a{
@@ -1745,7 +1750,7 @@ ul.menu.active {
 
 .quote-area{
     padding: 100px 0px;
-    background: url(../images/bg/11.jpg) no-repeat center center / cover;
+    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url(../images/bg/11.jpg) no-repeat center center / cover;
 }
 .quote-wrap h2{
     color: #fff;
@@ -2310,3 +2315,27 @@ ol {
     height: 600px;
 }
 /*-------contact-area end-------*/
+
+/* my edits */
+.header-desc p{
+    padding-top: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    color: #504f4f;
+}
+
+.logo2{
+    padding: 10px 0px 5px;
+}
+.margin-top-100{
+    margin-top: 100px;
+}
+
+.slider-content2 h2{
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 40px;
+    color: #fff;
+    margin-bottom: 40px;
+    margin-top: 25px;
+}

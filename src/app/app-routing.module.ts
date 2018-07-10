@@ -12,6 +12,7 @@ import {SlideCustomReportComponent} from './components/slide-custom-report/slide
 import {AdminTemplateComponent} from './components/admin-template/admin-template.component';
 import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
+import { RegisterComponent } from './components/register/register.component';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path : 'loginPage', component : LoginComponent },
   { path : 'home', component : HomeComponent },
   { path : 'adminTemplate',component: AdminTemplateComponent}
+  { path : 'register', component : RegisterComponent }
 ];
 
 @NgModule({

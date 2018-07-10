@@ -1,7 +1,7 @@
 import {Component, OnInit, Inject} from "@angular/core";
 import {UserSessionService} from "../../services/user-session.service";
 import {WebStorageService, SESSION_STORAGE} from "angular-webstorage-service";
-declare var $: any;
+
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
@@ -14,15 +14,20 @@ export class HeadComponent implements OnInit {
 
   ngOnInit() {
     // this.storage.set('loggedUser', {name:'dfsdgd'});
-    //start
+    //start sticky nav-bar
     $(window).scroll(function(){
       var sticky = $('.header-bottom'),
           scroll = $(window).scrollTop();
 
-      if (scroll >= 100) sticky.addClass('fixed');
-      else sticky.removeClass('fixed');
+      if (scroll >= 100){
+        sticky.addClass('fixed');
+        $('#navbar-logo').removeClass('dis-none');
+      }else {
+        sticky.removeClass('fixed');
+        $('#navbar-logo').addClass('dis-none');
+      }
     });
-    //end
+    //end sticky nav-bar
   }
 
   logout() {
@@ -41,5 +46,12 @@ export class HeadComponent implements OnInit {
     }
   }
 
+  setSession() {
+    this.storage.set('loggedUser', {name: 'hello'});
+  }
+
+  removeSession() {
+    this.storage.remove('loggedUser');
+  }
 
 }

@@ -43,6 +43,7 @@ import { MoodleResultService } from './services/moodle-result.service';
 import { LoginComponent } from './components/login/login.component';
 import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
 import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { HomeComponent } from './components/home/home.component';
     HomeComponent,
     AdminTemplateComponent,
     TextRequestComponent,
-    MoodleResultComponent
+    MoodleResultComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
