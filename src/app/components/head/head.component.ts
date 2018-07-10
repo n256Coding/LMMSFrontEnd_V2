@@ -14,15 +14,20 @@ export class HeadComponent implements OnInit {
 
   ngOnInit() {
     // this.storage.set('loggedUser', {name:'dfsdgd'});
-    //start
+    //start sticky nav-bar
     $(window).scroll(function(){
       var sticky = $('.header-bottom'),
           scroll = $(window).scrollTop();
-    
-      if (scroll >= 100) sticky.addClass('fixed');
-      else sticky.removeClass('fixed');
+
+      if (scroll >= 100){
+        sticky.addClass('fixed');
+        $('#navbar-logo').removeClass('dis-none');
+      }else {
+        sticky.removeClass('fixed');
+        $('#navbar-logo').addClass('dis-none');
+      }
     });
-    //end
+    //end sticky nav-bar
   }
 
   logout() {

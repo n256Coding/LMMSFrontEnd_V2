@@ -11,6 +11,7 @@ import {SlideStandardReportComponent} from './components/slide-standard-report/s
 import {SlideCustomReportComponent} from './components/slide-custom-report/slide-custom-report.component';
 import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path : '', redirectTo : '/home', pathMatch : 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
   { path : 'loginPage', component : LoginComponent },
-  { path : 'home', component : HomeComponent }
+  { path : 'home', component : HomeComponent },
+  { path : 'register', component : RegisterComponent }
 ];
 
 @NgModule({

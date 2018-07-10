@@ -40,6 +40,7 @@ import { MoodleService } from './services/moodle.service';
 import { LoginComponent } from './components/login/login.component';
 import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
 import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { HomeComponent } from './components/home/home.component';
     SlideStandardReportComponent,
     SlideCustomReportComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
