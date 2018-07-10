@@ -3,7 +3,7 @@ import { TextResourceService } from './../../services/text-resource.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import * as $ from 'jquery';
-
+declare var $: any;
 @Component({
   selector: 'app-text-request',
   templateUrl: './text-request.component.html',
@@ -15,14 +15,24 @@ export class TextRequestComponent implements OnInit {
     private router: Router,
     private dataService: DataService) { }
 
-  inputValue = '';
+  inputValue = 'sql select query';
   isPdf: boolean;
-  contentType = "web";
+  contentType = "webpage";
+  public holdOnMessageHidden = true;
 
   errorContentHidden = true;
 
   setErrorContentStatus(status: boolean) {
     this.errorContentHidden = status;
+    this.holdOnMessageHidden = true;
+  }
+
+  setHoldOnMessage(status: boolean){
+    this.holdOnMessageHidden = status;
+  }
+
+  setContentType(contentType: string){
+    this.contentType = contentType;
   }
 
 
@@ -32,6 +42,9 @@ export class TextRequestComponent implements OnInit {
       keyboard: false,
       show: true
     });
+    setTimeout(()=>{
+      this.holdOnMessageHidden = false;
+    }, 10000);
     if(this.contentType == 'ebook'){
       this.isPdf = true;
     }else{
@@ -40,7 +53,8 @@ export class TextRequestComponent implements OnInit {
     this.textService.searchResource(this.inputValue, this.isPdf).subscribe(
       data => {
         $('#exampleModal').modal('hide');
-        this.dataService.changeMessage(data);
+        this.dataService.changeResults(data);
+        this.dataService.changeContentType(this.isPdf ? 'ebook' : 'webpage');
         this.router.navigateByUrl('/text-responce');
       },
       err => {

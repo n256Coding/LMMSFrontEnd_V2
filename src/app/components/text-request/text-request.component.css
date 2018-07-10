@@ -5,3 +5,45 @@
 .errorContent h1 {
     color: red;
 }
+
+.submit_btn {
+  color: white;
+  background-color: #0c5460;
+}
+
+.container {
+  min-height: 400px;
+}
+
+
+.btn-content-type {
+  transition-timing-function: ease-in-out;
+  transition: 500ms;
+  text-align: center;
+  height: 60px;
+  border-radius: 5px;
+  margin: 5px;
+  width: 90%;
+  color: black;
+  float: left;
+}
+
+.btn-content-type i {
+  font-size: 28px;
+  vertical-align: middle;
+}
+
+.btn-content-type span {
+  font-size: 10px;
+  vertical-align: middle;
+}
+
+.btn-content-type:hover {
+  text-shadow: 0 0 4px black;
+  /*color: #6ab3ff;*/
+}
+
+.btn-content-type-selected {
+  color: #c72500;
+}
+

@@ -3,7 +3,7 @@
   <h3>Start Moodle Page validation Service</h3>
   <div class="row" style="margin-top: 20px">
     <div class="col-sm-12 col-xs-12">
-      
+
         <form>
           <div class="form-group">
             <select class="form-control" id="selectOption" (change)="selectedOption($event)">
@@ -13,7 +13,7 @@
             </select>
           </div>
         </form>
-    </div> 
+    </div>
   </div>
   <!-- Moodle page validator row -->
   <div class="row" *ngIf="checkValue === 'moodle_page_view' ">
@@ -30,23 +30,23 @@
                 Invalid login URL !!!
               </div>
             </div>
-           
+
             <div class="form-group">
               <label for="moodle_login_username">User Name</label>
               <input [(ngModel)]="m_username" name="m_username" #userName="ngModel" type="text"  class="form-control" id="moodle_login_username"  placeholder="user" required>
-              
+
               <div  *ngIf="userName?.touched && userName.errors?.required" class="invalid-message">
                 Moodle site's username required !!!
               </div>
             </div>
-            
+
             <div class="form-group">
                 <label for="moodle_login_pwd">Password</label>
                 <input [(ngModel)]="m_pwd" name="m_pwd" #userPwd="ngModel" type="password" class="form-control" id="moodle_login_pwd" placeholder="Password" required>
                 <div  *ngIf="userPwd?.touched && userPwd.errors?.required" class="invalid-message">
                   Moodle site's password required !!!
                 </div>
-            
+
               </div>
             <!-- <small id="emailHelp" class="form-text text-muted">Only for Login</small> -->
             <div class="form-group">
@@ -59,7 +59,7 @@
                   Invalid page URL !!!
                 </div>
             </div>
-            <!-- validation type selection div --> 
+            <!-- validation type selection div -->
             <div class="border-style-1">
               <div class="form-group">
                   <label for="standardType">select Validation Type</label>
@@ -204,7 +204,7 @@
   </div>
   <!-- //question file analyzer row -->
 
-
+<button id="click" class="clicked">click me</button>
 </div>
 <!-- //main -->
 

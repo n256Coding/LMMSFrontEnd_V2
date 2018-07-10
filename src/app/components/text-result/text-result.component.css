@@ -1,0 +1,17 @@
+.title {
+  font-size: 22px;
+}
+
+.description {
+  font-size: 16px;
+}
+
+.card-body {
+  transition-timing-function: ease-in-out;
+  transition: 500ms;
+}
+
+.card-body:hover {
+  background-color: rgb(216, 239, 255);
+  box-shadow: 0 0 8px rgb(139, 174, 255);
+}

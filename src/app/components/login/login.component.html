@@ -1,21 +1,23 @@
-<div >
-  <form name="f" (submit)="login()" class="form-signin">
+<div>
+  <form name="f" method="post" (submit)="login()" class="form-signin">
     <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <fieldset>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="username" class="sr-only">Username</label>
-    <input type="email" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+    <input type="email" id="username" name="username" class="form-control" placeholder="Username" [(ngModel)]="credentials.username" required autofocus>
     <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" class="form-control" placeholder="Password" required>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="credentials.password" required>
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <Button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</Button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </fieldset>
   </form>
+
   <!--<form name="f" (submit)="login()" method="post">-->
     <!--<fieldset>-->
       <!--<legend>Please Login</legend>-->

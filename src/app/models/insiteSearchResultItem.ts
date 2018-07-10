@@ -3,5 +3,6 @@ export class InsiteSearchResultItem {
     url: string;
     description: string;
     rating: number;
+    title: string;
     tf_idf: number;
 }

@@ -14,6 +14,7 @@ export class TextResultComponent implements OnInit {
   @Input() url: string;
   @Input() description: string;
   @Input() _id: string;
+  @Input() title: string;
 
   private user: User;
 

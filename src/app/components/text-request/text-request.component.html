@@ -1,43 +1,59 @@
-<div>
+<div class="container">
   <br>
-  <h1 class="display-3 text-center">Text Materials
+  <h1 class="display-3 text-center font-weight-bold">Text Materials
   </h1>
   <br>
   <div class="row">
     <div class="col-xs-3 col-sm-1 col-md-3">&nbsp;</div>
     <div class="col-xs-6 col-sm-10 col-md-6">
       <div class="form-group">
-        <input type="text" name="" class="form-control" [(ngModel)]="inputValue" placeholder="What do you want?">
+        <input type="text" name="" class="form-control" [(ngModel)]="inputValue" placeholder="What do you want?" required>
+        <div class="row text-center">
+          <div class="col-6">
+            <a (click)="setContentType('webpage')">
+              <div class="btn-content-type" [ngClass]="{'btn-content-type-selected':contentType=='webpage'}">
+                <i class="fa fa-wpforms" aria-hidden="true"></i><br>
+                <span>Web Pages</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-6">
+            <a (click)="setContentType('ebook')">
+              <div class="btn-content-type" [ngClass]="{'btn-content-type-selected':contentType=='ebook'}">
+                <i class="fa fa-book" aria-hidden="true"></i><br>
+                <span>E Books</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-3 col-sm-1 col-md-3">&nbsp;</div>
-    <div class="col-xs-6 col-sm-10 col-md-5">
-      <a class="btn btn-primary" (click)="search()">Search</a>
+    <div class="col-12 text-center">
+      <a style="color: white; width: 180px;" class="btn btn-success" (click)="search()" role="button">Search</a>
     </div>
-    <div class="col-xs-3 col-sm-1 col-md-4">
-      <span>E-Books </span>
-      <input type="radio" name="Hello" value="ebook" [(ngModel)]="contentType">
-      <br><span> Web Tutorials </span>
-      <input type="radio" name="Hello" value="web" [(ngModel)]="contentType">
-    </div>
+    <!--<div class="col-xs-3 col-sm-1 col-md-4">-->
+      <!--<span>E-Books </span>-->
+      <!--<input type="radio" name="Hello" value="ebook" [(ngModel)]="contentType">-->
+      <!--<br><span> Web Tutorials </span>-->
+      <!--<input type="radio" name="Hello" value="web" [(ngModel)]="contentType">-->
+    <!--</div>-->
   </div>
 </div>
 <br>
 
-<!-- Modal -->
+ <!--Modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">LMMS Project</h5>
-      </div>
       <div class="modal-body">
         <div class="progressContent" [hidden]="!errorContentHidden">
-          <h1>Processing your request...</h1>
-          <h2>Please Wait</h2>
-          <p class="fa fa-refresh fa-spin" style="font-size:250px;"></p>
+          <!--<p class="fa fa-refresh fa-spin" style="font-size:250px;"></p>-->
+          <img src="../../../assets/loading.gif" width="250px" height="250px">
+          <h1 [hidden]="holdOnMessageHidden">Hold On</h1>
+          <h3 [hidden]="holdOnMessageHidden">We will reading & analysing online resources for you</h3>
+          <p [hidden]="holdOnMessageHidden">This may take several minutes</p>
         </div>
         <div class="errorContent" [hidden]="errorContentHidden">
           <h1>Oops.. Server Error!!</h1>

@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    alert('Username: '+this.credentials.username+'\nPassword: '+this.credentials.password);
+
     this.userSession.authenticate(this.credentials, () => {
       this.router.navigateByUrl('/');
     });

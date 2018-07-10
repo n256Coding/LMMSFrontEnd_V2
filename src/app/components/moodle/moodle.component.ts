@@ -20,12 +20,12 @@ export class MoodleComponent implements OnInit {
 
   checkValue = "";
   standardType = "";
-  
+
 
   creds :Credential[] = [];
   resources : ResourcesList = new ResourcesList();
 
-  m_username; m_loginUrl; m_pwd ; m_pageUrl; 
+  m_username; m_loginUrl; m_pwd ; m_pageUrl;
 
   selectedOption(event) {
     this.checkValue = event.target.value;
@@ -43,14 +43,14 @@ export class MoodleComponent implements OnInit {
 
   displayMoodleResults(): void{
     $('#moodleLoadingModal').modal('show');
-    
+
     this.moodleService.getMoodleResults().subscribe(
       res => {
         // this.resources = res
         this.router.navigateByUrl('/moodle-result');
         this.moodleResultService.changeMessage(res);
        $('#moodleLoadingModal').modal('hide');
-      
+
       },err =>{
       alert("cannot connect to the moodle server !!!");
       $('#moodleLoadingModal').modal('hide');
@@ -75,6 +75,7 @@ export class MoodleComponent implements OnInit {
 
 
 
+
   startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl){
     const newMoodle: Credential = new Credential();
     newMoodle.username = userName.value;
@@ -83,7 +84,7 @@ export class MoodleComponent implements OnInit {
     newMoodle.pageUrl = pageUrl.value;
     this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
         console.log("inserted credentials");
-      
+
       },err =>{
         alert("cannot connect to the moodle server !!!");
       }
@@ -92,8 +93,11 @@ export class MoodleComponent implements OnInit {
   }
 
 
+
   ngOnInit() {
+
     // this.displayMoodleResults();
+
   }
 
 }

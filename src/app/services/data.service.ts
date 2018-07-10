@@ -5,13 +5,20 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class DataService {
 
-  private messageSource = new BehaviorSubject(new InsiteSearchResult);
-  currentMessage = this.messageSource.asObservable();
+  private searchResults = new BehaviorSubject(new InsiteSearchResult);
+  private contentType = new BehaviorSubject('');
+
+  currentResults = this.searchResults.asObservable();
+  currentContentType = this.contentType.asObservable();
 
   constructor() { }
 
-  changeMessage(message: InsiteSearchResult) {
-    this.messageSource.next(message);
+  changeResults(message: InsiteSearchResult) {
+    this.searchResults.next(message);
+  }
+
+  changeContentType(contentType: string){
+    this.contentType.next(contentType);
   }
 
 }

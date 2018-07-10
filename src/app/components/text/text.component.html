@@ -1,11 +1,65 @@
 <!--<h1 class="display-4">Resources Found!!</h1>--><br>
-<h5>Results for <a href="#">{{results.originalQuery}}</a></h5>
-<h5 [hidden]="results.originalQuery == results.spellCorrectedQuery">Did you mean? <a href="#">{{results.spellCorrectedQuery}}</a></h5>
-<h5>{{results.count}} results found!</h5>
-<a href="text-request" class="btn btn-outline-success">Return to new search</a>
-<br><br>
-<app-text-result *ngFor="let resultItem of results.resultItems"
-    [url]="resultItem.url"
-    [description]="resultItem.description"
-    [rating]="resultItem.rating"
-    [_id]="resultItem._id"></app-text-result>
+<div class="row header-bar">
+  <div class="container">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-6 row">
+    <a (click)="search('webpage')">
+      <div class="col-6 btn-content-type" [ngClass]="{'btn-content-type-selected':contentType=='webpage'}">
+        <i class="fa fa-wpforms" aria-hidden="true"></i><br>
+        <span>Web Pages</span>
+      </div>
+    </a>
+    <a (click)="search('ebook')">
+    <div class="col-6 btn-content-type" [ngClass]="{'btn-content-type-selected':contentType=='ebook'}">
+      <i class="fa fa-book" aria-hidden="true"></i><br>
+      <span>E Books</span>
+    </div>
+    </a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-6 search-status">
+      <h5 class="original-query">{{results.count}} results available with matching <a href="#">{{results.originalQuery}}</a></h5>
+      <h5 class="spell-corrected-query" [hidden]="results.originalQuery == results.spellCorrectedQuery">Did you mean? <a href="#">{{results.spellCorrectedQuery}}</a></h5>
+      <!--<h5 class="results-found">{{results.count}} results found!</h5>-->
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-6" style="text-align: right;">
+      <a href="text-request" class="btn btn-outline-success">Start new search</a>
+    </div>
+  </div>
+  <br>
+  <app-text-result *ngFor="let resultItem of results.resultItems"
+      [url]="resultItem.url"
+      [description]="resultItem.description"
+      [rating]="resultItem.rating"
+      [title]="resultItem.title == '' ? resultItem.url : resultItem.title"
+      [_id]="resultItem._id"></app-text-result>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="text-align: center;" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="progressContent" [hidden]="!errorContentHidden">
+          <!--<h1>Processing your request...</h1>-->
+          <!--<h2>Please Wait</h2>-->
+          <!--<p class="fa fa-refresh fa-spin" style="font-size:250px;"></p>-->
+          <img src="../../../assets/loading.gif" width="250px" height="250px">
+          <h1 [hidden]="holdOnMessageHidden">Hold On</h1>
+          <h3 [hidden]="holdOnMessageHidden">We will reading & analysing online resources for you</h3>
+          <p [hidden]="holdOnMessageHidden">This may take several minutes</p>
+        </div>
+        <div class="errorContent" [hidden]="errorContentHidden">
+          <h1>Oops.. Server Error!!</h1>
+          <p class="fa fa-frown-o" style="font-size:250px;"></p>
+        </div>
+        <div class="modal-footer" [hidden]="errorContentHidden">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="setErrorContentStatus(true)">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

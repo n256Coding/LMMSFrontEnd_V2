@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="../../../assets/css/responsive.css">
   <!-- header-area start -->
   <header class="header-area header-area2">
-    <!-- <div class="header-top">
+    <div class="header-top">
       <div class="container">
         <div class="row">
           <div class="col-xl-5 col-lg-6 col-md-8 col-12">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="header-bottom bg-2">
       <div class="container">
         <div class="row">
@@ -58,8 +58,8 @@
           </div>
           <div class="col-lg-2 col-sm-3 col-8">
             <div class="geta_quote">
-              <a href="loginPage">Register | Login</a>
-               <!--<a href="logout">Logout</a>-->
+              <a [hidden]="authenticated()" href="loginPage">Register | Login</a>
+               <a [hidden]="!authenticated()" href="logout">Logout</a>
             </div>
           </div>
           <div class="d-block d-lg-none col-4 pull-right col-sm-2">

@@ -18,6 +18,10 @@
         $(".responsive-menu-area").toggleClass("active");
     });
 
+  $("#click").on('click', function() {
+    alert("ee")
+  });
+
     $('ul.metismenu').metisMenu({
     });
 

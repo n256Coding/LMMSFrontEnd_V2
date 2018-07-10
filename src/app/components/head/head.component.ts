@@ -1,7 +1,7 @@
 import {Component, OnInit, Inject} from "@angular/core";
 import {UserSessionService} from "../../services/user-session.service";
 import {WebStorageService, SESSION_STORAGE} from "angular-webstorage-service";
-
+declare var $: any;
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
@@ -41,12 +41,5 @@ export class HeadComponent implements OnInit {
     }
   }
 
-  setSession() {
-    this.storage.set('loggedUser', {name: 'hello'});
-  }
-
-  removeSession() {
-    this.storage.remove('loggedUser');
-  }
 
 }
