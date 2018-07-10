@@ -3,11 +3,11 @@
   <h2>Custom Validation Report</h2>
   <hr>
 </div>
-
+<!--
 <div *ngIf="showSpinner">
   <div class="small-loader"></div>
 </div>
-
+-->
 
 
 
@@ -52,7 +52,7 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-primary text-white">
           <h6>Success Points in Each Slide</h6>
         </div>
         <div class="card-body">
@@ -65,7 +65,7 @@
     </div>
     <div class="col-sm-4">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-success text-white">
           <h6>Success Precentage Chart</h6>
         </div>
         <div class="card-body">
@@ -82,12 +82,12 @@
 
     <div class="col-sm">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-secondary text-white">
           <h6>Quick Status Report</h6>
         </div>
         <div class="card-body">
           <table class="table">
-            <thead>
+            <thead class="thead-light">
               <tr>
                 <th>Slide No</th>
                 <th>Header</th>
@@ -95,13 +95,13 @@
                 <th>Footer</th>
                 <th>Footer Text</th>
                 <th>Page No</th>
-                <th>Contrast</th>
+                <th>Visibility</th>
                 <th>Family</th>
                 <th>FontSize</th>
                 <th>Content Position</th>
                 <th>Words</th>
                 <th>Bullerts</th>
-                <th>Logo Position</th>
+                <th>Template</th>
                 <th>Total Status</th>
               </tr>
             </thead>
@@ -197,9 +197,9 @@
   <div class="row">
     <div class="col-sm">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-secondary text-white">
           <a class="collapsed card-link" data-toggle="collapse" href="#collapseOne">
-            <h6 style="text-align: center;color: black">{{reportList[0].maxSlideNo}} (Click Here For More Details)</h6>
+            <h6 style="text-align: center;color: white">{{reportList[0].maxSlideNo}} (Click Here For More Details)</h6>
           </a>
         </div>
         <div id="collapseOne" class="collapse" data-parent="#accordion">
@@ -242,51 +242,51 @@
 
                         <div *ngIf="reportItem.header !== 'Header is Available';else content14" style="color: red">
                           <strong>Header : </strong>{{reportItem.header}}<br></div>
-                        <ng-template #content14><strong>Header : </strong>{{reportItem.header}}<br></ng-template>
+                        <ng-template #content14><div style="color: green"><strong>Header : </strong>{{reportItem.header}}</div></ng-template>
 
                         <div *ngIf="reportItem.headertext !== 'Header is matching';else content15" style="color: red">
                           <strong>HeaderText : </strong>{{reportItem.headertext}}<br></div>
-                        <ng-template #content15> <strong>HeaderText : </strong>{{reportItem.headertext}}<br></ng-template>
+                        <ng-template #content15><div style="color: green"> <strong>HeaderText : </strong>{{reportItem.headertext}}</div></ng-template>
 
                         <div *ngIf="reportItem.footer !== 'Footer is Available';else content16" style="color: red">
                           <strong>Footer : </strong>{{reportItem.footer}}<br> </div>
-                        <ng-template #content16><strong>Footer : </strong>{{reportItem.footer}}<br></ng-template>
+                        <ng-template #content16><div style="color: green"><strong>Footer : </strong>{{reportItem.footer}}</div></ng-template>
 
                         <div *ngIf="reportItem.footertext !== 'Footer is matching';else content17" style="color: red">
                           <strong>FooterText : </strong>{{reportItem.footertext}}<br></div>
-                        <ng-template #content17> <strong>FooterText : </strong>{{reportItem.footertext}}<br></ng-template>
+                        <ng-template #content17> <div style="color: green"><strong>FooterText : </strong>{{reportItem.footertext}}</div></ng-template>
 
                         <div *ngIf="reportItem.pageNumber !== 'Slide Numbering is Available';else content18" style="color: red">
                           <strong>Page Numbering : </strong>{{reportItem.pageNumber}}<br></div>
-                        <ng-template #content18><strong>Page Numbering : </strong>{{reportItem.pageNumber}}<br></ng-template>
+                        <ng-template #content18><div style="color: green"><strong>Page Numbering : </strong>{{reportItem.pageNumber}}</div></ng-template>
 
                         <div *ngIf="reportItem.contrast !== 'Visibility is Good';else content19" style="color: red">
-                          <strong>Contrast : </strong>{{reportItem.contrast}}<br> </div>
-                        <ng-template #content19><strong>Contrast : </strong>{{reportItem.contrast}}<br></ng-template>
+                          <strong>Visibility : </strong>{{reportItem.contrast}}<br> </div>
+                        <ng-template #content19><div style="color: green"><strong>Visibility : </strong>{{reportItem.contrast}}</div></ng-template>
 
                         <div *ngIf="reportItem.fontFamily !== 'You are used recommandard San-Serif font';else content20" style="color: red">
                           <strong>Family : </strong>{{reportItem.fontFamily}}<br> </div>
-                        <ng-template #content20><strong>Family : </strong>{{reportItem.fontFamily}}<br></ng-template>
+                        <ng-template #content20><div style="color: green"><strong>Family : </strong>{{reportItem.fontFamily}}</div></ng-template>
 
                         <div *ngIf="reportItem.fontSize !== 'you have used proper font Size';else content21" style="color: red">
                           <strong>FontSize : </strong>{{reportItem.fontSize}}<br></div>
-                        <ng-template #content21><strong>FontSize : </strong>{{reportItem.fontSize}}<br></ng-template>
+                        <ng-template #content21><div style="color: green"><strong>FontSize : </strong>{{reportItem.fontSize}}</div></ng-template>
 
                         <div *ngIf="reportItem.position !== 'TextBox position is Good';else content22" style="color: red">
                           <strong>Content Position : </strong> {{reportItem.position}}<br></div>
-                        <ng-template #content22><strong>Content Position : </strong> {{reportItem.position}}<br></ng-template>
+                        <ng-template #content22><div style="color: green"><strong>Content Position : </strong> {{reportItem.position}}</div></ng-template>
 
                         <div *ngIf="reportItem.words !== 'Number of words per slide is good';else content23" style="color: red">
                           <strong>Words Per Slide : </strong>{{reportItem.words}}<br></div>
-                        <ng-template #content23> <strong>Words Per Slide : </strong>{{reportItem.words}}<br></ng-template>
+                        <ng-template #content23> <div style="color: green"><strong>Words Per Slide : </strong>{{reportItem.words}}</div></ng-template>
 
                         <div *ngIf="reportItem.bullters !== 'Number of bullerts per slide is good';else content24" style="color: red">
                           <strong>Bullerts Per Slide : </strong>{{reportItem.bullters}}<br></div>
-                        <ng-template #content24><strong>Bullerts Per Slide : </strong>{{reportItem.bullters}}<br></ng-template>
+                        <ng-template #content24><div style="color: green"><strong>Bullerts Per Slide : </strong>{{reportItem.bullters}}</div></ng-template>
 
                         <div *ngIf="reportItem.picPositions !== 'Slide match with logo and images in Master slide';else content25" style="color: red">
-                          <strong>Logo Positions : </strong>{{reportItem.picPositions}}<br> </div>
-                        <ng-template #content25> <strong>Logo Positions : </strong>{{reportItem.picPositions}}<br></ng-template>
+                          <strong>Template : </strong>{{reportItem.picPositions}}<br> </div>
+                        <ng-template #content25><div style="color: green"> <strong>Template : </strong>{{reportItem.picPositions}}</div></ng-template>
 
                       </div>
                     </div>
@@ -313,4 +313,21 @@
     <button class="btn btn-success" (click)='goBack()'>Back to Home</button>
   </div>
 
+</div>
+
+<!-- Slide Loading Modal -->
+<div class="modal fade" id="slideCustomLoadingModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="text-center">
+              <img src="../../../assets/Slide/SlideSpinner.gif" width="250px" height="250px">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Slide Loading Modal Ends -->
+
+<div style="height: 500px">
 </div>

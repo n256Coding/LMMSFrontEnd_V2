@@ -6,6 +6,7 @@ import { SlideService } from './../../services/slide.service';
 
 import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import Chart from 'Chart.js'
+declare var $: any;
 
 @Component({
   selector: 'app-slide-custom-report',
@@ -23,6 +24,7 @@ export class SlideCustomReportComponent implements OnInit {
     private slideService: SlideService) { }
 
   ngOnInit() {
+        $('#slideCustomLoadingModal').modal('show');
     this.getSlideReportFromService();
   }
 
@@ -41,7 +43,7 @@ export class SlideCustomReportComponent implements OnInit {
         this.reportList = updatedReport;
         this.showSpinner = false;
         this.maxNo = this.reportList.length;
-        
+         $('#slideCustomLoadingModal').modal('hide');
 
                 var barLableArray: string[] = new Array(this.maxNo);
                 var barDataArray: number[] = new Array(this.maxNo);
@@ -54,7 +56,7 @@ export class SlideCustomReportComponent implements OnInit {
                     this.currentPoints = this.currentPoints + i.checkingPoints;
                     barLableArray[countlable++] = "Slide No: "+i.slideNo;
                     barDataArray[countdata++] = i.checkingPoints;
-                    colorArray[colordata++]= 'rgba(0, 0, 255, 0.8)';
+                    colorArray[colordata++]= 'rgba(0, 102, 255, 0.5)';
                 }
 
                 this.successPre = +this.reportList[this.maxNo - 1].summary;
@@ -67,8 +69,8 @@ export class SlideCustomReportComponent implements OnInit {
                             label: '# of Votes',
                             data: [this.successPre, 100 - this.successPre],
                             backgroundColor: [
-                                'rgba(0, 255, 0, 0.8)',
-                                'rgba(255, 0, 0, 0.8)'
+                                'rgba(0, 153, 51,0.7)',
+                                'rgba(204, 0, 0, 0.7)'
                             ],
 
                             borderWidth: 1
@@ -76,6 +78,7 @@ export class SlideCustomReportComponent implements OnInit {
                     },
                     options: {
                         title: {
+                            label:"Success Chart",
                             display: true
                         },
                         responsive: false,
@@ -93,6 +96,12 @@ export class SlideCustomReportComponent implements OnInit {
                             data: barDataArray,
                             backgroundColor: colorArray,
                             borderWidth: 1
+                        }, {
+                           label:'Success Points',
+                            data: barDataArray,
+
+                            // Changes this dataset to become a line
+                            type: 'line'
                         }]
                     },
                     options: {

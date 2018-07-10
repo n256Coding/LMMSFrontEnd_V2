@@ -3,9 +3,11 @@
   <br>
   <h2>Lecture Slide Validation</h2>
   <hr>
-
+<div class="card">
+  <div class="card-body">
   <form [formGroup]='adminForm' (ngSubmit)="admin(template.value)">
 
+    
     <div class="form-group">
       <label>Name of the template:</label>
       <input type="text" formControlName='templateName' class="form-control" #template>
@@ -43,4 +45,9 @@
     <input type="submit" value="Upload" class="btn btn-primary" [disabled]="!adminForm.valid || selectedMasterSlide === undefined">
 
   </form>
+  </div>
+</div>
+</div>
+
+<div style="height: 500px">
 </div>
