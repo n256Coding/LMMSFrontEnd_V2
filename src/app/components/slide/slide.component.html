@@ -286,11 +286,11 @@
     </div>
   </div>
 
-  <div *ngIf="permissionToReport === 'Okay'" style="text-align: right">
+  <div *ngIf="permissionToReport === 'Okay'" >
     <button routerLink='/report' class="btn btn-success">Generate Report</button>
   </div>
 
-  <div *ngIf="permissionToCustomReport === 'Okay'" style="text-align: right">
+  <div *ngIf="permissionToCustomReport === 'Okay'" >
     <button routerLink='/customReportSlide' class="btn btn-success">Generate Report</button>
   </div>
 
@@ -341,7 +341,7 @@
       <div class="form-control">
         <div class="text-center">
           <label class="btn btn-primary">
-         <input type="file" (change)="selectMasterDoc($event)">
+         <input type="file" (change)="selectMasterDoc($event)" >
       </label> <br>
           <button class="btn btn-success" [disabled]="!selectedMasterDoc" (click)="uploadMasterDoc()">Upload Master template</button>
         </div>
@@ -443,6 +443,7 @@
     </div>
   </div>
 
-
   <!-- remove-->
+</div>
+<div style="height: 500px">
 </div>
