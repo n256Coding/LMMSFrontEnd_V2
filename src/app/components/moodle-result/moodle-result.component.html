@@ -47,15 +47,14 @@
         </table>
       </div>
     </div> -->
-
 <div class="container-fluid main-margin">
   <div class="row">
     <div class="col-md-12 col-sm-12 text-center">
-      <h3>Moodle Page Validation Results</h3>
+      <h3>Moodle Page Validation Results</h3><hr>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9 col-sm-9">
+    <div class="col-md-8 col-sm-8">
         <div class="card">
           <div class="card-header">
             Lecture presentation Format
@@ -84,10 +83,10 @@
                   <tr *ngFor="let eachHeading of resources.headingDetailList">
                     <td>{{eachHeading.headingName}}</td>
                     <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'no_desc')">
-                      <h6><span class="badge badge-warning" style="color: white">Not Included</span></h6>
+                      <h5><span class="badge badge-warning">Not Included</span></h5>
                     </td>
                     <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'desc')">
-                      <h6><span class="badge badge-success">Include</span></h6>
+                      <h5><span class="badge badge-success">Include</span></h5>
                     </td>
                   </tr>
                 </tbody>
@@ -111,11 +110,11 @@
                   <tbody>
                     <tr *ngFor="let eachResource of resources.resourcesList">
                       <td>{{eachResource.resourceName}}</td>
-                      <td *ngIf="eachResource.name === 'incorrect_name_format'"><h6><span class="badge badge-warning" style="color: white">Incorrect</span></h6></td>
-                      <td *ngIf="eachResource.name === 'correct_name_format'"><h6><span class="badge badge-success">Correct</span></h6></td>
+                      <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-danger" >Incorrect</span></h5></td>
+                      <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
                       
-                      <td *ngIf="eachResource.description === 'no_recource_desc'"><h6><span class="badge badge-warning" style="color: white">Incorrect</span></h6></td>
-                      <td *ngIf="eachResource.description === 'resource_desc'"><h6><span class="badge badge-success">Correct</span></h6></td>
+                      <td *ngIf="eachResource.description === 'no_recource_desc'"><h5><span class="badge badge-danger" >Not Included</span></h5></td>
+                      <td *ngIf="eachResource.description === 'resource_desc'"><h5><span class="badge badge-success">Included</span></h5></td>
                       
                     </tr>
                   </tbody>
@@ -124,14 +123,20 @@
           </div>
       
     </div> 
-    <div class="col-md-3 col-sm-3">
+    <div class="col-md-4 col-sm-4">
         <div class="card">
             <div class="card-header">
               Overall Result
             </div>
             <div class="card-body">
-              <!-- <h5 class="card-title">Topic Type</h5> -->
-            <p> some results display here !!</p>
+              <h6 class="card-title"><b>Files (Activities/Resources)</b></h6><hr>
+              <p>Total resources    : <b>21</b></p>
+              <p>Success resources  : <b>12</b></p>
+              <p>Failed Resources   : <b>9</b></p>
+              <p></p>
+              <h6 class="card-title"><b>Graphical Represntation</b></h6><hr>
+              <canvas id="myChart" width="700" height="400"></canvas>
+
             </div>
           </div>
     </div>
@@ -139,11 +144,9 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
 
-        <a href="moodle" class="btn btn-default" style="margin-top: 15px">Go back</a>
+        <a href="moodle" class="btn btn-primary" style="margin-top: 15px">Go back</a>
         
     </div>
   </div>
 </div>
 
-
-   

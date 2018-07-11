@@ -3,6 +3,7 @@
 .main-view{
     padding: 5% 10%;
     min-height: 500px;
+    /* background: #cdcfdf; */
 }
 
 .dis-none{
@@ -73,4 +74,26 @@
 
 input.ng-invalid.ng-touched {
     border: 1px solid red;
+}
+
+/* modal center position */
+.modal {
+    text-align: center;
+    padding: 0!important;
   }
+  
+  .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+  }
+  
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  /* end modal center position */
