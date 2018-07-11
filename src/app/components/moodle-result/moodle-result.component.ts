@@ -3,6 +3,7 @@ import { ResourcesList } from '../../models/resourcesList';
 import { Router } from '@angular/router';
 import { MoodleService } from './../../services/moodle.service';
 import { MoodleResultService } from './../../services/moodle-result.service';
+import { Chart} from 'chart.js';
 
 @Component({
   selector: 'app-moodle-result',
@@ -16,12 +17,16 @@ export class MoodleResultComponent implements OnInit {
 
     resources : ResourcesList = new ResourcesList();
 
+  //chart variables
+  canvas: any;
+  ctx: any;
+
   ngOnInit() {
     this.moodleResultService.currentMessage.subscribe(
       res => {
         if (res.sectionType === undefined) {
-          // this.router.navigateByUrl('/moodle');
-          this.router.navigateByUrl('/moodle-result');
+          this.router.navigateByUrl('/moodle');
+          // this.router.navigateByUrl('/moodle-result');
           
         } else {
           this.resources = res;
@@ -31,6 +36,32 @@ export class MoodleResultComponent implements OnInit {
         }
       }
     );
+
+    // pie chart
+    this.canvas = document.getElementById('myChart');
+    this.ctx = this.canvas.getContext('2d');
+    let myChart = new Chart(this.ctx, {
+      type: 'pie',
+      data: {
+          labels: ["Success", "Fail"],
+          datasets: [{
+              label: '# of Resources',
+              data: [12,9],
+              backgroundColor: [
+                  'rgb(76, 175, 80)', //green
+                  'rgb(244, 67, 54)' //red
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+        responsive: true,
+        display: true
+      }
+    });
+    //end pie chart
+
+
   }
 
 }
