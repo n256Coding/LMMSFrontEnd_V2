@@ -28,7 +28,7 @@ const routes: Routes = [
   { path : 'customReportSlide', component : SlideCustomReportComponent },
   { path : 'loginPage', component : LoginComponent },
   { path : 'home', component : HomeComponent },
-  { path : 'adminTemplate',component: AdminTemplateComponent}
+  { path : 'adminTemplate',component: AdminTemplateComponent},
   { path : 'register', component : RegisterComponent }
 ];
 
