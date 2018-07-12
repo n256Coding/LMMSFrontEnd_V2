@@ -49,8 +49,8 @@
 
   <div class="input-group">
     <div class="custom-file">
-      <input type="file"  multiple class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
-      <label class="custom-file-label" for="inputGroupFile04">{{inputGroupFile04.value}}</label>
+      <input type="file"  multiple  class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
+      <label class="custom-file-label" for="inputGroupFile04">{{selectedFiles.item(0).name}}</label>
     </div>
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
