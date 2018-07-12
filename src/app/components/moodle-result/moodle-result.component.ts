@@ -3,7 +3,7 @@ import { ResourcesList } from '../../models/resourcesList';
 import { Router } from '@angular/router';
 import { MoodleService } from './../../services/moodle.service';
 import { MoodleResultService } from './../../services/moodle-result.service';
-import { Chart} from 'chart.js';
+import { Chart } from 'Chart.js';
 
 @Component({
   selector: 'app-moodle-result',
@@ -27,7 +27,7 @@ export class MoodleResultComponent implements OnInit {
         if (res.sectionType === undefined) {
           this.router.navigateByUrl('/moodle');
           // this.router.navigateByUrl('/moodle-result');
-          
+
         } else {
           this.resources = res;
           console.log('SectionType: '+this.resources.sectionType);

@@ -39,7 +39,7 @@ export class SlideCustomReportComponent implements OnInit {
     this.slideService.getSlideCustomReport().subscribe(
       (updatedReport) => {
 
-        
+
         this.reportList = updatedReport;
         this.showSpinner = false;
         this.maxNo = this.reportList.length;
