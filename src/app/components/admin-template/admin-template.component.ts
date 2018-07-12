@@ -40,7 +40,7 @@ export class AdminTemplateComponent implements OnInit {
     this.progressMasterSlide.percentageMasterSlide = 0;
 
     this.currentMasterSlideUpload = this.selectedMasterSlide.item(0);
-    this.slideService.pushMasterSlideToStorage(this.currentMasterSlideUpload).subscribe(event => {
+    this.slideService.pushMasterSlideToStorage(this.selectedMasterSlide).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.progressMasterSlide.percentageMasterSlide = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {

@@ -30,9 +30,11 @@ export class SlideService {
     return this.http.request(req);
   }
 
-    pushMasterSlideToStorage(file: File): Observable<HttpEvent<{}>> {
+    pushMasterSlideToStorage(file: FileList): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
-    formdata.append('file', file,file.name);
+    for(var x=0;x<file.length;x++){
+    formdata.append('file', file[x],file[x].name);
+    }
     const req = new HttpRequest('POST', '//localhost:8090/slide/postMasterSlide', formdata, {
       reportProgress: true,
       responseType: 'text'
