@@ -51,7 +51,7 @@ export class SlideCustomReportComponent implements OnInit {
                 var countlable: number = 0;
                 var countdata: number = 0;
                 var colordata: number = 0;
-                this.totalPoints = 11 * this.maxNo;
+                this.totalPoints = 10 * this.maxNo;
                 for (let i of this.reportList) {
                     this.currentPoints = this.currentPoints + i.checkingPoints;
                     barLableArray[countlable++] = "Slide No: "+i.slideNo;
@@ -110,7 +110,7 @@ export class SlideCustomReportComponent implements OnInit {
                                 ticks: {
                                     beginAtZero: true,
                                     min: 0,
-                                    max: 11
+                                    max: 10
                                 }
                             }]
                         }

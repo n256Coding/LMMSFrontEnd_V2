@@ -49,7 +49,7 @@
 
   <div class="input-group">
     <div class="custom-file">
-      <input type="file" class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
+      <input type="file"  multiple class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
       <label class="custom-file-label" for="inputGroupFile04">{{inputGroupFile04.value}}</label>
     </div>
     <div class="input-group-append">
@@ -104,7 +104,7 @@
 <div *ngIf="changeToThird === 'Change'" class="container"> -->
 <div *ngIf="changeToSecond === 'Change'" class="container">
   <div>
-    <div class="container">
+    
       <p>Choose your template type</p>
       <form>
         <select class="custom-select custom-select mb-3">
@@ -113,9 +113,9 @@
             </option>
           </select>
       </form>
-    </div>
+   
 
-    <div *ngIf="selectTempalte === 'standard'" class="container">
+    <div *ngIf="selectTempalte === 'standard'" >
 
       <form [formGroup]='standardSlideForm' (ngSubmit)="startStandardSlideValidation(audiance.value)">
 
@@ -142,7 +142,7 @@
 
 
 
-    <div *ngIf="selectTempalte === 'custom'" class="container">
+    <div *ngIf="selectTempalte === 'custom'" >
 
       <form [formGroup]='customForm' (ngSubmit)="startCustomSlideValidation(noofslide.value,
         noofword.value,bullert.value,caudiance.value,fontfamily.value,contentPosition.value,header.value,
