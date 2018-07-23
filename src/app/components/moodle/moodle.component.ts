@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Credential } from '../../models/credential';
 import { MoodleResults } from '../../models/moodleResults';
+import { QuizResults } from '../../models/quizResults';
 import { MoodleService } from './../../services/moodle.service';
 import { Router } from '@angular/router';
 import { ResourcesList } from '../../models/resourcesList';
 import { MoodleResultService } from './../../services/moodle-result.service';
+
+//quiz
+import {HttpClient, HttpResponse, HttpEventType} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import { MoodleQuizService } from './../../services/moodle-quiz.service';
 
 declare var $: any;
 
@@ -16,7 +22,7 @@ declare var $: any;
 export class MoodleComponent implements OnInit {
 
   constructor(private moodleService: MoodleService, private router: Router,
-    private moodleResultService: MoodleResultService) { }
+    private moodleResultService: MoodleResultService, private moodleQuizService: MoodleQuizService) { }
 
   checkValue = "";
   standardType = "";
@@ -24,6 +30,7 @@ export class MoodleComponent implements OnInit {
 
   creds :Credential[] = [];
   resources : ResourcesList = new ResourcesList();
+  quizes :  QuizResults = new  QuizResults();
 
   m_username; m_loginUrl; m_pwd ; m_pageUrl; 
 
@@ -90,6 +97,64 @@ export class MoodleComponent implements OnInit {
     );
     this.displayMoodleResults();
   }
+
+  // start quiz codes
+  selectedFiles: FileList
+  currentFileUpload: File
+  progress: { percentage: number } = { percentage: 0 }
+  
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload() {
+    this.progress.percentage = 0;
+ 
+    this.currentFileUpload = this.selectedFiles.item(0)
+
+    if(this.currentFileUpload.type ==="text/xml"){
+      this.moodleQuizService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          console.log('File is completely uploaded!');
+        } 
+      },err=>{
+        console.log("Failed to complete Uploading!!!");
+      })
+    }else{
+      alert("Invalid file format !!! \n Moodle XML files only....")
+    }
+    this.progress.percentage = 0;
+    this.selectedFiles = undefined
+  }
+
+  //start quiz analyze
+  clickMe():void{
+    // alert("sdsfsd")
+    this.displayMoodleQuizResults();
+  }
+
+  displayMoodleQuizResults(): void{
+    // $('#moodleLoadingModal').modal('show');
+    this.moodleQuizService.getMoodleQuizResults().subscribe(
+      res => {
+        // this.quizes = res;
+        this.router.navigateByUrl('/moodle-quiz-results');
+        this.moodleResultService.changeMessageForQuiz(res);
+        $("#moodleLoadingModal").modal('hide');
+      
+
+      },err =>{
+      alert("cannot connect to the quiz server !!!");
+      $('#moodleLoadingModal').modal('hide');
+      }
+    );
+  }
+
+  // end quiz analyze
+  
+  // End quiz codes
 
 
   ngOnInit() {

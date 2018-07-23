@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TextRequestComponent } from './components/text-request/text-request.component';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
+import { MoodleQuizResultsComponent} from './components/moodle-quiz-results/moodle-quiz-results.component';
 
 const routes: Routes = [
   { path : '', redirectTo : '/text-request', pathMatch : 'full' },
@@ -16,7 +17,10 @@ const routes: Routes = [
   { path : 'slide', component : SlideComponent },
 
   { path : '', redirectTo: '/moodle-result' ,pathMatch : 'full'},
-  { path : 'moodle-result', component : MoodleResultComponent }
+  { path : 'moodle-result', component : MoodleResultComponent },
+
+  { path : '', redirectTo: '/moodle-quiz-results' ,pathMatch : 'full'},
+  { path : 'moodle-quiz-results', component : MoodleQuizResultsComponent }
 ];
 
 @NgModule({

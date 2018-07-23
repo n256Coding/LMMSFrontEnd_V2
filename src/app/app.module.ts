@@ -21,6 +21,8 @@ import { TextRequestComponent } from './components/text-request/text-request.com
 import { MoodleService } from './services/moodle.service';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 import { MoodleResultService } from './services/moodle-result.service';
+import { MoodleQuizService } from './services/moodle-quiz.service';
+import { MoodleQuizResultsComponent } from './components/moodle-quiz-results/moodle-quiz-results.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { MoodleResultService } from './services/moodle-result.service';
     SlideComponent,
     TextResultComponent,
     TextRequestComponent,
-    MoodleResultComponent
+    MoodleResultComponent,
+    MoodleQuizResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { MoodleResultService } from './services/moodle-result.service';
     BarRatingModule,
     FormsModule
   ],
-  providers: [TextResourceService, DataService, MoodleService, MoodleResultService],
+  providers: [TextResourceService, DataService, MoodleService, MoodleResultService, MoodleQuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
