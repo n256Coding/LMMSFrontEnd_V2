@@ -1,11 +1,10 @@
-
 #one {
   padding: 10px;
 }
 
 #three {
   background-color: burlywood;
-} 
+}
 
 .row {
   border-radius: 8px;
@@ -54,4 +53,33 @@ img {
 
 hr {
   height: 5px;
+}
+
+a {
+  cursor: pointer;
+}
+
+.more-show-hide {
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+}
+
+.more-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.toggle-dots-grey {
+  color: darkgrey;
+}
+
+.toggle-dots-yellow {
+  color: yellow;
+}
+
+.toggle-link-yellow {
+  color: yellow;
+}
+
+.toggle-link-grey {
+  color: darkgrey;
 }

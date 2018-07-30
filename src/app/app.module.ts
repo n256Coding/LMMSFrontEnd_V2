@@ -26,7 +26,6 @@ import { HttpModule } from '@angular/http';
 import { FilterDialog } from "./components/video/filter-dialog/filter-dialog.component";
 import { videoService } from './services/video-service';
 import { ProcessingComponent } from './components/video/processing/processing.component';
-
 //enableProdMode();
 
 @NgModule({
