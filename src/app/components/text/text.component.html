@@ -29,12 +29,22 @@
     </div>
   </div>
   <br>
-  <app-text-result *ngFor="let resultItem of results.resultItems"
-      [url]="resultItem.url"
-      [description]="resultItem.description"
-      [rating]="resultItem.rating"
-      [title]="resultItem.title == '' ? resultItem.url : resultItem.title"
-      [_id]="resultItem._id"></app-text-result>
+  <div class="row">
+    <div class="col-md-9 col-sm-12 col-9 results-pane">
+      <!--TODO: Remove slicepipe limit  | slice:0:1-->
+      <app-text-result *ngFor="let resultItem of results.resultItems | slice:0:1"
+          [result]="resultItem"
+          [contentType]="contentType"></app-text-result>
+    </div>
+    <div class="col-md-3 col-sm-12 col-3 recommendation-pane">
+      <h4>You may like these</h4>
+      <!--TODO: Remove slicepipe limit-->
+      <app-recommendation-item *ngFor="let item of results.recommendations| slice:0:1"
+          [url]="item.url"
+          [description]="item.description"
+          [title]="item.title"></app-recommendation-item>
+    </div>
+  </div>
 </div>
 
 

@@ -1,10 +1,24 @@
 <div class="text-result-holder">
   <div class="card">
     <div class="card-body">
-      <a href="{{url}}" class="card-title title" target="_blank">{{title}}</a>
-      <p class="card-text description">{{description}}</p>
-      <bar-rating [(ngModel)]="rating" [max]="5" (rateChange)="updateRatings()"></bar-rating>
-      <input type="hidden" [value]="_id"/>
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <img class="snapshot" src="https://image.thum.io/get/auth/1770-thumiokey/allowJPG/width/250/crop/600/{{result.url}}"
+               alt="snapshot" [hidden]="contentType == 'ebook'"/>
+          <img class="book-cover-snapshot"
+               src="{{result.imageUrl}}"
+               [hidden]="contentType == 'webpage' || result.imageUrl == ''"/>
+          <img class="snapshot"
+               src="https://images.pexels.com/photos/256396/pexels-photo-256396.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+               [hidden]="contentType == 'webpage' || (contentType == 'ebook' && result.imageUrl != '')"/>
+        </div>
+        <div class="col-md-8 col-sm-12" ngClass="">
+          <a href="{{result.url}}" class="card-title title" target="_blank">{{result.title}}</a>
+          <p class="card-text description">{{result.description}}</p>
+          <bar-rating [(ngModel)]="result.rating" [max]="5" (rateChange)="updateRatings()"></bar-rating>
+          <input type="hidden" [value]="result._id"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>

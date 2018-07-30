@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {SESSION_STORAGE, WebStorageService} from "angular-webstorage-service";
 import {User} from "../../models/user";
 
+declare var $: any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,9 +21,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    $('#moodleLoadingModal').modal('show');
     this.userSession.authenticate(this.credentials, () => {
+      $('#moodleLoadingModal').modal('hide');
       this.router.navigateByUrl('/');
     });
+    $('#moodleLoadingModal').modal('hide');
     return false;
   }
 }

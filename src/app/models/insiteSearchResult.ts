@@ -5,4 +5,5 @@ export class InsiteSearchResult {
     originalQuery: string;
     count: number;
     resultItems: InsiteSearchResultItem[];
+    recommendations: InsiteSearchResultItem[];
 }

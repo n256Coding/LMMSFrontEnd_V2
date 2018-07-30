@@ -48,10 +48,16 @@
           </div>
           <div class="col-lg-7 col-sm-9 d-none d-lg-block">
             <ul class="mainmenu d-flex justify-content-end">
-              <li class="active"><a href="home">Home</a>
+              <li [ngClass]="{'active':this.router.url=='/home' || this.router.url==''}"><a href="home">Home</a>
               </li>
-              <li><a href="about.html">About us</a></li>
-              <li><a>Our Services <i class="fa fa-angle-down"></i></a>
+              <li [ngClass]="{'active':this.router.url=='/aboutus'}"><a href="about.html" >About us</a></li>
+              <li [ngClass]="{'active':this.router.url=='/text-request' ||
+                                                            this.router.url=='/text-request' ||
+                                                            this.router.url=='/video' ||
+                                                            this.router.url=='/slide' ||
+                                                            this.router.url=='/text-responce' ||
+                                                            this.router.url=='/moodle'}">
+                <a>Our Services <i class="fa fa-angle-down"></i></a>
                 <ul>
                   <li><a href="text-request">Text Analyzer</a></li>
                   <li><a href="video">Video Analyzer</a></li>
@@ -60,12 +66,12 @@
                   <li><a href="moodle">Moodle Validator</a></li>
                 </ul>
               </li>
-              <li><a href="contact.html">contact</a></li>
+              <li [ngClass]="{'active':this.router.url=='/contact'}"><a href="contact.html">contact</a></li>
             </ul>
           </div>
           <div class="col-lg-2 col-sm-3 col-8">
             <div class="geta_quote">
-              <a [hidden]="authenticated()" href="loginPage">Register | Login</a>
+              <a [hidden]="authenticated()" href="loginPage">Login</a>
                <a [hidden]="!authenticated()" href="#" (click)="logout()">Logout</a>
             </div>
           </div>
@@ -84,17 +90,20 @@
           <div class="row">
             <div class="col-12">
               <ul class="metismenu">
-                <li class="sidemenu-items"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About us</a></li>
-                <li class="sidemenu-items"><a class="has-arrow" aria-expanded="false">Our Services</a>
+                <li class="sidemenu-items" ><a href="index.html">Home</a></li>
+                <li><a href="about.html" >About us</a></li>
+                <li class="sidemenu-items" ><a class="has-arrow" aria-expanded="false">Our Services</a>
                   <ul aria-expanded="false">
                     <li><a href="text-request">Text Analyzer</a></li>
                     <li><a href="video">Video Analyzer</a></li>
-                    <li><a href="slide">Slide Validator</a></li>
+                    <li><a [hidden]="isAdminUser()" href="slide">Slide Validator</a></li>
+                    <li><a [hidden]="!isAdminUser()" href="adminTemplate">Slide Validator</a></li>
                     <li><a href="moodle">Moodle Validator</a></li>
                   </ul>
                 </li>
-                <li><a href="contact">contact</a></li>
+                <li>
+                  <a href="contact">contact</a>
+                </li>
               </ul>
             </div>
           </div>

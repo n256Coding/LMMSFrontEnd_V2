@@ -2,7 +2,9 @@ import { DataService } from './../../services/data.service';
 import { TextResourceService } from './../../services/text-resource.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import * as $ from 'jquery';
+import {UserSessionService} from "../../services/user-session.service";
+import {User} from "../../models/user";
+
 declare var $: any;
 @Component({
   selector: 'app-text-request',
@@ -13,11 +15,13 @@ export class TextRequestComponent implements OnInit {
 
   constructor(private textService: TextResourceService,
     private router: Router,
-    private dataService: DataService) { }
+    private dataService: DataService,
+    private sessionService: UserSessionService) { }
 
-  inputValue = 'sql select query';
+  inputValue = '';
   isPdf: boolean;
   contentType = "webpage";
+  user: User;
   public holdOnMessageHidden = true;
 
   errorContentHidden = true;
@@ -50,7 +54,8 @@ export class TextRequestComponent implements OnInit {
     }else{
       this.isPdf = false;
     }
-    this.textService.searchResource(this.inputValue, this.isPdf).subscribe(
+    //TODO: Change this.user.id
+    this.textService.searchResource(this.inputValue, this.isPdf, /*this.user.id*/"5b4dc76baf2fc529d0510546").subscribe(
       data => {
         $('#exampleModal').modal('hide');
         this.dataService.changeResults(data);
@@ -69,6 +74,7 @@ export class TextRequestComponent implements OnInit {
 
 
   ngOnInit() {
+    this.user = this.sessionService.getCurrentUser();
   }
 
 }

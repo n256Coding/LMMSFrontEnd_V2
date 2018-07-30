@@ -30,7 +30,7 @@
                 <li>presesnter visibility</li>
               </td>
               <td>:</td>
-              <td *ngIf="listitem.filter2; else wrong">
+              <td *ngIf="listitem.filter2 == 'true'; else wrong">
                 <i class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -42,7 +42,7 @@
                 <li>code visibility</li>
               </td>
               <td>:</td>
-              <td *ngIf="listitem.filter3; else wrong">
+              <td *ngIf="listitem.filter3 == 'true'; else wrong">
                 <i class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -54,7 +54,7 @@
                 <li>IDE(Elipse)</li>
               </td>
               <td>:</td>
-              <td *ngIf="!listitem.filter4; else wrong">
+              <td *ngIf="listitem.filter4 == 'true'; else wrong">
                 <i class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -66,7 +66,7 @@
                 <li>IDE(Intellij) </li>
               </td>
               <td>:</td>
-              <td *ngIf="!listitem.filter5; else wrong">
+              <td *ngIf="listitem.filter5 == 'true'; else wrong">
                 <i class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -78,7 +78,7 @@
                 <li>IDE(Visual studio) </li>
               </td>
               <td>:</td>
-              <td *ngIf="!listitem.filter6; else wrong">
+              <td *ngIf="listitem.filter6 == 'true'; else wrong">
                 <i class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -90,7 +90,7 @@
                 <li>IDE(Net beans) </li>
               </td>
               <td>:</td>
-              <td *ngIf="!listitem.filter7; else wrong">
+              <td *ngIf="listitem.filter7 == 'true'; else wrong">
                 <i class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -102,7 +102,7 @@
                 <li>IDE(Visual studio Code) </li>
               </td>
               <td>:</td>
-              <td *ngIf="!listitem.filter8; else wrong">
+              <td *ngIf="listitem.filter8 == 'true'; else wrong">
                 <i id="cor" class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>
@@ -114,7 +114,7 @@
                 <li>IDE(Android studio) </li>
               </td>
               <td>:</td>
-              <td *ngIf="!listitem.filter9; else wrong">
+              <td *ngIf="listitem.filter9 == 'true'; else wrong">
                 <i id="cor" class="cor fa fa-check-circle"></i>
               </td>
               <ng-template #wrong>

@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject} from "@angular/core";
 import {UserSessionService} from "../../services/user-session.service";
 import {WebStorageService, SESSION_STORAGE} from "angular-webstorage-service";
+import {Router} from "@angular/router";
 
 declare var $: any;
 @Component({
@@ -10,8 +11,12 @@ declare var $: any;
 })
 
 export class HeadComponent implements OnInit {
+  router: Router;
 
-  constructor(private userSession: UserSessionService, @Inject(SESSION_STORAGE) private storage: WebStorageService) {
+  constructor(private userSession: UserSessionService,
+              @Inject(SESSION_STORAGE) private storage: WebStorageService,
+              private routerService: Router) {
+    this.router = routerService;
   }
 
   ngOnInit() {
@@ -41,13 +46,9 @@ export class HeadComponent implements OnInit {
   }
 
   authenticated() {
-    console.log('logged User: ');
-    console.log(this.storage.get('loggedUser'));
     if (this.storage.get('loggedUser') == null) {
-      console.log('its false');
       return false;
     } else {
-      console.log('its true');
       return true;
     }
   }

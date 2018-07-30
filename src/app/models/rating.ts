@@ -1,5 +1,6 @@
 export class Rating {
-    public resourceId: string;
-    public userId: string;
-    public rating: number;
+    public item_id: string;
+    public user_id: string;
+    public preference: number;
+    public created_at: string;
 }

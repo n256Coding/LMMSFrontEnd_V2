@@ -8,7 +8,7 @@ import {SESSION_STORAGE, WebStorageService} from "angular-webstorage-service";
 @Injectable()
 export class UserSessionService {
 
-  hostname = "http://localhost:8085/";
+  hostname = "http://34.217.10.5:8085/";
 
   private messageSource = new BehaviorSubject(new User);
   currentMessage = this.messageSource.asObservable();
@@ -65,5 +65,18 @@ export class UserSessionService {
 
   getUser(username: String): Observable<User> {
     return this.http.get<User>('user/' + username);
+  }
+
+  getCurrentUser(){
+    var currentUser = this.storage.get('loggedUser');
+    let user = new User();
+    user.id = currentUser._id;
+    user.firstName = currentUser.firstName;
+    user.lastName = currentUser.lastName;
+    user.userRoles = currentUser.userRoles;
+    user.university = currentUser.university;
+    user.subjects = currentUser.subjects;
+
+    return user;
   }
 }

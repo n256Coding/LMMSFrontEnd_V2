@@ -44,6 +44,7 @@ import { LoginComponent } from './components/login/login.component';
 import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { RegisterComponent } from './components/register/register.component';
     AdminTemplateComponent,
     TextRequestComponent,
     MoodleResultComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecommendationItemComponent
   ],
   imports: [
     BrowserModule,

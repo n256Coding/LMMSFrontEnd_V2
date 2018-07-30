@@ -120,7 +120,8 @@
                   <div class="featured-img">
                     <img src="../../../assets/images/featured/5.jpg" alt="">
                   </div>
-                  <h2><a href="slide">Power Point Slide and Doc Validation service</a></h2>
+                  <h2><a [hidden]="isAdminUser()" href="slide">Power Point Slide and Doc Validation service</a></h2>
+                  <h2><a [hidden]="!isAdminUser()" href="adminTemplate">Power Point Slide and Doc Validation service</a></h2>
                   <p>There are many variations of passages of Lorem the Ipsum available, but the majority have suffered that alteration in some form.</p>
                 </div>
               </div>
@@ -258,7 +259,7 @@
                     <div class="blog-content">
                         <h3><a href="text-request">Online text learning resources finding service</a></h3>
                         <ul>
-                            <li><a>PDFs</a></li>
+                            <li><a>Online Tutorials/Articles</a></li>
                             <li><a>E-Books</a></li>
                         </ul>
                         <p>There are many variations of passages of Lorem is Ipsum available, but the majority have some suffered or alteration in  form, by injected randomised words which.</p>
@@ -276,7 +277,7 @@
                         <ul>
                             <li><a>Youtube</a></li>
                             <li><a>Udacity</a></li>
-                            
+
                         </ul>
                         <p>There are many variations of passages of Lorem is Ipsum available, but the majority have some suffered or alteration in  form, by injected randomised words which.</p>
                         <a href="about.html" class="readmore">Read More <i class="fa fa-angle-double-right"></i></a>
@@ -290,10 +291,11 @@
                     </div>
                     <div class="blog-content">
                         <h3><a href="blog-details.html">Presentation Slides and documents validation service</a></h3>
+
                         <ul>
                             <li><a>MS Powerpoint</a></li>
                             <li><a>MS Word</a></li>
-                           
+
                         </ul>
                         <p>There are many variations of passages of Lorem is Ipsum available, but the majority have some suffered or alteration in  form, by injected randomised words which.</p>
                         <a href="blog-details.html" class="readmore">Read More <i class="fa fa-angle-double-right"></i></a>
@@ -310,7 +312,7 @@
                         <ul>
                             <li><a>Moodle</a></li>
                             <li><a>XML</a></li>
-                            
+
                         </ul>
                         <p>There are many variations of passages of Lorem is Ipsum available, but the majority have some suffered or alteration in  form, by injected randomised words which.</p>
                         <a href="blog-details.html" class="readmore">Read More <i class="fa fa-angle-double-right"></i></a>
