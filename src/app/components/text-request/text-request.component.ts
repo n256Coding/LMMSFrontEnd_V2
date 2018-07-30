@@ -48,7 +48,7 @@ export class TextRequestComponent implements OnInit {
     });
     setTimeout(()=>{
       this.holdOnMessageHidden = false;
-    }, 10000);
+    }, 40000);
     if(this.contentType == 'ebook'){
       this.isPdf = true;
     }else{

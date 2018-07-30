@@ -35,6 +35,12 @@
       <app-text-result *ngFor="let resultItem of results.resultItems | slice:0:1"
           [result]="resultItem"
           [contentType]="contentType"></app-text-result>
+      <div class="jumbotron jumbotron-fluid" [hidden]="results.count != 0">
+        <div class="container">
+          <h1 class="display-4">Oops! No results found</h1>
+          <p class="lead">Currently we cant find any result matching your query, But we are working on this to improve search results.</p>
+        </div>
+      </div>
     </div>
     <div class="col-md-3 col-sm-12 col-3 recommendation-pane">
       <h4>You may like these</h4>
@@ -46,6 +52,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- Modal -->
