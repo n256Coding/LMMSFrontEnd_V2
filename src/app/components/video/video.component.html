@@ -6,7 +6,7 @@
     <div class="col-xs-6 col-sm-10 col-md-6" id="four">
       <div class="form-group" id="five">
         <input type="text" id="search-bar" placeholder="Enter search keyword.." [(ngModel)]="searchKeyword" name="search"
-          minlength="2" maxlength="30" #search = "ngModel">
+          minlength="2" maxlength="30" #search = "ngModel" (keyup.enter)="searchInDB();">
         <button type="submit" value="Submit" id="submitButton" (click)="searchInDB();">
           <i id="search-icon" class="fa fa-search"></i>
         </button>

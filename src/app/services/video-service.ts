@@ -13,10 +13,10 @@ export class videoService {
     constructor(private http: HttpClient) { }
 
     searchVideosInDatabase(model: postModel): Observable<listItem[]> {
-        return this.http.post<listItem[]>('//localhost:8080/api/index/evideos', model);
+        return this.http.post<listItem[]>('/api/index/evideos', model);
     }
 
     searchNewVideos(model: postModel) : Observable<string>{
-        return this.http.post<string>('//localhost:8080/api/index/tvideos', model);
+        return this.http.post<string>('/api/index/nvideos', model);
     }
 }
