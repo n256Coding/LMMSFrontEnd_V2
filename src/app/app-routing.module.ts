@@ -14,6 +14,8 @@ import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
 import { RegisterComponent } from './components/register/register.component';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   { path : '', redirectTo : '/home', pathMatch : 'full' },
@@ -29,7 +31,9 @@ const routes: Routes = [
   { path : 'loginPage', component : LoginComponent },
   { path : 'home', component : HomeComponent },
   { path : 'adminTemplate',component: AdminTemplateComponent},
-  { path : 'register', component : RegisterComponent }
+  { path : 'register', component : RegisterComponent },
+  { path : 'about',component: AboutComponent },
+  { path : 'contact', component : ContactComponent }
 ];
 
 @NgModule({

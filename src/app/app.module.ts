@@ -44,6 +44,8 @@ import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { RecommendationItemComponent } from './components/recommendation-item/re
     TextRequestComponent,
     MoodleResultComponent,
     RegisterComponent,
-    RecommendationItemComponent
+    RecommendationItemComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
