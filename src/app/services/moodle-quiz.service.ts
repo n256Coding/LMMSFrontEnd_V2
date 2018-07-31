@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { QuizResults } from '../models/quizResults';
+import { QuizStandards } from '../models/quizStandards';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -34,6 +35,12 @@ export class MoodleQuizService {
   //   return this.http.get('/getallfiles');
   // }
 
+  addQuizSettings(QuizSettings: QuizStandards):Observable<QuizStandards>{
+    return this.http.post<QuizStandards>('http://localhost:8080/moodle/savequizsettings',QuizSettings,httpOptions).pipe(
+      tap((moodleQuiz:QuizStandards) => console.log(`Inserted - ${JSON.stringify(moodleQuiz)}`)),
+      catchError(error => of(new QuizStandards()))
+    );
+  }
 
   getMoodleQuizResults():Observable<QuizResults>{
     return this.http.get<QuizResults>('http://localhost:8080/moodle/quizresults').pipe(

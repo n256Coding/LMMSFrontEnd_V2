@@ -160,16 +160,25 @@
         <hr>
           <div class="quiz-div-style">
             <h4>Question Analyzing Settings<hr></h4>
-            <div class="form-group row">
-              <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">MCQ Question Type</label>
-              <div class="col-md-3 col-sm-3 col-xs-3">
-                <select id="mcq_type" class="form-control">
-                  <option selected>Single Answers</option>
-                  <option>Multiple Answers</option>
+            <div class="form-group">
+                <label for="quizStdType">Analyze Option</label>
+                <select class="form-control" id="quizStdType" (change)="selectedQuizStd($event)">
+                  <option value="basic_quiz_analyze" selected>Basic Analyze</option>
+                  <option value="custom_quiz_analyze">Custom Analyze</option>
                 </select>
-              </div>
             </div>
-            <div class="form-group row">
+            <!-- settings -->
+            <div *ngIf="quizStdType === 'custom_quiz_analyze' ">
+              <div class="form-group row">
+                <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">MCQ Question Type</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="mcq_type" class="form-control">
+                    <option selected>Single Answers</option>
+                    <option>Multiple Answers</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label for="question_amount" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of questions</label>
                 <div class="col-md-3 col-sm-3 col-xs-3">
                   <select id="question_amount" class="form-control">
@@ -179,30 +188,32 @@
                 </div>
               </div>
               <div class="form-group row">
-                  <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of answers (MCQ only)</label>
-                  <div class="col-md-3 col-sm-3 col-xs-3">
-                    <select id="check_resource_name" class="form-control">
-                      <option selected>Yes</option>
-                      <option>No</option>
-                    </select>
-                  </div>
+                <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of answers (MCQ only)</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="check_resource_name" class="form-control">
+                    <option selected>Yes</option>
+                    <option>No</option>
+                  </select>
                 </div>
-                <div class="form-group row">
-                    <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers for each MCQ question</label>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                      <select id="check_resource_desc" class="form-control">
-                        <option selected>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                      </select>
-                    </div>
+              </div>
+              <div class="form-group row">
+                <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers for each MCQ question</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="check_resource_desc" class="form-control">
+                    <option selected>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                  </select>
                 </div>
+               </div>
+              </div>
+                <!-- settings ends-->
                 <div class="form-group row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <button type="button" class="btn btn-primary margin-right-10">Apply Settings</button>
-                        <button type="button" class="btn btn-success margin-left-10" (click)="clickMe()">Start Analyze</button>
+                        <button type="button" class="btn btn-primary margin-right-10" (click)="checkMe()">Apply Settings</button>
+                        <button type="button" class="btn btn-success margin-left-10" (click)="startQuizAnalyze()">Start Analyze</button>
                       </div>
                 </div>
               </div>

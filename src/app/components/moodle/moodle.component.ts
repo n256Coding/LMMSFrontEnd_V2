@@ -11,7 +11,7 @@ import { MoodleResultService } from './../../services/moodle-result.service';
 import {HttpClient, HttpResponse, HttpEventType} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import { MoodleQuizService } from './../../services/moodle-quiz.service';
-
+import { QuizStandards } from '../../models/quizStandards';
 declare var $: any;
 
 @Component({
@@ -26,13 +26,15 @@ export class MoodleComponent implements OnInit {
 
   checkValue = "";
   standardType = "";
+  quizStdType = "basic_quiz_analyze";
   
 
   creds :Credential[] = [];
+  quizStds: QuizStandards[] = [];
   resources : ResourcesList = new ResourcesList();
   quizes :  QuizResults = new  QuizResults();
 
-  m_username; m_loginUrl; m_pwd ; m_pageUrl; 
+  m_username ; m_loginUrl ; m_pwd ; m_pageUrl; 
 
   selectedOption(event) {
     this.checkValue = event.target.value;
@@ -46,6 +48,12 @@ export class MoodleComponent implements OnInit {
 
   selectedValidationOption(event){
 
+  }
+
+  selectedQuizStd(event){
+    this.quizStdType = event.target.value;
+    // this.quizStdType = event.target.options[event.target.selectedIndex].text;
+   
   }
 
   displayMoodleResults(): void{
@@ -80,7 +88,10 @@ export class MoodleComponent implements OnInit {
     console.log(this.m_username)
   }
 
+  checkMe(){
+    // alert(this.quizStdType)
 
+  }
 
   startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl){
     const newMoodle: Credential = new Credential();
@@ -129,12 +140,6 @@ export class MoodleComponent implements OnInit {
     this.selectedFiles = undefined
   }
 
-  //start quiz analyze
-  clickMe():void{
-    // alert("sdsfsd")
-    this.displayMoodleQuizResults();
-  }
-
   displayMoodleQuizResults(): void{
     // $('#moodleLoadingModal').modal('show');
     this.moodleQuizService.getMoodleQuizResults().subscribe(
@@ -151,6 +156,22 @@ export class MoodleComponent implements OnInit {
       }
     );
   }
+
+  //start quiz analyze
+  startQuizAnalyze():void{
+    const newQuizSetting: QuizStandards = new QuizStandards();
+    newQuizSetting.analyzeType = this.quizStdType;
+    
+    this.moodleQuizService.addQuizSettings(newQuizSetting).subscribe(quizSettings => {
+        console.log("inserted settings");
+      
+      },err =>{
+        alert("cannot connect to the moodle server !!!");
+      }
+    );
+    this.displayMoodleQuizResults();
+  }
+
 
   // end quiz analyze
   
