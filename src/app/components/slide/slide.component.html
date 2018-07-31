@@ -1,13 +1,13 @@
 <div class="container">
 
   <br>
-  <h2>Lecture Slide Validation</h2>
+  <h2>Lecture Material Validation</h2>
   <hr>
 
 </div>
 
 <button routerLink='/adminTemplate'>click</button>
-<!--
+
 <div class="container">
   <p>Choose your leacture material type</p>
   <form>
@@ -18,10 +18,10 @@
     </select>
   </form>
 </div>
--->
 
-<div class="container">
-  <p>Choose your slide template</p>
+
+<div *ngIf="selectMaterial === 'slide' || selectMaterial === 'tute' || selectMaterial === 'lab' " class="container">
+  <p>Choose your template</p>
   <form>
     <select class="custom-select custom-select mb-3">
       <option *ngFor="let temp of receviedTempales" [value]="temp.actualName" (click)="onSelectAdminTemplate(temp.actualName)">
@@ -34,7 +34,7 @@
 
 <!--
 <div *ngIf="selectMaterial === 'slide'" class="container"> -->
-<div *ngIf="selectAdminTemp" class="container">
+<div *ngIf="selectMaterial === 'slide' && selectAdminTemp" class="container">
 
   <p>Choose your lecture slide</p>
 
@@ -49,8 +49,8 @@
 
   <div class="input-group">
     <div class="custom-file">
-      <input type="file"  multiple  class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
-      <label class="custom-file-label" for="inputGroupFile04">{{selectedFiles.item(0).name}}</label>
+      <input type="file" multiple class="custom-file-input" #inputGroupFile04 (change)="selectFile($event)">
+      <label class="custom-file-label" for="inputGroupFile04">{{inputGroupFile04.value}}</label>
     </div>
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
@@ -67,9 +67,9 @@
     </div>
   </div>
   -->
-
+  <br>
 </div>
-<br>
+
 
 
 <!--
@@ -104,18 +104,18 @@
 <div *ngIf="changeToThird === 'Change'" class="container"> -->
 <div *ngIf="changeToSecond === 'Change'" class="container">
   <div>
-    
-      <p>Choose your template type</p>
-      <form>
-        <select class="custom-select custom-select mb-3">
+
+    <p>Choose your validation type</p>
+    <form>
+      <select class="custom-select custom-select mb-3">
             <option *ngFor="let template of templates" [value]="template.value" (click)="onSelectTemplate(template.value)">
             {{ template.viewValue }}
             </option>
           </select>
-      </form>
-   
+    </form>
 
-    <div *ngIf="selectTempalte === 'standard'" >
+
+    <div *ngIf="selectTempalte === 'standard'">
 
       <form [formGroup]='standardSlideForm' (ngSubmit)="startStandardSlideValidation(audiance.value)">
 
@@ -142,7 +142,7 @@
 
 
 
-    <div *ngIf="selectTempalte === 'custom'" >
+    <div *ngIf="selectTempalte === 'custom'">
 
       <form [formGroup]='customForm' (ngSubmit)="startCustomSlideValidation(noofslide.value,
         noofword.value,bullert.value,caudiance.value,fontfamily.value,contentPosition.value,header.value,
@@ -214,7 +214,7 @@
             {{ position.viewValue }}
             </option>
         </select>
-
+<!--
         <div class="form-check-inline">
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input"  #header  (click) ="onHeaderCheck(header.value)">Header
@@ -225,7 +225,7 @@
           <label>Header Text:</label>
           <input type="text" class="form-control" (change)=onHeaderText($event)>
         </div>
-
+-->
         <div class="form-check-inline">
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input"  #footer  (click) ="onFooterCheck(footer.value)">Footer
@@ -286,11 +286,11 @@
     </div>
   </div>
 
-  <div *ngIf="permissionToReport === 'Okay'" >
+  <div *ngIf="permissionToReport === 'Okay'">
     <button routerLink='/report' class="btn btn-success">Generate Report</button>
   </div>
 
-  <div *ngIf="permissionToCustomReport === 'Okay'" >
+  <div *ngIf="permissionToCustomReport === 'Okay'">
     <button routerLink='/customReportSlide' class="btn btn-success">Generate Report</button>
   </div>
 
@@ -299,63 +299,36 @@
 
 <!-- tutorial and labs -->
 
-<div *ngIf="selectMaterial === 'tute' || selectMaterial === 'lab' " class="container">
+
+<div *ngIf="(selectMaterial === 'tute' || selectMaterial === 'lab') && selectAdminTemp" class="container">
+
+
   <p>Choose your lecture tute or lab</p>
 
   <div class="display-3 text-center">
     <div *ngIf="currentDocFileUpload" class="progress">
-      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressDoc.percentageDoc}}"
-        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressDoc.percentageDoc+'%'}">
-        {{progressDoc.percentageDoc}}%</div>
+      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{docProgress.docPercentage}}"
+        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:docProgress.docPercentage+'%'}">
+        {{docProgress.docPercentage}}%</div>
     </div>
   </div>
 
-  <div class="form-control">
-    <div class="text-center">
-      <label class="btn btn-primary">
-         <input type="file" (change)="selectDocFile($event)">
-      </label> <br>
-      <button class="btn btn-success" [disabled]="!selectedDocFiles" (click)="uploadDoc()">Upload Lecture Material</button>
+
+  <div class="input-group">
+    <div class="custom-file">
+      <input type="file" multiple class="custom-file-input" #inputGroupFile05 (change)="selectDocFile($event)">
+      <label class="custom-file-label" for="inputGroupFile05">{{inputGroupFile05.value}}</label>
+    </div>
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" [disabled]="!selectedDocFiles" (click)="uploadDoc()">Upload</button>
     </div>
   </div>
+  <br>
 
-  <!--
-</div>  -->
-
-  <!-- <div  *ngIf="changeToSecond === 'Change'" class="container"> -->
-  <div>
-    <div class="container">
-      <p>Choose your master material</p>
-      <p>*Make sure your master material only have one page and that describe color template and logos that you need to check.And
-        name should be <strong>master-(your_material_name).doc</strong></p>
-
-
-      <div class="display-3 text-center">
-        <div *ngIf="currentMasterSlideUpload" class="progress">
-          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterDoc.percentageMasterDoc}}"
-            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterDoc.percentageMasterDoc+'%'}">
-            {{progressMasterDoc.percentageMasterDoc}}%</div>
-        </div>
-      </div>
-
-      <div class="form-control">
-        <div class="text-center">
-          <label class="btn btn-primary">
-         <input type="file" (change)="selectMasterDoc($event)" >
-      </label> <br>
-          <button class="btn btn-success" [disabled]="!selectedMasterDoc" (click)="uploadMasterDoc()">Upload Master template</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!--
-<div *ngIf="changeToThird === 'Change'" class="container"> -->
-  <div>
+  <div *ngIf="changeToThird === 'Change'">
     <div>
-      <div class="container">
-        <p>Choose your template type</p>
+      <div>
+        <p>Choose your validation type</p>
         <form>
           <select class="custom-select custom-select mb-3">
             <option *ngFor="let template of templates" [value]="template.value" (click)="onSelectDocTemplate(template.value)">
@@ -365,27 +338,23 @@
         </form>
       </div>
 
-      <div *ngIf="selectDocTempalte === 'standard'" class="container">
-
-
-
-        <button class="btn btn-primary" (click)="startStandardDocValidation()">Start Validation</button>
-
-
+      <div *ngIf="selectDocTempalte === 'standard'">
+        <br>
+        <div *ngIf="permissionToDocReport !== 'Okay'">
+          <button class="btn btn-primary" (click)="startStandardDocValidation()">Start Validation</button>
+        </div>
       </div>
 
 
 
-      <div *ngIf="selectDocTempalte === 'custom'" class="container">
+      <div *ngIf="selectDocTempalte === 'custom'">
 
-        <form [formGroup]='customDocForm' (ngSubmit)="startCustomDocValidation(noofslide.value,
-        noofword.value,bullert.value,caudiance.value,fontfamily.value,contentPosition.value,header.value,
-        footer.value)">
+        <form (ngSubmit)="startCustomDocValidation(fontDocfamily.value)">
 
 
           <label>Font Family:</label>
           <select class="custom-select custom-select mb-3" #fontDocfamily>
-            <option *ngFor="let family of families" [value]="family.value" >
+            <option *ngFor="let family of wordFamilies" [value]="family.value" >
             {{ family.viewValue }}
             </option>
         </select>
@@ -394,34 +363,32 @@
 
           <div class="form-check-inline">
             <label class="form-check-label">
-            <input type="checkbox" class="form-check-input"  #headerDoc  (click) ="onDocHeaderCheck(headerDoc.value)">Header
+            <input type="checkbox" class="form-check-input"  #headerDoc (click) ="onDocHeaderCheck(headerDoc.value)" >Header
           </label>
           </div>
 
-          <div class="form-group" *ngIf="selectDocHeader === 'on'">
-            <label>Header Text:</label>
-            <input type="text" class="form-control" (change)=onDocHeaderText($event)>
-          </div>
+
 
           <div class="form-check-inline">
             <label class="form-check-label">
-            <input type="checkbox" class="form-check-input"  #footerDoc  (click) ="onDocFooterCheck(footerDoc.value)">Footer
+            <input type="checkbox" class="form-check-input"  #footerDoc (click) ="onDocFooterCheck(footerDoc.value)" >Footer
           </label>
           </div>
 
-          <div class="form-group" *ngIf="selectDocFooter === 'on'">
-            <label>Footer Text:</label>
-            <input type="text" class="form-control" (change)=onDocFooterText($event)>
-          </div>
 
+          <!--
           <div class="form-check-inline disabled">
             <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" (click) ="onDocNumbering($event)">Page Numbering
+            <input type="checkbox" class="form-check-input" #numberingDoc (click) ="onDocNumberingCheck(numberingDoc.value)">Page Numbering
           </label>
           </div>
-          <br>
-          <input type="submit" value="Validate" class="btn btn-primary" [disabled]='!customDocForm.valid'>
+        -->
 
+
+          <br>
+          <div *ngIf="permissionToDocCustomReport !== 'Okay'">
+            <input type="submit" value="Start Validation" class="btn btn-primary">
+          </div>
         </form>
 
 
@@ -431,19 +398,160 @@
     </div>
 
 
-    <div class="container">
-      <br>
-      <div *ngIf="permissionToDocReport === 'Okay'">
-        <button class="btn btn-success">Generate Report</button>
-      </div>
 
-      <div *ngIf="permissionToDocCustomReport === 'Okay'">
-        <button class="btn btn-success">Generate Report</button>
+
+    <div *ngIf="permissionToDocReport === 'Okay'">
+      <button class="btn btn-success" (click)="validateDoc()">Generate Report</button>
+    </div>
+
+    <div *ngIf="permissionToDocCustomReport === 'Okay'">
+      <button class="btn btn-success" (click)="validateCustomDoc()">Generate Report</button>
+    </div>
+
+  </div>
+
+  <!-- Doc Loading Modal -->
+  <div class="modal fade" id="docStandradLoadingModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Validation Report</h4>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="text-center" *ngIf="reportList === null">
+            <img src="../../../assets/Slide/SlideSpinner.gif" width="250px" height="250px">
+          </div>
+
+          <div *ngIf="reportList !== null">
+
+
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Attribute</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor='let reportItem of reportList'>
+                  <td>Header </td>
+                  <td>
+                    <div *ngIf="reportItem.header !== 'ok';else content1">
+                      <span class="badge badge-danger">Failed</span></div>
+                    <ng-template #content1><span class="badge badge-success">Success</span></ng-template>
+                  </td>
+                </tr>
+
+                <tr *ngFor='let reportItem of reportList'>
+                  <td>Footer </td>
+                  <td>
+                    <div *ngIf="reportItem.footer !== 'ok';else content2">
+                      <span class="badge badge-danger">Failed</span></div>
+                    <ng-template #content2><span class="badge badge-success">Success</span></ng-template>
+                  </td>
+                </tr>
+
+                <tr *ngFor='let reportItem of reportList'>
+                  <td>Font Family </td>
+                  <td>
+                    <div *ngIf="reportItem.family !== 'ok';else content3">
+                      <span class="badge badge-danger">Failed</span></div>
+                    <ng-template #content3><span class="badge badge-success">Success</span></ng-template>
+                  </td>
+                </tr>
+
+                <tr *ngFor='let reportItem of reportList'>
+                  <td>Template </td>
+                  <td>
+                    <div *ngIf="reportItem.template !== 'ok';else content4">
+                      <span class="badge badge-danger">Failed</span></div>
+                    <ng-template #content4><span class="badge badge-success">Success</span></ng-template>
+                  </td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="pageRefresh()" data-dismiss="modal">Close</button>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- remove-->
+  <!-- Doc Loading Modal Ends -->
 </div>
+
+  <!-- slide success Loading Modal -->
+  <div class="modal fade" id="slideTemplateUploadingModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          Your File Successfully Uploaded!
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="pageRefresh()" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- slide success Loading Modal Ends -->
+
+
+  <!-- slide fail Loading Modal -->
+  <div class="modal fade" id="slideTemplateUploadingFailModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          Invalid File Format!
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="pageRefresh()" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- slide fail Loading Modal Ends -->
+
+
+<!-- Slide Loading Modal -->
+<div class="modal fade" id="slideDocLoadingModal" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="text-center">
+              <img src="../../../assets/Slide/SlideSpinner.gif" width="250px" height="250px">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Slide Loading Modal Ends -->
+
+
 <div style="height: 500px">
 </div>

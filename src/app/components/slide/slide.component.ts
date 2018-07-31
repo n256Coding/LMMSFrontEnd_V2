@@ -5,6 +5,12 @@ import { SlideStandard } from '../../models/StandardSlide';
 import { CustomSlide } from '../../models/CustomSlide';
 import { SlideAdminTemplate } from '../../models/SlideAdminTemplate';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { StandardDoc } from '../../models/StandardDoc';
+import { CustomDoc } from '../../models/CustomDoc';
+import { DocReport } from '../../models/DocReport';
+import { Location } from '@angular/common';
+
+declare var $: any;
 
 @Component({
   selector: 'app-slide',
@@ -17,10 +23,15 @@ export class SlideComponent implements OnInit {
   standardSlideForm: FormGroup;
 
 
-  //original file
+  //ppt file
   selectedFiles: FileList;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 };
+
+  //doc file
+  selectedDocFiles: FileList;
+  currentDocFileUpload: File;
+  docProgress: { docPercentage: number } = { docPercentage: 0 };
 
   //master file
   selectedMasterSlide: FileList;
@@ -62,6 +73,60 @@ export class SlideComponent implements OnInit {
     { value: 'Trebuchet MS', viewValue: 'Trebuchet MS' },
     { value: 'Twentieth Century', viewValue: 'Twentieth Century' },
     { value: 'Verdana', viewValue: 'Verdana' }
+  ];
+
+  wordFamilies = [
+    { value: 'Agency FB', viewValue: 'Agency FB' },
+    { value: 'Arial', viewValue: 'Arial' },
+    { value: 'Bauhaus', viewValue: 'Bauhaus' },
+    { value: 'Benguiat Gothic', viewValue: 'Benguiat Gothic' },
+    { value: 'Berlin Sans', viewValue: 'Berlin Sans' },
+    { value: 'Calibri', viewValue: 'Calibri' },
+    { value: 'Century Gothic', viewValue: 'Century Gothic' },
+    { value: 'Comic Sans', viewValue: 'Comic Sans' },
+    { value: 'Corbel', viewValue: 'Corbel' },
+    { value: 'Eras', viewValue: 'Eras' },
+    { value: 'Franklin Gothic', viewValue: 'Franklin Gothic' },
+    { value: 'Gill Sans', viewValue: 'Gill Sans' },
+    { value: 'Haettenschweiler', viewValue: 'Haettenschweiler' },
+    { value: 'Impact', viewValue: 'Impact' },
+    { value: 'Luci', viewValue: 'Luci' },
+    { value: 'da Sans', viewValue: 'da Sans' },
+    { value: 'Lucida Sans Unicode', viewValue: 'Lucida Sans Unicode' },
+    { value: 'Modern', viewValue: 'Modern' },
+    { value: 'MS Sans Serif', viewValue: 'MS Sans Serif' },
+    { value: 'Segoe UI', viewValue: 'Segoe UI' },
+    { value: 'Tahoma', viewValue: 'Tahoma' },
+    { value: 'Trebuchet MS', viewValue: 'Trebuchet MS' },
+    { value: 'Twentieth Century', viewValue: 'Twentieth Century' },
+    { value: 'Verdana', viewValue: 'Verdana' },
+
+    { value: 'Adobe Jenson', viewValue: 'Adobe Jenson' },
+    { value: 'Albertus', viewValue: 'Albertus' },
+    { value: 'Aldus', viewValue: 'Aldus' },
+    { value: 'Alexandria', viewValue: 'Alexandria' },
+    { value: 'American Typewriter', viewValue: 'American Typewriter' },
+    { value: 'Archer', viewValue: 'Archer' },
+    { value: 'Arno', viewValue: 'Arno' },
+    { value: 'Aster', viewValue: 'Aster' },
+    { value: 'Baskerville', viewValue: 'Baskerville' },
+    { value: 'Bell', viewValue: 'Bell' },
+    { value: 'Bodoni', viewValue: 'Bodoni' },
+    { value: 'Caledonia', viewValue: 'Caledonia' },
+    { value: 'Calisto', viewValue: 'Calisto' },
+    { value: 'Cambria', viewValue: 'Cambria' },
+    { value: 'Caslon', viewValue: 'Caslon' },
+    { value: 'Centaur', viewValue: 'Centaur' },
+    { value: 'Century Schoolbook', viewValue: 'Century Schoolbook' },
+    { value: 'Droid', viewValue: 'Droid' },
+    { value: 'Droid Serif Pro', viewValue: 'Droid Serif Pro' },
+    { value: 'Palatino', viewValue: 'Palatino' },
+    { value: 'Sabon', viewValue: 'Sabon' },
+    { value: 'Mrs Eaves', viewValue: 'Mrs Eaves' },
+    { value: 'Georgia', viewValue: 'Georgia' },
+    { value: 'Times New Roman', viewValue: 'Times New Roman' },
+    { value: 'Trajan', viewValue: 'Trajan' },
+    { value: 'Warnock', viewValue: 'Warnock' }
   ];
 
   materials = [
@@ -117,7 +182,7 @@ export class SlideComponent implements OnInit {
     this.progressMasterSlide.percentageMasterSlide = 0;
 
     this.currentMasterSlideUpload = this.selectedMasterSlide.item(0);
-    this.slideService.pushMasterSlideToStorage(this.selectedMasterSlide).subscribe(event => {
+    this.slideService.pushMasterSlideToStorage(this.currentMasterSlideUpload).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.progressMasterSlide.percentageMasterSlide = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
@@ -129,24 +194,37 @@ export class SlideComponent implements OnInit {
     this.selectedMasterSlide = undefined;
   }
 
+  filespath: string;
   //original file
   selectFile(event) {
     this.selectedFiles = event.target.files;
-    this.currentFileUpload=undefined;
+    this.filespath = event.target.files.name;
+    this.currentFileUpload = undefined;
+
   }
 
   upload() {
+    //  $('#slideDocLoadingModal').modal('show');
     this.progress.percentage = 0;
-
     this.currentFileUpload = this.selectedFiles.item(0);
-    this.slideService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        this.progress.percentage = Math.round(100 * event.loaded / event.total);
-      } else if (event instanceof HttpResponse) {
-        console.log('Original Slide is completely uploaded!');
-        this.changeToSecond = "Change";
-      }
-    });
+
+    if ((this.currentFileUpload.type === "application/vnd.ms-powerpoint") /* ||
+      (this.currentFileUpload.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation") */) {
+
+      this.slideService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          console.log('Original Slide is completely uploaded!');
+          this.changeToSecond = "Change";
+        //   $('#slideDocLoadingModal').modal('hide');
+        }
+
+      });
+    } else {
+      $('#slideTemplateUploadingFailModal').modal('show');
+
+    }
 
     this.selectedFiles = undefined;
   }
@@ -185,8 +263,8 @@ export class SlideComponent implements OnInit {
     newSlide.caudiance = caudiance;
     newSlide.fontfamily = fontfamily;
     newSlide.position = position;
-    newSlide.header = header;
-    newSlide.headertext = this.headertext;
+    newSlide.header = null;
+    newSlide.headertext = null;
     newSlide.footer = footer;
     newSlide.footertext = this.footertext;
     newSlide.numbering = this.numbering;
@@ -212,9 +290,10 @@ export class SlideComponent implements OnInit {
   selectMaterial: string;
   onSelectMaterial(lectureMaterial: string): void {
     this.selectMaterial = lectureMaterial;
+    this.getAdminTemplatesFromDb();
   }
 
-  
+
   selectTempalte: string;
   onSelectTemplate(materialTempale: string): void {
     this.selectTempalte = materialTempale;
@@ -270,9 +349,9 @@ export class SlideComponent implements OnInit {
     }
   }
 
-  constructor(private frmbuilder: FormBuilder, private slideService: SlideService) {
-    
-    this.getAdminTemplatesFromDb();
+  constructor(private frmbuilder: FormBuilder, private slideService: SlideService, private location: Location) {
+
+
 
     this.customForm = frmbuilder.group({
       noofslides: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])],
@@ -286,7 +365,7 @@ export class SlideComponent implements OnInit {
       standardaudiancesize: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])]
     });
 
-    
+
   }
 
 
@@ -295,12 +374,12 @@ export class SlideComponent implements OnInit {
     this.changeToThird = "no Change";
   }
 
-    selectDocTempalte: string;
+  selectDocTempalte: string;
   onSelectDocTemplate(materialTempale: string): void {
     this.selectDocTempalte = materialTempale;
   }
 
-selectDocHeader: string;
+  selectDocHeader: string = 'off';
   onDocHeaderCheck(header: string): void {
 
     if (this.selectDocHeader === 'on') {
@@ -310,7 +389,7 @@ selectDocHeader: string;
     }
   }
 
-  selectDocFooter: string;
+  selectDocFooter: string = 'off';
   onDocFooterCheck(footer: string): void {
 
     if (this.selectDocFooter === 'on') {
@@ -320,14 +399,34 @@ selectDocHeader: string;
     }
   }
 
-  getAdminTemplatesFromDb(): void {
-    this.receviedTempales=null;
-    this.slideService.getAdminTemplates("sliit").subscribe(
-      (updatedReport) => {
+  selectDocNum: string;
+  onDocNumberingCheck(Num: string): void {
 
-        this.receviedTempales = updatedReport;
-      
-      });
+    if (this.selectDocNum === 'on') {
+      this.selectDocNum = 'off';
+    } else {
+      this.selectDocNum = Num;
+    }
+  }
+
+  getAdminTemplatesFromDb(): void {
+    this.receviedTempales = null;
+
+    if (this.selectMaterial == 'slide') {
+
+      this.slideService.getAdminTemplates("sliit").subscribe(
+        (updatedReport) => {
+          this.receviedTempales = updatedReport;
+        });
+      console.log(this.receviedTempales);
+    } else {
+
+      this.slideService.getAdminDocTemplates("sliit").subscribe(
+        (updatedReport) => {
+          this.receviedTempales = updatedReport;
+        });
+
+    }
   }
 
   selectAdminTemp: string;
@@ -335,4 +434,105 @@ selectDocHeader: string;
     this.selectAdminTemp = adminTemplate;
   }
 
+  docFilesPath: string;
+  //original file
+  selectDocFile(event) {
+    this.selectedDocFiles = event.target.files;
+    this.docFilesPath = event.target.files.name;
+    this.currentDocFileUpload = undefined;
+  }
+
+  uploadDoc() {
+
+   //  $('#slideDocLoadingModal').modal('show');
+    this.docProgress.docPercentage = 0;
+    this.currentDocFileUpload = this.selectedDocFiles.item(0);
+
+    if ( /*(this.currentDocFileUpload.type === "application/msword") || */
+      (this.currentDocFileUpload.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+
+      this.slideService.pushFileToStorage(this.currentDocFileUpload).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.docProgress.docPercentage = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          console.log('Original Doc is completely uploaded!');
+          this.changeToThird = "Change";
+        //   $('#slideDocLoadingModal').modal('hide');
+        }
+      });
+    } else {
+      $('#slideTemplateUploadingFailModal').modal('show');
+    }
+
+    this.selectedDocFiles = undefined;
+  }
+
+  permissionToDocCustomReport: string;
+  startCustomDocValidation(fontDocfamily: string) {
+
+    const newDoc: CustomDoc = new CustomDoc();
+    newDoc.fontfamily = fontDocfamily;
+    newDoc.header = this.selectDocHeader;
+    newDoc.footer = this.selectDocFooter;
+    newDoc.numbering = "default";
+    newDoc.materialName = this.currentDocFileUpload.name;
+    newDoc.masterFirstName = this.selectAdminTemp;
+
+    console.log(newDoc);
+
+    this.slideService.addCustomDoc(newDoc)
+      .subscribe(insertedSlide => {
+        console.log(insertedSlide);
+        this.permissionToDocCustomReport = "Okay";
+      });
+
+  }
+
+
+  permissionToDocReport: string;
+  startStandardDocValidation() {
+    const newDoc: StandardDoc = new StandardDoc();
+    newDoc.materialName = this.currentDocFileUpload.name;
+    newDoc.masterFirstName = this.selectAdminTemp;
+    this.slideService.addSandardDoc(newDoc)
+      .subscribe(insertedSlide => {
+        console.log(insertedSlide);
+        this.permissionToDocReport = "Okay";
+      });
+  }
+
+  reportList: DocReport[];
+
+  validateDoc() {
+
+    $('#docStandradLoadingModal').modal('show');
+    this.reportList = null;
+    this.slideService.getDocReport().subscribe(
+      (updatedReport) => {
+
+        this.reportList = updatedReport;
+
+      });
+
+
+    // $('#docStandradLoadingModal').modal('hide');
+  }
+
+  validateCustomDoc() {
+    $('#docStandradLoadingModal').modal('show');
+    this.reportList = null;
+    this.slideService.getCustomDocReport().subscribe(
+      (updatedReport) => {
+
+        this.reportList = updatedReport;
+
+      });
+
+
+    // $('#docStandradLoadingModal').modal('hide');
+  }
+
+  pageRefresh() {
+    location.reload();
+  }
 }
