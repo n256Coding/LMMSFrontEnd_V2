@@ -23,14 +23,14 @@ export class ListItemComponent implements OnChanges {
     constructor(private _videoService: videoService, private router: Router) { }
 
     searchNewVideos() {
-        /*    this._videoService
+            this._videoService
                 .searchNewVideos(this.postModel)
                 .subscribe(data => {
                     console.log(data);
                     this.router.navigateByUrl('/video/processing');
                 }, err => {
                     console.log(err);
-                });*/
+                });
 
         this.router.navigateByUrl('/video/processing');
 

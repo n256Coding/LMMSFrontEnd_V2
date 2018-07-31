@@ -2,16 +2,23 @@
   <h5>We identified following results for your search criteria. If you need more. start a new search
     <button type="button" class="btn btn-info" (click)="searchNewVideos();"> Start a new search </button>
   </h5>
+
   <ng-container *ngFor="let listitem of listItems">
     <div class="row">
+      <hr>
       <div class="col-sm-3">
         <div id="thumbnail">
           <img src={{listitem.thumbnailUrl}} alt="empty">
         </div>
       </div>
       <div class="col-sm-5">
-        <h4 class="list-group-item-heading">{{listitem.title}}</h4>
-        <p> {{listitem.description}}</p>
+        <h5 class="list-group-item-heading">{{listitem.title}}</h5>
+        <!-- <p> {{listitem.description}}</p> -->
+        <!-- <p {{listitem.description}}></p></p> -->
+        <div ng-init="moreShown = false">
+          {{listitem.description | slice:0:200}}
+          <!-- <a> ...More </a> -->
+        </div><br>
         <p class="list-group-item-text">Duration : {{listitem.duration}}</p>
         <button type="button" class="btn btn-info" (click)="navigate(listitem.videoUrl);"> Watch </button>
       </div>
