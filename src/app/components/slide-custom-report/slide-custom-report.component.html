@@ -190,7 +190,7 @@
                 </td>
 
                 <td>
-                  <div *ngIf="reportItem.picPositions !== 'Slide is match with logo and images in Master slide';else content12">
+                  <div *ngIf="reportItem.picPositions !== 'Slide match with logo and images in Master slide';else content12">
                     <span class="badge badge-danger">Failed</span></div>
                   <ng-template #content12> <span class="badge badge-success">Success</span></ng-template>
                 </td>
@@ -330,7 +330,7 @@
 </div>
 
 <!-- Slide Loading Modal -->
-<div class="modal fade" id="slideCustomLoadingModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="slideCustomLoadingModal" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body">

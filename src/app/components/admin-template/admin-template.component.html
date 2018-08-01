@@ -1,53 +1,184 @@
 <div class="container">
 
   <br>
-  <h2>Lecture Slide Validation</h2>
+  <h2>Lecture Material Validation</h2>
   <hr>
-<div class="card">
-  <div class="card-body">
-  <form [formGroup]='adminForm' (ngSubmit)="admin(template.value)">
+  <div class="card">
+    <div class="card-body">
 
-    
-    <div class="form-group">
-      <label>Name of the template:</label>
-      <input type="text" formControlName='templateName' class="form-control" #template>
 
-      <div *ngIf="adminForm.controls['templateName'].touched && !adminForm.controls['templateName'].valid">
-        <span *ngIf="adminForm.controls['templateName'].hasError('required') " style="color: red">  
+
+      <p>Choose your leacture material type</p>
+      <form>
+        <select class="custom-select custom-select mb-3">
+      <option *ngFor="let material of materials" [value]="material.value" (click)="onSelectMaterial(material.value)">
+      {{ material.viewValue }}
+    </option>
+    </select>
+      </form>
+
+      <div *ngIf="selectMaterial === 'slide'">
+        <form [formGroup]='adminForm' (ngSubmit)="admin(template.value)">
+
+          <div class="form-group">
+            <label>Name of the template:</label>
+            <input type="text" formControlName='templateName' class="form-control" #template>
+
+            <div *ngIf="adminForm.controls['templateName'].touched && !adminForm.controls['templateName'].valid">
+              <span *ngIf="adminForm.controls['templateName'].hasError('required') " style="color: red">  
             *Please enter name of the template
             </span>
-      </div>
-      <br>
-      <p>Choose your master slide:</p>
-      <p>*Make sure your master slide does not containt any textual content.It only have two slides and first one describe color template
-        and logos that you need to check in first slide and second one describe color template and logos that you need to check in content slides.And name should be <strong>master-(your_slide_name).ppt</strong></p>
+            </div>
+            <br>
+            <p>Choose your master slide:</p>
+            <p>*Make sure your master slide does not containt any textual content.It only have two slides and first one describe
+              color template and logos that you need to check in first slide and second one describe color template and logos
+              that you need to check in content slides.And name should be <strong>master-(your_slide_name)</strong></p>
 
-      <div class="display-3 text-center">
-        <div *ngIf="currentMasterSlideUpload" class="progress">
-          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterSlide.percentageMasterSlide}}"
-            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterSlide.percentageMasterSlide+'%'}">
-            {{progressMasterSlide.percentageMasterSlide}}%</div>
-        </div>
+            <div class="display-3 text-center">
+              <div *ngIf="currentMasterSlideUpload" class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterSlide.percentageMasterSlide}}"
+                  aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterSlide.percentageMasterSlide+'%'}">
+                  {{progressMasterSlide.percentageMasterSlide}}%</div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" multiple class="custom-file-input" #inputGroupFile04 (change)="selectMasterSlide($event)">
+                <label class="custom-file-label" for="inputGroupFile04">{{inputGroupFile04.value}}</label>
+              </div>
+            </div>
+
+            <br>
+
+          </div>
+
+
+          <input type="submit" value="Upload" class="btn btn-primary" [disabled]="!adminForm.valid || selectedMasterSlide === undefined">
+        </form>
       </div>
 
-      <div class="input-group">
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" #inputGroupFile04 (change)="selectMasterSlide($event)">
-          <label class="custom-file-label" for="inputGroupFile04">{{selectedMasterSlide.item(0).name}}</label>
-        </div>
-      </div>
+      <div *ngIf="selectMaterial === 'tute' || selectMaterial === 'lab' ">
+        <form [formGroup]='adminForm' (ngSubmit)="adminDoc(templateDoc.value)">
 
-      <br>
+          <div class="form-group">
+            <label>Name of the template:</label>
+            <input type="text" formControlName='templateName' class="form-control" #templateDoc>
+
+            <div *ngIf="adminForm.controls['templateName'].touched && !adminForm.controls['templateName'].valid">
+              <span *ngIf="adminForm.controls['templateName'].hasError('required') " style="color: red">  
+            *Please enter name of the template
+            </span>
+            </div>
+            <br>
+            <p>Choose your master doc:</p>
+            <p>*Make sure your master doc does not containt any textual content.It only have one page that describe header,footer
+              and logo formate that you need to check.And name should be <strong>master-(your_doc_name)</strong></p>
+
+            <div class="display-3 text-center">
+              <div *ngIf="currentMasterSlideUpload" class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progressMasterSlide.percentageMasterSlide}}"
+                  aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progressMasterSlide.percentageMasterSlide+'%'}">
+                  {{progressMasterSlide.percentageMasterSlide}}%</div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" #inputGroupFile05 (change)="selectMasterSlide($event)">
+                <label class="custom-file-label" for="inputGroupFile05">{{selectedMasterSlide.item(0).name}}</label>
+              </div>
+            </div>
+
+            <br>
+
+          </div>
+
+          <input type="submit" value="Upload" class="btn btn-primary" [disabled]="!adminForm.valid || selectedMasterSlide === undefined">
+        </form>
+      </div>
 
     </div>
-
-
-    <input type="submit" value="Upload" class="btn btn-primary" [disabled]="!adminForm.valid || selectedMasterSlide === undefined">
-
-  </form>
   </div>
 </div>
+
+<!-- Admin Loading Modal -->
+<div class="modal fade" id="adminTemplateUploadingModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        Your File Successfully Uploaded!
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="pageRefresh()" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
 </div>
+
+<!-- Admin Loading Modal Ends -->
+
+
+<!-- Admin fail Loading Modal -->
+<div class="modal fade" id="adminTemplateUploadingFailModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        Invalid File Format!
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="pageRefresh()" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Admin fail Loading Modal Ends -->
+
+<!-- Admin invalid Loading Modal -->
+<div class="modal fade" id="adminTemplateUploadingExistModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        Template already exist!
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="pageRefresh()" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Admin invalid Loading Modal Ends -->
+
+<!-- Slide Loading Modal -->
+<div class="modal fade" id="adminLoadingModal" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="text-center">
+              <img src="../../../assets/Slide/SlideSpinner.gif" width="250px" height="250px">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Slide Loading Modal Ends -->
 
 <div style="height: 500px">
 </div>
