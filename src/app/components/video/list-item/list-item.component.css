@@ -19,8 +19,8 @@
 }
 
 #thumbnail {
-  height: 50%;
-  width: 100%;
+  height: 150px;
+  width: 200px;
   margin: auto;
   background-color: #26b2ad;
 }
@@ -53,33 +53,4 @@ img {
 
 hr {
   height: 5px;
-}
-
-a {
-  cursor: pointer;
-}
-
-.more-show-hide {
-  -webkit-transition: all linear 0.2s;
-  transition: all linear 0.2s;
-}
-
-.more-show-hide.ng-hide {
-  opacity: 0;
-}
-
-.toggle-dots-grey {
-  color: darkgrey;
-}
-
-.toggle-dots-yellow {
-  color: yellow;
-}
-
-.toggle-link-yellow {
-  color: yellow;
-}
-
-.toggle-link-grey {
-  color: darkgrey;
 }
