@@ -1,0 +1,58 @@
+@import "../../../assets/css/bootstrap.min.css";
+@import "../../../assets/css/animate.css";
+/*@import "../../../assets/css/owl.carousel.min.css";*/
+@import "../../../assets/css/swiper.min.css";
+@import "../../../assets/css/font-awesome.min.css";
+@import "../../../assets/css/flaticon.css";
+@import "../../../assets/css/magnific-popup.css";
+@import "../../../assets/css/metisMenu.min.css";
+@import "../../../assets/css/styles.css";
+
+.service-details-img{
+    background: url(../../../assets/images/service/1.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+.service-details-img4{
+    background: url(../../../assets/images/service/4.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+
+.service-details-img5{
+    background: url(../../../assets/images/service/5.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+
+.service-details-img6{
+    background: url(../../../assets/images/service/12.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+.service-details-img7{
+    background: url(../../../assets/images/service/7.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+
+.service-details-img8{
+    background: url(../../../assets/images/service/8.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+
+.service-details-img9{
+    background: url(../../../assets/images/service/9.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+.service-details-img10{
+    background: url(../../../assets/images/service/13.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+.service-details-img11{
+    background: url(../../../assets/images/service/11.jpg)no-repeat center center / cover;
+    height: 278px;
+}
+
+.service-details ul li i{
+    font-size: 18px;
+    color: #1e799e;
+    position: absolute;
+    left: 10px;
+    top: 6px;
+}
