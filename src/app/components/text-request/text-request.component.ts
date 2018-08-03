@@ -54,8 +54,8 @@ export class TextRequestComponent implements OnInit {
     }else{
       this.isPdf = false;
     }
-    //TODO: Change this.user.id
-    this.textService.searchResource(this.inputValue, this.isPdf, /*this.user.id*/"5b4dc76baf2fc529d0510546").subscribe(
+
+    this.textService.searchResource(this.inputValue, this.isPdf, this.user.id/*"5b4dc76baf2fc529d0510546"*/).subscribe(
       data => {
         $('#exampleModal').modal('hide');
         this.dataService.changeResults(data);

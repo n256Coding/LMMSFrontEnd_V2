@@ -32,7 +32,7 @@
   <div class="row">
     <div class="col-md-9 col-sm-12 col-9 results-pane">
       <!--TODO: Remove slicepipe limit  | slice:0:1-->
-      <app-text-result *ngFor="let resultItem of results.resultItems | slice:0:1"
+      <app-text-result *ngFor="let resultItem of results.resultItems"
           [result]="resultItem"
           [contentType]="contentType"></app-text-result>
       <div class="jumbotron jumbotron-fluid" [hidden]="results.count != 0">
@@ -45,7 +45,7 @@
     <div class="col-md-3 col-sm-12 col-3 recommendation-pane">
       <h4>You may like these</h4>
       <!--TODO: Remove slicepipe limit-->
-      <app-recommendation-item *ngFor="let item of results.recommendations| slice:0:1"
+      <app-recommendation-item *ngFor="let item of results.recommendations"
           [url]="item.url"
           [description]="item.description"
           [title]="item.title"></app-recommendation-item>
