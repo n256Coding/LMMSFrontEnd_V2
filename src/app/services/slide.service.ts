@@ -21,7 +21,7 @@ export class SlideService {
 
   constructor(private http: HttpClient) { }
 
-  pathvalue:string = 'http://localhost:8090';
+  pathvalue:string = 'http://35.231.194.172:8090';
 
   pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
