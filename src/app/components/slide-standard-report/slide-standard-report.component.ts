@@ -56,11 +56,46 @@ export class SlideStandardReportComponent implements OnInit {
                 var countdata: number = 0;
                 var colordata: number = 0;
                 this.totalPoints = 10 * this.maxNo;
+
                 for (let i of this.reportList) {
                     this.currentPoints = this.currentPoints + i.checkingPoints;
                     barLableArray[countlable++] = "Slide No: " + i.slideNo;
                     barDataArray[countdata++] = i.checkingPoints;
                     colorArray[colordata++] = 'rgba(0, 102, 255, 0.5)';
+
+                    if(i.slideNo === this.reportList.length){
+
+                    this.BarChart = new Chart('barChart', {
+                    type: 'bar',
+                    data: {
+                        labels: barLableArray,
+                        datasets: [{
+                            label: 'Success Points in Slide',
+                            data: barDataArray,
+                            backgroundColor: colorArray,
+                            borderWidth: 1
+                        }, {
+                           label:'Success Points',
+                            data: barDataArray,
+
+                            // Changes this dataset to become a line
+                            type: 'line'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 10
+                                }
+                            }]
+                        }
+                    }
+                });
+
+                    }
                 }
 
                 this.successPre = +this.reportList[this.maxNo - 1].summary;
@@ -91,35 +126,7 @@ export class SlideStandardReportComponent implements OnInit {
                 });
                 //////////////////////////////////////////////////////////////
 
-                this.BarChart = new Chart('barChart', {
-                    type: 'bar',
-                    data: {
-                        labels: barLableArray,
-                        datasets: [{
-                            label: 'Success Points in Slide',
-                            data: barDataArray,
-                            backgroundColor: colorArray,
-                            borderWidth: 1
-                        }, {
-                           label:'Success Points',
-                            data: barDataArray,
-
-                            // Changes this dataset to become a line
-                            type: 'line'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    min: 0,
-                                    max: 10
-                                }
-                            }]
-                        }
-                    }
-                });
+            
 
 
                 ////////////////////////////////////////////////////////

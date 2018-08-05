@@ -57,36 +57,11 @@ export class SlideCustomReportComponent implements OnInit {
                     barLableArray[countlable++] = "Slide No: "+i.slideNo;
                     barDataArray[countdata++] = i.checkingPoints;
                     colorArray[colordata++]= 'rgba(0, 102, 255, 0.5)';
-                }
 
-                this.successPre = +this.reportList[this.maxNo - 1].summary;
 
-                this.PieChart = new Chart('pieChart', {
-                    type: 'doughnut',
-                    data: {
-                        labels: ["Success", "Failed"],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [this.successPre, 100 - this.successPre],
-                            backgroundColor: [
-                                'rgba(0, 153, 51,0.7)',
-                                'rgba(204, 0, 0, 0.7)'
-                            ],
+                    if(i.slideNo === this.reportList.length){
 
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        title: {
-                            label:"Success Chart",
-                            display: true
-                        },
-                        responsive: false,
-                        display: true,
-                    }
-                });
-                //////////////////////////////////////////////////////////////
-
+         
                 this.BarChart = new Chart('barChart', {
                     type: 'bar',
                     data: {
@@ -117,7 +92,40 @@ export class SlideCustomReportComponent implements OnInit {
                     }
                 });
 
+                    }
 
+                }
+
+                this.successPre = +this.reportList[this.maxNo - 1].summary;
+
+                this.PieChart = new Chart('pieChart', {
+                    type: 'doughnut',
+                    data: {
+                        labels: ["Success", "Failed"],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [this.successPre, 100 - this.successPre],
+                            backgroundColor: [
+                                'rgba(0, 153, 51,0.7)',
+                                'rgba(204, 0, 0, 0.7)'
+                            ],
+
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            label:"Success Chart",
+                            display: true
+                        },
+                        responsive: false,
+                        display: true,
+                    }
+                });
+                //////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
 
       });
   }
