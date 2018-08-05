@@ -204,20 +204,21 @@ export class SlideComponent implements OnInit {
   }
 
   upload() {
-    //  $('#slideDocLoadingModal').modal('show');
+    
     this.progress.percentage = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
 
     if ((this.currentFileUpload.type === "application/vnd.ms-powerpoint") /* ||
       (this.currentFileUpload.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation") */) {
-
+  
       this.slideService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+      //  $('#slideDocLoadingModal').modal('show');
         if (event.type === HttpEventType.UploadProgress) {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
+            //$('#slideDocLoadingModal').modal('hide');
           console.log('Original Slide is completely uploaded!');
           this.changeToSecond = "Change";
-        //   $('#slideDocLoadingModal').modal('hide');
         }
 
       });
