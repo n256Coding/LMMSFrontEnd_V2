@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import * as bootstrap from "bootstrap";
+
 
 import { AppComponent } from './app.component';
 import { HeadComponent } from './components/head/head.component';
@@ -36,7 +36,7 @@ import { FilterDialog } from "./components/video/filter-dialog/filter-dialog.com
 import { videoService } from './services/video-service';
 import { ProcessingComponent } from './components/video/processing/processing.component';
 
-//enableProdMode();
+// enableProdMode();
 import { MoodleService } from './services/moodle.service';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 import { MoodleResultService } from './services/moodle-result.service';
