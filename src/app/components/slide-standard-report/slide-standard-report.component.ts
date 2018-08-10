@@ -63,37 +63,37 @@ export class SlideStandardReportComponent implements OnInit {
                     barDataArray[countdata++] = i.checkingPoints;
                     colorArray[colordata++] = 'rgba(0, 102, 255, 0.5)';
 
-                    if(i.slideNo === this.reportList.length){
+                    if (i.slideNo === this.reportList.length) {
 
-                    this.BarChart = new Chart('barChart', {
-                    type: 'bar',
-                    data: {
-                        labels: barLableArray,
-                        datasets: [{
-                            label: 'Success Points in Slide',
-                            data: barDataArray,
-                            backgroundColor: colorArray,
-                            borderWidth: 1
-                        }, {
-                           label:'Success Points',
-                            data: barDataArray,
+                        this.BarChart = new Chart('barChart', {
+                            type: 'bar',
+                            data: {
+                                labels: barLableArray,
+                                datasets: [{
+                                    label: 'Success Points in Slide',
+                                    data: barDataArray,
+                                    backgroundColor: colorArray,
+                                    borderWidth: 1
+                                }, {
+                                    label: 'Success Points',
+                                    data: barDataArray,
 
-                            // Changes this dataset to become a line
-                            type: 'line'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    min: 0,
-                                    max: 10
+                                    // Changes this dataset to become a line
+                                    type: 'line'
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            min: 0,
+                                            max: 10
+                                        }
+                                    }]
                                 }
-                            }]
-                        }
-                    }
-                });
+                            }
+                        });
 
                     }
                 }
@@ -117,7 +117,7 @@ export class SlideStandardReportComponent implements OnInit {
                     },
                     options: {
                         title: {
-                            label:"Success Chart",
+                            label: "Success Chart",
                             display: true
                         },
                         responsive: false,
@@ -126,7 +126,7 @@ export class SlideStandardReportComponent implements OnInit {
                 });
                 //////////////////////////////////////////////////////////////
 
-            
+                this.BarChart.update();
 
 
                 ////////////////////////////////////////////////////////
