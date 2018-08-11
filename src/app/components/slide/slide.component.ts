@@ -254,7 +254,7 @@ export class SlideComponent implements OnInit {
 
   permissionToCustomReport: string;
   startCustomSlideValidation(noofslide: number,
-    noofword: number, bullert: number, caudiance: number, fontfamily: string, position: string, header: string,
+    noofword: number, bullert: number, caudiance: number, fontfamily: string, position: string,
     footer: string) {
 
     const newSlide: CustomSlide = new CustomSlide();
@@ -264,8 +264,8 @@ export class SlideComponent implements OnInit {
     newSlide.caudiance = caudiance;
     newSlide.fontfamily = fontfamily;
     newSlide.position = position;
-    newSlide.header = null;
-    newSlide.headertext = null;
+    newSlide.header = "null";
+    newSlide.headertext = "null";
     newSlide.footer = footer;
     newSlide.footertext = this.footertext;
     newSlide.numbering = this.numbering;
