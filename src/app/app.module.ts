@@ -41,12 +41,14 @@ import { MoodleService } from './services/moodle.service';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 import { MoodleResultService } from './services/moodle-result.service';
 import { LoginComponent } from './components/login/login.component';
-import {WebStorageService, SESSION_STORAGE, StorageServiceModule} from "angular-webstorage-service";
+import { WebStorageService, SESSION_STORAGE, StorageServiceModule } from "angular-webstorage-service";
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { MoodleQuizService } from './services/moodle-quiz.service';
+import { MoodleQuizResultsComponent } from './components/moodle-quiz-results/moodle-quiz-results.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { ContactComponent } from './components/contact/contact.component';
     RecommendationItemComponent,
     AboutComponent,
     ContactComponent
+    MoodleResultComponent,
+    MoodleQuizResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +92,7 @@ import { ContactComponent } from './components/contact/contact.component';
     StorageServiceModule
   ],
   entryComponents: [FilterDialog, VideoComponent, ListItemComponent, ProcessingComponent],
-  providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService, MoodleResultService],
+  providers: [TextResourceService, DataService, UserSessionService, videoService, MoodleService, MoodleResultService, MoodleQuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

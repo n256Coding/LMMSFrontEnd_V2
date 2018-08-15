@@ -82,44 +82,39 @@
                       <div class="form-group row">
                         <label for="weekly_lesson_type" class="col-sm-9 col-xs-9 col-form-label">Weekly Lesson Type</label>
                         <div class="col-sm-3 col-xs-3">
-                          <select id="weekly_lesson_type" class="form-control">
-                            <option selected>Topic wise (ex:- Java Development)</option>
-                            <option>Date wise (ex:- 1 January - 7 January)</option>
+                          <select id="weekly_lesson_type" class="form-control" (change)="getTopicType($event)">
+                            <option value="date_wise">Date wise (ex:- 1 January - 7 January)</option>
+                            <option value="topic_wise">Topic wise (ex:- Java Development)</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group row">
                           <label for="weekly_main_desc" class="col-sm-9 col-xs-9 col-form-label">Check main Weekly Description</label>
                           <div class="col-sm-3 col-xs-3">
-                            <select id="weekly_main_desc" class="form-control">
-                              <option selected>Yes</option>
-                              <option>No</option>
+                            <select id="weekly_main_desc" class="form-control" (change)="getMainDescCheck($event)">
+                              <option value="checked">Yes</option>
+                              <option value="not_checked">No</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-group row">
                             <label for="check_resource_name" class="col-sm-9 col-xs-9 col-form-label">Check resource's naming convension</label>
                             <div class="col-sm-3 col-xs-3">
-                              <select id="check_resource_name" class="form-control">
-                                <option selected>Yes</option>
-                                <option>No</option>
+                              <select id="check_resource_name" class="form-control" (change)="getResCheck($event)">
+                                <option value="checked">Yes</option>
+                                <option value="not_checked">No</option>
                               </select>
                             </div>
                           </div>
                           <div class="form-group row">
                               <label for="check_resource_desc" class="col-sm-9 col-xs-9 col-form-label">Check resources description</label>
                               <div class="col-sm-3 col-xs-3">
-                                <select id="check_resource_desc" class="form-control">
-                                  <option selected>Yes</option>
-                                  <option>No</option>
+                                <select id="check_resource_desc" class="form-control" (change)="getResDescCheck($event)">
+                                  <option value="checked">Yes</option>
+                                  <option value="not_cheked">No</option>
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-xs-12 text-right">
-                                  <button type="button" class="btn btn-primary margin-right-10">Apply Settings</button>
-                                </div>
-                              </div>
                     </div>
                 </div>
                 <!-- end moodle settings -->
@@ -139,17 +134,20 @@
           <h4>Moodle Question File Analyzer</h4>
           <div id="question-file-validator" class="row">
             <div class="col-md-9 col-sm-9 col-xs-12 file-uploader-style">
-              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+              <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="selectFile($event)">
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12 ">
-              <button class="btn btn-primary  margin-left-10">Upload</button>
+              <button class="btn btn-primary  margin-left-10" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
             </div>
             <div class="col-sm-12 col-xs-12 ">
-                <div class="progress progress-bar-height">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                <div *ngIf="currentFileUpload" class="progress progress-bar-height">
+                  <div class="progress progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                    aria-valuemin="0" aria-valuemax="100"
+                    [ngStyle]="{width:progress.percentage+'%'}">
+                    </div>
                 </div>
             </div>
-          </div>
       </div>
 
       <!-- question settings -->
@@ -157,16 +155,25 @@
         <hr>
           <div class="quiz-div-style">
             <h4>Question Analyzing Settings<hr></h4>
-            <div class="form-group row">
-              <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">MCQ Question Type</label>
-              <div class="col-md-3 col-sm-3 col-xs-3">
-                <select id="mcq_type" class="form-control">
-                  <option selected>Single Answers</option>
-                  <option>Multiple Answers</option>
+            <div class="form-group">
+                <label for="quizStdType">Analyze Option</label>
+                <select class="form-control" id="quizStdType" (change)="selectedQuizStd($event)">
+                  <option value="basic_quiz_analyze" selected>Basic Analyze</option>
+                  <option value="custom_quiz_analyze">Custom Analyze</option>
                 </select>
-              </div>
             </div>
-            <div class="form-group row">
+            <!-- settings -->
+            <div *ngIf="quizStdType === 'custom_quiz_analyze' ">
+              <div class="form-group row">
+                <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">MCQ Question Type</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="mcq_type" class="form-control">
+                    <option selected>Single Answers</option>
+                    <option>Multiple Answers</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label for="question_amount" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of questions</label>
                 <div class="col-md-3 col-sm-3 col-xs-3">
                   <select id="question_amount" class="form-control">
@@ -176,30 +183,32 @@
                 </div>
               </div>
               <div class="form-group row">
-                  <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of answers (MCQ only)</label>
-                  <div class="col-md-3 col-sm-3 col-xs-3">
-                    <select id="check_resource_name" class="form-control">
-                      <option selected>Yes</option>
-                      <option>No</option>
-                    </select>
-                  </div>
+                <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of answers (MCQ only)</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="check_resource_name" class="form-control">
+                    <option selected>Yes</option>
+                    <option>No</option>
+                  </select>
                 </div>
-                <div class="form-group row">
-                    <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers for each MCQ question</label>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                      <select id="check_resource_desc" class="form-control">
-                        <option selected>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                      </select>
-                    </div>
+              </div>
+              <div class="form-group row">
+                <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers for each MCQ question</label>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <select id="check_resource_desc" class="form-control">
+                    <option selected>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                  </select>
                 </div>
+               </div>
+              </div>
+                <!-- settings ends-->
                 <div class="form-group row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <button type="button" class="btn btn-primary margin-right-10">Apply Settings</button>
-                        <button type="submit" class="btn btn-success margin-left-10">Start Analyze</button>
+                        <!-- <button type="button" class="btn btn-primary margin-right-10" (click)="checkMe()">Apply Settings</button> -->
+                        <button type="button" class="btn btn-primary" (click)="startQuizAnalyze()">Start Analyze</button>
                       </div>
                 </div>
               </div>

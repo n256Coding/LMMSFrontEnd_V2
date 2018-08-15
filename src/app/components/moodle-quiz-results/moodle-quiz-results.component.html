@@ -1,0 +1,40 @@
+<div class="container-fluid main-margin">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 text-center">
+      <h3>Moodle Quiz Analyze Results</h3><hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12" *ngIf="quizResults.checkFileFormat === 'moodle_xml_format'">
+        <div class="card">
+          <div class="card-header">
+            Full Report
+          </div>
+          <div class="card-body">
+            <!-- <h5 class="card-title">Topic Type</h5> -->
+            <p class="card-text">No of Questions : {{quizResults.totalQuestions}}</p>
+            <p class="card-text">No of MCQs : {{quizResults.multiChoice}}</p>
+            <p class="card-text">No of True/False: {{quizResults.trueFalse}}</p>
+            <p class="card-text">No of single answer mcqs: {{quizResults.noOfSingleAnswers}}</p>
+            <p class="card-text">No of multiple answer mcqs: {{quizResults.noOfMultipleAnswers}}</p>
+            <hr>
+            <p class="card-text">Questions which are not having four answers(for MCQs)</p>
+            <ul *ngFor="let eachQues of quizResults.incorrectAnsQ">
+              <li>{{eachQues}}</li>
+            </ul>
+          </div>
+        </div>     
+    </div> 
+    <div class="col-md-12 col-sm-12" *ngIf="quizResults.checkFileFormat === 'not_moodle_xml_format'">
+      <p>No results found.Please check your moodle XML file.</p>
+      <p>File format are listed below.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <a href="moodle" class="btn btn-primary" style="margin-top: 15px">Go back</a>
+        
+    </div>
+  </div>
+</div>

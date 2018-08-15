@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { MoodleResultComponent } from './components/moodle-result/moodle-result.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { MoodleQuizResultsComponent} from './components/moodle-quiz-results/moodle-quiz-results.component';
 
 const routes: Routes = [
   { path : '', redirectTo : '/home', pathMatch : 'full' },
@@ -24,13 +25,14 @@ const routes: Routes = [
   { path : 'video', component : VideoComponent },
   { path : 'video/processing', component : ProcessingComponent },
   { path : 'moodle', component : MoodleComponent },
-  { path : 'slide', component : SlideComponent },
   { path : 'moodle-result', component : MoodleResultComponent },
+  { path : 'moodle-quiz-results', component : MoodleQuizResultsComponent },
+  { path : 'slide', component : SlideComponent },
   { path : 'report', component : SlideStandardReportComponent },
   { path : 'customReportSlide', component : SlideCustomReportComponent },
+  { path : 'adminTemplate',component: AdminTemplateComponent},
   { path : 'loginPage', component : LoginComponent },
   { path : 'home', component : HomeComponent },
-  { path : 'adminTemplate',component: AdminTemplateComponent},
   { path : 'register', component : RegisterComponent },
   { path : 'about',component: AboutComponent },
   { path : 'contact', component : ContactComponent }
