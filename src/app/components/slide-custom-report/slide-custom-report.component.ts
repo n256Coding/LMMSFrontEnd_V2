@@ -26,6 +26,7 @@ export class SlideCustomReportComponent implements OnInit {
     ngOnInit() {
         $('#slideCustomLoadingModal').modal('show');
         this.getSlideReportFromService();
+        this.report();
     }
 
     reportList: SlideStandardReport[];
@@ -71,7 +72,13 @@ export class SlideCustomReportComponent implements OnInit {
                                     data: barDataArray,
                                     backgroundColor: colorArray,
                                     borderWidth: 1
-                                }]
+                                }, {
+								  label: 'Success Point',
+								  data: barDataArray,
+
+								  // Changes this dataset to become a line
+								  type: 'line'
+								}]
                             },
                             options: {
                                 scales: {
@@ -117,30 +124,7 @@ export class SlideCustomReportComponent implements OnInit {
                     }
                 });
                 //////////////////////////////////////////////////////////////
-                this.BarChart = new Chart('barChart', {
-                            type: 'bar',
-                            data: {
-                                labels: barLableArray,
-                                datasets: [{
-                                    label: 'Success Points in Slide',
-                                    data: barDataArray,
-                                    backgroundColor: colorArray,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true,
-                                            min: 0,
-                                            max: 10
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-               // this.BarChart.update();
+            
                 ////////////////////////////////////////////////////////////
 
             });
@@ -150,4 +134,7 @@ export class SlideCustomReportComponent implements OnInit {
         this.location.back();
     }
 
+    report(): void {
+        this.BarChart.update();
+    }
 }

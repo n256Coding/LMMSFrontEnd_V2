@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { SlideStandardReport } from '../../models/SlideStandradReport';
 import { SlideService } from './../../services/slide.service';
-
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import Chart from 'Chart.js'
 
@@ -31,6 +31,8 @@ export class SlideStandardReportComponent implements OnInit {
     ngOnInit() {
         $('#slideStandardLoadingModal').modal('show');
         this.getSlideReportFromService();
+        this.report();
+       
     }
 
     reportList: SlideStandardReport[];
@@ -74,7 +76,13 @@ export class SlideStandardReportComponent implements OnInit {
                                     data: barDataArray,
                                     backgroundColor: colorArray,
                                     borderWidth: 1
-                                }]
+                                }, {
+								  label: 'Success Point',
+								  data: barDataArray,
+
+								  // Changes this dataset to become a line
+								  type: 'line'
+								}]
                             },
                             options: {
                                 scales: {
@@ -120,29 +128,6 @@ export class SlideStandardReportComponent implements OnInit {
                 });
                 //////////////////////////////////////////////////////////////
 
-                this.BarChart = new Chart('barChart', {
-                    type: 'bar',
-                    data: {
-                        labels: barLableArray,
-                        datasets: [{
-                            label: 'Success Points in Slide',
-                            data: barDataArray,
-                            backgroundColor: colorArray,
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    min: 0,
-                                    max: 10
-                                }
-                            }]
-                        }
-                    }
-                });
 
 
                 ////////////////////////////////////////////////////////
@@ -154,5 +139,9 @@ export class SlideStandardReportComponent implements OnInit {
 
     goBack(): void {
         this.location.back();
+    }
+
+    report(): void {
+        this.BarChart.update();
     }
 }
