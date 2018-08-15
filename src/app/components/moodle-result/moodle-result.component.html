@@ -61,7 +61,12 @@
           </div>
           <div class="card-body">
             <!-- <h5 class="card-title">Topic Type</h5> -->
-            <p class="card-text">Topic Type : {{resources.sectionType}}</p>
+            <!-- <p class="card-text">Topic Type : {{resources.sectionType}}</p> -->
+            <p class="card-text" *ngIf="resources.sectionType === 'topic_wise'">Course Organized type (Weekly / Topic) : <span class="topicType-valid">Lessons are divided Topic wisely.</span> </p>
+            <p class="card-text" *ngIf="resources.sectionType === 'not_topic_wise'">Course Organized type (Weekly / Topic) : <span class="topicType-invalid">Lessons are not divided according to your selections.</span> </p>
+            <p class="card-text" *ngIf="resources.sectionType === 'date_wise'">Course Organized type (Weekly / Topic) : <span class="topicType-valid">Lessons are divided Date wisely.</span> </p>
+            <p class="card-text" *ngIf="resources.sectionType === 'not_date_wise'">Course Organized type (Weekly / Topic) : <span class="topicType-invalid">Lessons are not divided according to your selections.</span> </p>
+            
             <p class="card-text" *ngIf="resources.newsForum === 'no forum'"> News Forum : <span class="badge badge-danger">Not Included</span></p>
             <p class="card-text" *ngIf="resources.newsForum === 'News forum'"> News Forum :<span class="badge badge-success">Include</span></p>
           </div>
@@ -76,17 +81,17 @@
                 <thead>
                   <tr>
                     <th>Topic Name</th>
-                    <th>Description</th>
+                    <th>Results</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let eachHeading of resources.headingDetailList">
                     <td>{{eachHeading.headingName}}</td>
                     <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'no_desc')">
-                      <h5><span class="badge badge-warning">Not Included</span></h5>
+                      <h5><span class="badge badge-warning">Description not included</span></h5>
                     </td>
                     <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'desc')">
-                      <h5><span class="badge badge-success">Include</span></h5>
+                      <h5><span class="badge badge-success">Description included</span></h5>
                     </td>
                   </tr>
                 </tbody>
@@ -113,7 +118,7 @@
                       <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-danger" >Incorrect</span></h5></td>
                       <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
                       
-                      <td *ngIf="eachResource.description === 'no_recource_desc'"><h5><span class="badge badge-danger" >Not Included</span></h5></td>
+                      <td *ngIf="eachResource.description === 'no_resource_desc'"><h5><span class="badge badge-danger" >Not Included</span></h5></td>
                       <td *ngIf="eachResource.description === 'resource_desc'"><h5><span class="badge badge-success">Included</span></h5></td>
                       
                     </tr>

@@ -82,44 +82,39 @@
                       <div class="form-group row">
                         <label for="weekly_lesson_type" class="col-sm-9 col-xs-9 col-form-label">Weekly Lesson Type</label>
                         <div class="col-sm-3 col-xs-3">
-                          <select id="weekly_lesson_type" class="form-control">
-                            <option selected>Topic wise (ex:- Java Development)</option>
-                            <option>Date wise (ex:- 1 January - 7 January)</option>
+                          <select id="weekly_lesson_type" class="form-control" (change)="getTopicType($event)">
+                            <option value="date_wise">Date wise (ex:- 1 January - 7 January)</option>
+                            <option value="topic_wise">Topic wise (ex:- Java Development)</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group row">
                           <label for="weekly_main_desc" class="col-sm-9 col-xs-9 col-form-label">Check main Weekly Description</label>
                           <div class="col-sm-3 col-xs-3">
-                            <select id="weekly_main_desc" class="form-control">
-                              <option selected>Yes</option>
-                              <option>No</option>
+                            <select id="weekly_main_desc" class="form-control" (change)="getMainDescCheck($event)">
+                              <option value="checked">Yes</option>
+                              <option value="not_checked">No</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-group row">
                             <label for="check_resource_name" class="col-sm-9 col-xs-9 col-form-label">Check resource's naming convension</label>
                             <div class="col-sm-3 col-xs-3">
-                              <select id="check_resource_name" class="form-control">
-                                <option selected>Yes</option>
-                                <option>No</option>
+                              <select id="check_resource_name" class="form-control" (change)="getResCheck($event)">
+                                <option value="checked">Yes</option>
+                                <option value="not_checked">No</option>
                               </select>
                             </div>
                           </div>
                           <div class="form-group row">
                               <label for="check_resource_desc" class="col-sm-9 col-xs-9 col-form-label">Check resources description</label>
                               <div class="col-sm-3 col-xs-3">
-                                <select id="check_resource_desc" class="form-control">
-                                  <option selected>Yes</option>
-                                  <option>No</option>
+                                <select id="check_resource_desc" class="form-control" (change)="getResDescCheck($event)">
+                                  <option value="checked">Yes</option>
+                                  <option value="not_cheked">No</option>
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-xs-12 text-right">
-                                  <button type="button" class="btn btn-primary margin-right-10">Apply Settings</button>
-                                </div>
-                              </div>
                     </div>
                 </div>
                 <!-- end moodle settings -->
@@ -212,8 +207,8 @@
                 <!-- settings ends-->
                 <div class="form-group row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <button type="button" class="btn btn-primary margin-right-10" (click)="checkMe()">Apply Settings</button>
-                        <button type="button" class="btn btn-success margin-left-10" (click)="startQuizAnalyze()">Start Analyze</button>
+                        <!-- <button type="button" class="btn btn-primary margin-right-10" (click)="checkMe()">Apply Settings</button> -->
+                        <button type="button" class="btn btn-primary" (click)="startQuizAnalyze()">Start Analyze</button>
                       </div>
                 </div>
               </div>

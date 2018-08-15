@@ -25,9 +25,15 @@ export class MoodleComponent implements OnInit {
     private moodleResultService: MoodleResultService, private moodleQuizService: MoodleQuizService) { }
 
   checkValue = "";
-  standardType = "";
+  standardType = "moodle_standard_validation";
   quizStdType = "basic_quiz_analyze";
-  
+  // moodle fields
+  moodleTopicType = "date_wise";
+  weeklyDesc = "checked";
+  resourcesName = "checked";
+  recourcesDesc = "checked";
+  lecturesName = "";
+// end moodle fields
 
   creds :Credential[] = [];
   quizStds: QuizStandards[] = [];
@@ -44,6 +50,20 @@ export class MoodleComponent implements OnInit {
   selectedMoodleStandard(event) {
     this.standardType = event.target.value;
     // alert( this.standardType)
+  }
+  getTopicType(event){
+    this.moodleTopicType = event.target.value;
+  }
+
+  getMainDescCheck(event){
+    this.weeklyDesc = event.target.value;
+  }
+
+  getResCheck(event){
+    this.resourcesName = event.target.value;
+  }
+  getResDescCheck(event){
+    this.recourcesDesc = event.target.value;
   }
 
   selectedValidationOption(event){
@@ -88,8 +108,8 @@ export class MoodleComponent implements OnInit {
     console.log(this.m_username)
   }
 
-  checkMe(){
-    // alert(this.quizStdType)
+
+  applyMoodleValidateSettings(){
 
   }
 
@@ -99,6 +119,15 @@ export class MoodleComponent implements OnInit {
     newMoodle.pwd = userPwd.value;
     newMoodle.loginUrl = loginUrl.value;
     newMoodle.pageUrl = pageUrl.value;
+    newMoodle.standardType = this.standardType;
+
+    if(this.standardType == "moodle_custom_validation"){
+      newMoodle.moodleTopicType = this.moodleTopicType;
+      newMoodle.weeklyDesc = this.weeklyDesc;
+      newMoodle.resourcesName = this.resourcesName;
+      newMoodle.recourcesDesc = this.recourcesDesc;
+    }
+
     this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
         console.log("inserted credentials");
       
