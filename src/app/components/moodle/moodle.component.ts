@@ -32,7 +32,7 @@ export class MoodleComponent implements OnInit {
   moodleTopicType = "date_wise";
   weeklyDesc = "checked";
   resourcesName = "checked";
-  recourcesDesc = "checked";
+  resourcesDesc = "checked";
   lecturesName = "";
 // end moodle fields
 
@@ -70,7 +70,7 @@ export class MoodleComponent implements OnInit {
   }
 
   getResDescCheck(event){
-    this.recourcesDesc = event.target.value;
+    this.resourcesDesc = event.target.value;
   }
 
   selectedValidationOption(event){
@@ -122,7 +122,7 @@ export class MoodleComponent implements OnInit {
       this.testChar = ""
     else
       this.testChar = this.resCharCheck
-      
+
     $('#showResourcePreview').html(this.begin_string +' '+this.testNum +' '+this.testChar + ' xxxxxxxxxxxx')
   }
   
@@ -184,7 +184,10 @@ export class MoodleComponent implements OnInit {
       newMoodle.moodleTopicType = this.moodleTopicType;
       newMoodle.weeklyDesc = this.weeklyDesc;
       newMoodle.resourcesName = this.resourcesName;
-      newMoodle.recourcesDesc = this.recourcesDesc;
+      newMoodle.resourcesDesc = this.resourcesDesc;
+      newMoodle.lecturesName = this.begin_string;
+      newMoodle.lectureNumber = this.resNumCheck;
+      newMoodle.lectureCharacter = this.resCharCheck;
     }
 
     this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {

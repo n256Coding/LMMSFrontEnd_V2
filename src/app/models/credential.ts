@@ -10,8 +10,10 @@ export class Credential {
     public moodleTopicType : string;
     public weeklyDesc: string;
     public resourcesName: string;
-    public recourcesDesc: string;
+    public resourcesDesc: string;
     public lecturesName: string;
+    public lectureNumber: string;
+    public lectureCharacter: string
     // end moodle fields
 
 }
