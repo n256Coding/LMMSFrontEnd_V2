@@ -51,6 +51,7 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 text-center">
       <h3>Moodle Page Validation Results</h3><hr>
+      <a href="moodle" class="btn btn-primary" style="margin-top: 15px">check new page</a>
     </div>
   </div>
   <div class="row">
@@ -104,10 +105,18 @@
             </div>
             <div class="card-body">
               <p style="color: #0f237c">* These results are based on predefined learning standards</p>
+              <p>Filters : 
+                <span class="badge badge-danger">File</span>
+                <span class="badge badge-default">Page</span>
+                <span class="badge badge-warning">URL</span>
+                <span class="badge badge-success">Assignment</span>
+                <span class="badge badge-info">Quiz</span>
+              </p>
               <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>Resources</th>
+                      <th>Resource</th>
+                      <th>Type</th>
                       <th>Name standard</th>
                       <th>Description standard</th>
                     </tr>
@@ -115,6 +124,7 @@
                   <tbody>
                     <tr *ngFor="let eachResource of resources.resourcesList">
                       <td>{{eachResource.resourceName}}</td>
+                      <td>{{eachResource.resourceType}}</td>
                       <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-danger" >Incorrect</span></h5></td>
                       <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
                       
@@ -141,9 +151,28 @@
               <p></p>
               <h6 class="card-title"><b>Graphical Represntation</b></h6><hr>
               <canvas id="myChart" width="700" height="400"></canvas>
-
+              
             </div>
           </div>
+          <div class="card">
+              <div class="card-header">
+                Standard Course pages
+              </div>
+              <div class="card-body">
+                <h6 class="card-title"><b>Full Page Structure</b></h6><hr>
+                <p style="color: blue;">Resources Names are checked according to following conditions.</p>
+                <p>Lecture 1 : name of the resource</p>
+                <p>Tutorial 1 : name of the resource</p>
+                <p>Lab 1 : name of the resource</p>
+                <p>Quiz 1 / Assignment 1 : name of the resource</p>
+                <img src="../../../assets/moodle-images/standard_template.png" width="100%" height="400px"/>
+                <p></p>
+                <h6 class="card-title"><b>Section Structure</b></h6><hr>
+                <p>Brief Descriptions for each weeks</p>
+                <p>Brief Descriptions for each resources.</p>
+                <img src="../../../assets/moodle-images/standard_template1.png" width="100%" height="200px"/>  
+              </div>
+            </div>
     </div>
   </div>
   <div class="row">

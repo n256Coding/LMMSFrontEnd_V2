@@ -4,6 +4,7 @@ export class Credential {
     public loginUrl: string;
     public pageUrl: string;
     public standardType: string;
+    public credentialType: string;
     
     // moodle fields
     public moodleTopicType : string;

@@ -25,6 +25,7 @@ export class MoodleComponent implements OnInit {
     private moodleResultService: MoodleResultService, private moodleQuizService: MoodleQuizService) { }
 
   checkValue = "";
+  btnNeedsCredentials = "no_needs_cred";
   standardType = "moodle_standard_validation";
   quizStdType = "basic_quiz_analyze";
   // moodle fields
@@ -40,7 +41,12 @@ export class MoodleComponent implements OnInit {
   resources : ResourcesList = new ResourcesList();
   quizes :  QuizResults = new  QuizResults();
 
-  m_username ; m_loginUrl ; m_pwd ; m_pageUrl; 
+  m_username ; m_loginUrl ; m_pwd ; m_pageUrl;
+  
+  begin_string; 
+  resNumCheck = "numAdd";
+  resCharCheck = "none";
+  testNum; testChar; 
 
   selectedOption(event) {
     this.checkValue = event.target.value;
@@ -62,6 +68,7 @@ export class MoodleComponent implements OnInit {
   getResCheck(event){
     this.resourcesName = event.target.value;
   }
+
   getResDescCheck(event){
     this.recourcesDesc = event.target.value;
   }
@@ -70,10 +77,58 @@ export class MoodleComponent implements OnInit {
 
   }
 
+  selectResNumType(event){
+    this.resNumCheck = event.target.value;
+  }
+
+  selectResCharType(event){
+    this.resCharCheck = event.target.value;
+  }
+
+  //quizes
   selectedQuizStd(event){
     this.quizStdType = event.target.value;
-    // this.quizStdType = event.target.options[event.target.selectedIndex].text;
-   
+    // this.quizStdType = event.target.options[event.target.selectedIndex].text;   
+  }
+
+  //quizes ends
+
+
+  enterLoginCreds(){
+    this.btnNeedsCredentials = "needs_cred";
+    $('#btn_cancel_cred').removeClass('dis-none')
+    $('#btn_enter_cred').addClass('dis-none')
+  }
+  cancelLoginCreds(){
+    this.btnNeedsCredentials = "no_needs_cred";
+    $('#btn_cancel_cred').addClass('dis-none')
+    $('#btn_enter_cred').removeClass('dis-none')
+  }
+
+  credInfo(){
+    alert('sfsd')
+  }
+
+  showPreviewRes(){
+    $('#showResourcePreview').show();
+    $('#clsResPrew').removeClass('dis-none');
+
+    if(this.resNumCheck === 'numAdd')
+      this.testNum = "1";
+    else
+      this.testNum = "";
+    
+    if(this.resCharCheck === 'none')
+      this.testChar = ""
+    else
+      this.testChar = this.resCharCheck
+      
+    $('#showResourcePreview').html(this.begin_string +' '+this.testNum +' '+this.testChar + ' xxxxxxxxxxxx')
+  }
+  
+  closePreviewRes(){
+    $('#clsResPrew').addClass('dis-none');
+    $('#showResourcePreview').hide();
   }
 
   displayMoodleResults(): void{
@@ -105,7 +160,7 @@ export class MoodleComponent implements OnInit {
   // }
 
   checkData(){
-    console.log(this.m_username)
+    console.log(this.begin_string)
   }
 
 
@@ -113,14 +168,18 @@ export class MoodleComponent implements OnInit {
 
   }
 
-  startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl){
+  startMoodlePageValidation(pageUrl){
     const newMoodle: Credential = new Credential();
-    newMoodle.username = userName.value;
-    newMoodle.pwd = userPwd.value;
-    newMoodle.loginUrl = loginUrl.value;
     newMoodle.pageUrl = pageUrl.value;
     newMoodle.standardType = this.standardType;
+    newMoodle.credentialType = this.btnNeedsCredentials;
 
+    if(this.btnNeedsCredentials =="needs_cred"){
+      newMoodle.username = this.m_username;
+      newMoodle.pwd = this.m_pwd;
+      newMoodle.loginUrl = this.m_loginUrl;
+    }
+    
     if(this.standardType == "moodle_custom_validation"){
       newMoodle.moodleTopicType = this.moodleTopicType;
       newMoodle.weeklyDesc = this.weeklyDesc;
@@ -130,12 +189,12 @@ export class MoodleComponent implements OnInit {
 
     this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
         console.log("inserted credentials");
-      
+        this.displayMoodleResults();
       },err =>{
         alert("cannot connect to the moodle server !!!");
       }
     );
-    this.displayMoodleResults();
+    // this.displayMoodleResults();
   }
 
   // start quiz codes
@@ -193,12 +252,12 @@ export class MoodleComponent implements OnInit {
     
     this.moodleQuizService.addQuizSettings(newQuizSetting).subscribe(quizSettings => {
         console.log("inserted settings");
-      
+        this.displayMoodleQuizResults();
       },err =>{
         alert("cannot connect to the moodle server !!!");
       }
     );
-    this.displayMoodleQuizResults();
+    
   }
 
 
@@ -209,6 +268,7 @@ export class MoodleComponent implements OnInit {
 
   ngOnInit() {
     // this.displayMoodleResults();
+
   }
 
 }
