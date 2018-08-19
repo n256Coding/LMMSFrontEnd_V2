@@ -18,16 +18,21 @@
             <p class="card-text">No of single answer mcqs: {{quizResults.noOfSingleAnswers}}</p>
             <p class="card-text">No of multiple answer mcqs: {{quizResults.noOfMultipleAnswers}}</p>
             <hr>
-            <p class="card-text">Questions which are not having four answers(for MCQs)</p>
-            <ul *ngFor="let eachQues of quizResults.incorrectAnsQ">
-              <li>{{eachQues}}</li>
-            </ul>
+            <p class="card-text">Questions which are not having four answers(for MCQs) :
+              <span class="">{{ quizResults.incorrectAnsQ?.length || '0' }}</span>
+              <button class="btn btn-success margin-left-10" (click)="showNotFourAnsQ()">See Questions</button>
+            </p>
+            <div id="showIncorrectAnswers" class="dis-none">
+              <ul *ngFor="let eachQues of quizResults.incorrectAnsQ">
+                <li>{{eachQues}}</li>
+              </ul>
+            </div>
           </div>
         </div>     
     </div> 
     <div class="col-md-12 col-sm-12" *ngIf="quizResults.checkFileFormat === 'not_moodle_xml_format'">
       <p>No results found.Please check your moodle XML file.</p>
-      <p>File format are listed below.</p>
+      <p style="color: red">File format are listed below.</p>
     </div>
   </div>
   <div class="row">

@@ -1,7 +1,12 @@
 .main-margin{
     margin: 15px 0;    
 }
-
+.margin-left-10{
+    margin-left: 10px;
+}
+.dis-none{
+    display: none;
+}
 .card{
     /* font-family: 'Roboto', sans-serif;  */
     margin-top: 10px;

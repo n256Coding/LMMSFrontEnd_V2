@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizResults } from '../../models/quizResults';
 import { Router } from '@angular/router';
 import { MoodleResultService } from './../../services/moodle-result.service';
+declare var $: any;
 
 @Component({
   selector: 'app-moodle-quiz-results',
@@ -13,8 +14,12 @@ export class MoodleQuizResultsComponent implements OnInit {
   constructor(private router: Router,
     private moodleResultService: MoodleResultService) { }
 
-    quizResults : QuizResults = new QuizResults();
+  quizResults : QuizResults = new QuizResults();
 
+  showNotFourAnsQ(){
+    $('#showIncorrectAnswers').removeClass('dis-none');
+    
+  }
   ngOnInit() {
 
     this.moodleResultService.currentMessageForQuiz.subscribe(

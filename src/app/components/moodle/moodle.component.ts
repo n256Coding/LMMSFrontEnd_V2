@@ -91,6 +91,7 @@ export class MoodleComponent implements OnInit {
     // this.quizStdType = event.target.options[event.target.selectedIndex].text;   
   }
 
+
   //quizes ends
 
 
@@ -106,7 +107,7 @@ export class MoodleComponent implements OnInit {
   }
 
   credInfo(){
-    alert('sfsd')
+    // alert('sfsd')
   }
 
   showPreviewRes(){
