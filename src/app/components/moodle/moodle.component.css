@@ -1,11 +1,13 @@
 /*moodle css file*/
 
 .main-view{
-    padding: 5% 10%;
+    padding: 5% 5%;
     min-height: 500px;
     /* background: #cdcfdf; */
 }
-
+.click-info:hover{
+    cursor: pointer;
+}
 .dis-none{
     display: none;
 }
@@ -14,6 +16,9 @@
 }
 .margin-top-10{
     margin-top: 10px;
+}
+.margin-top-20{
+    margin-top: 20px;
 }
 .margin-left-10{
     margin-left: 10px;
@@ -24,9 +29,20 @@
 .margin-bottom-10{
     margin-bottom: 10px; 
 }
+.margin-right-5{
+    margin-right: 5px;
+}
+.left-10{
+    left: 10px;
+}
 .border-style-1{
     border: 2px solid rgba(139, 139, 139, 0.479);
     padding: 8px;
+}
+.border-style-2{
+    border: 2px solid rgba(139, 139, 139, 0.479);
+    padding: 8px;
+    background-color: rgba(0, 128, 0, 0.055);
 }
 .progress-bar-height{
     height: 8px;
@@ -36,6 +52,9 @@
 }
 .margin-right-10{
     margin-right: 10px;
+}
+.margin-top-4{
+    margin-top: 4px;
 }
 .parent{
     display: flex;
@@ -55,17 +74,23 @@
     margin: 0.5em;
     text-align: left;
 }
-/* .quiz-div-style{ */
-    /* margin: 15px 0 0 0 ; */
-/* } */
+.quiz-div-style{
+    margin: 15px 0 0 0 ;
+}
 
 .file-uploader-style{
-    border: 2px solid rgba(139, 139, 139, 0.479);
+    /* border: 2px solid rgba(139, 139, 139, 0.479); */
     left: 10px;
     padding: 6px;
     margin-bottom: 10px;
 }
-
+.btn-style-1{
+    /* padding-left: 10px; */
+    /* padding-right: 10px; */
+    padding: 5px 10px;
+    border-radius: 0;
+    color: white;
+}
 /* validation messages */
 .invalid-message{
     display: block;

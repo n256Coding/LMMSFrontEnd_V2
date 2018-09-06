@@ -1,45 +1,393 @@
 <div class="container-fluid main-margin">
   <div class="row">
-    <div class="col-md-12 col-sm-12 text-center">
-      <h3>Moodle Quiz Analyze Results</h3><hr>
+    <div class="col-md-12 col-sm-12" *ngIf="quizResults.checkFileFormat === 'not_moodle_xml_format'">
+      <div class="alert alert-warning">
+        <h6><small><b>No results found. Please check your moodle XML file.</b></small></h6>
+        <p style="color: red">File format should be Moodle XML.</p>    
+      </div>
+      
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 col-sm-12" *ngIf="quizResults.checkFileFormat === 'moodle_xml_format'">
+    <!--*ngIf="quizResults.checkFileFormat === 'moodle_xml_format'"-->
+    <div class="col-md-9 col-sm-9 col-xs-12">
         <div class="card">
-          <div class="card-header">
-            Full Report
+          <div class="card-header" *ngIf="quizResults.analyzeType === 'basic_quiz_analyze'">
+            Basic Results
           </div>
+          <div class="card-header" *ngIf="quizResults.analyzeType === 'custom_quiz_analyze'">
+              Custom Results
+            </div>
           <div class="card-body">
-            <!-- <h5 class="card-title">Topic Type</h5> -->
-            <p class="card-text">No of Questions : {{quizResults.totalQuestions}}</p>
-            <p class="card-text">No of MCQs : {{quizResults.multiChoice}}</p>
-            <p class="card-text">No of True/False: {{quizResults.trueFalse}}</p>
-            <p class="card-text">No of single answer mcqs: {{quizResults.noOfSingleAnswers}}</p>
-            <p class="card-text">No of multiple answer mcqs: {{quizResults.noOfMultipleAnswers}}</p>
-            <hr>
-            <p class="card-text">Questions which are not having four answers(for MCQs) :
+            <p class="card-text">Total no of Questions : 
+              <span class="margin-left-10">{{quizResults.totalQuestions}}</span>
+              <small (click)="showAllQues()" class="margin-left-10 show-questions">click here to see questions</small>
+            </p>
+            <div class="row">
+              <div class="col-md-7">
+                <table class="table">
+                  <h5>Question Types</h5>
+                  <tbody>
+                    <tr>
+                      <td>No of Multiple Choice Questions:</td>
+                      <td>{{quizResults.multiChoice}}</td>
+                    </tr>
+                    <tr>
+                      <td>No of True/False Questions:</td>
+                      <td>{{quizResults.trueFalse}}</td>
+                    </tr>
+                    <tr>
+                      <td>No of Short Answer Questions:</td>
+                      <td>{{quizResults.shortAnsQues}}</td>
+                    </tr>
+                    <tr>
+                      <td>No of Numerical Questions:</td>
+                      <td>{{quizResults.numericalQues}}</td>
+                    </tr>
+                    <tr>
+                      <td>No of Matching Questions:</td>
+                      <td>{{quizResults.matchingQues}}</td>
+                    </tr>
+                    <tr>
+                      <td>No of Essay Questions:</td>
+                      <td>{{quizResults.essayQues}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-5">
+                <!-- <button type="button" value="click" class="btn btn=primary" (click)="showChart()">fs</button>  -->
+                <canvas id="quesBasicChart" width="350px" height="350px" style="background-color: rgba(88, 187, 245, 0.281);"></canvas>
+              </div>
+            </div>
+            <div class="row padding-top-20">
+              <div id="tbl_all_ques" class=" div-style-1 dis-none table-responsive">
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>#</th>
+                      <th>name</th>
+                      <th>Type</th>
+                      <th>Answers</th>
+                      <!-- <th>Marks</th> -->
+                    </tr>
+                    
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let wholeQues of quizResults.allQues; let a = index">
+                      <td>{{a+1}}</td>
+                      <td>{{wholeQues.questionName}}</td>
+                      <td>{{wholeQues.questionType}}</td>
+                      <td>
+                        <ul *ngFor="let wholeAns of wholeQues.queAnswers">
+                          <li>{{wholeAns}}</li>
+                          <!-- <li class="{{ wholeQues.answerMarks[k] == '100' ? 'color-success': ''}}">{{wholeAns}}</li> -->
+                          <!-- <li class="color-success" *ngIf="wholeQues.answerMarks[k] == 100">{{wholeAns}}</li>
+                          <li class="color-partially-success" *ngIf="wholeQues.answerMarks[k] < 100 && wholeQues.answerMarks[k] > 0">{{wholeAns}}</li>
+                          <li class="color-danger" *ngIf="wholeQues.answerMarks[k] == 0">{{wholeAns}}</li>
+                          <li class="color-partially-danger" *ngIf="wholeQues.answerMarks[k] < 0">{{wholeAns}}</li> -->
+                        </ul>
+                      </td>
+                      <!-- <td>
+                        <ul *ngFor="let wholeAnsMarks of wholeQues.answerMarks">
+                          <li>{{wholeAnsMarks}}</li>
+                          
+                        </ul>
+                      </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <!-- <p class="card-text">Questions which are not having four answers(for MCQs) :
               <span class="">{{ quizResults.incorrectAnsQ?.length || '0' }}</span>
               <button class="btn btn-success margin-left-10" (click)="showNotFourAnsQ()">See Questions</button>
-            </p>
-            <div id="showIncorrectAnswers" class="dis-none">
-              <ul *ngFor="let eachQues of quizResults.incorrectAnsQ">
-                <li>{{eachQues}}</li>
-              </ul>
-            </div>
+            </p> -->
           </div>
-        </div>     
-    </div> 
-    <div class="col-md-12 col-sm-12" *ngIf="quizResults.checkFileFormat === 'not_moodle_xml_format'">
-      <p>No results found.Please check your moodle XML file.</p>
-      <p style="color: red">File format are listed below.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+        </div>
+        <!-- custom quiz results  -->
+        <div class="card" *ngIf="quizResults.analyzeType === 'custom_quiz_analyze'">
+          <div class="card-header">
+            MCQ Analyze Results
+            <!-- <div class="alert alert-warning">
+              <small>Following results are based on Multiple choice questions(MCQ) only.</small>    
+            </div> -->
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <small><b>Overall Results</b></small>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th><small><b>Your Selection</b></small></th>
+                      <th><small><b>File Results</b></small></th>
+                      <th><small><b>Action</b></small></th>
+                    </tr>
+                  </thead>
+                  <tbody> <!--bg-success-->
+                    <tr class="{{quizResults.userSelections[0] == quizResults.multiChoice ? 'table-success' : 'table-danger' }}">
+                      <td><small>No of MCQs</small></td>
+                      <td><small>{{quizResults.userSelections[0]}}</small></td>
+                      <td><small>{{quizResults.multiChoice}}</small></td>
+                      <td><a class="custom-btn-primary" (click)="showAllMCQs()"><i class="fa fa-info padding-right-5"></i>View</a></td>
+                    </tr>
+                    <tr class="{{quizResults.userSelections[1] == quizResults.noOfSingleAnswers ? 'table-success' : 'table-danger' }}">
+                      <td><small>No of Single Answer Questions</small></td>
+                      <td><small>{{quizResults.userSelections[1]}}</small></td>
+                      <td><small>{{quizResults.noOfSingleAnswers}}</small></td>
+                      <td><a class="custom-btn-primary" (click)="showSingleMCQs()"><i class="fa fa-info padding-right-5"></i>View</a></td>
+                    </tr>
+                    <tr class="{{quizResults.userSelections[2] == quizResults.noOfMultipleAnswers ? 'table-success' : 'table-danger' }}">
+                      <td><small>No of Multiple Answer Questions</small></td>
+                      <td><small>{{quizResults.userSelections[2]}}</small></td>
+                      <td><small>{{quizResults.noOfMultipleAnswers}}</small></td>
+                      <td><a class="custom-btn-primary" (click)="showMultiMCQs()"><i class="fa fa-info padding-right-5"></i>View</a></td>
+                    </tr>
+                    <tr>
+                      <td><small>Answers per Question</small></td>
+                      <td><small>{{quizResults.userSelections[3]}}</small></td>
+                      <td class="table-success"><small>Valid :
+                        </small><small class="margin-left-10">{{quizResults.correctAnsQ?.length || '0'}}</small>
+                      </td>
+                      <td><a class="custom-btn-success" (click)="showcorrectAnswers()"><i class="fa fa-info padding-right-5"></i>View</a></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"></td>
+                      <td class="table-danger"><small>In valid :
+                        </small><small class="margin-left-10">{{quizResults.incorrectAnsQ?.length || '0'}}</small>
+                      </td>
+                      <td><a class="custom-btn-danger" (click)="showIncorrectAnswers()"><i class="fa fa-info padding-right-5"></i>View</a></td>
+                    </tr>
+                  </tbody>     
+                </table>
+              </div>
+            </div>
+            <div class="row"> <!--all mcq table start-->
+              <div id="tbl_all_mcqs" class="col-md-12 col-sm-12 col-xs-12 dis-none">
+                <div class="row padding-top-bottom-15">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="text-center"><b>All MCQs</b></h5>
+                    <span class="custom-span-1 color-success">Correct</span>
+                    <span class="custom-span-1 color-partially-success margin-left-10">Partially Correct</span>
+                    <span class="custom-span-1 color-danger margin-left-10">Incorrect</span>
+                    <span class="custom-span-1 color-partially-danger margin-left-10">Penalty</span>
+                  </div>
+                </div>     
+                <div class="col-md-12 col-sm-12 col-xs-12  div-style-1 ">
+                  <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>#</th>
+                        <th>name</th>
+                        <th>Answers</th>
+                        <th>Grades</th>
+                      </tr>      
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let wholeQues of quizResults.allQues; let a = index">
+                        <td *ngIf="wholeQues.questionType == 'multichoice'">{{a+1}}</td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice'">{{wholeQues.questionName}}</td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice'">
+                          <ul *ngFor="let wholeAns of wholeQues.queAnswers ; let k = index">
+                            <li class="color-success" *ngIf="wholeQues.answerMarks[k] == 100">{{wholeAns}}</li>
+                            <li class="color-partially-success" *ngIf="wholeQues.answerMarks[k] < 100 && wholeQues.answerMarks[k] > 0">{{wholeAns}}</li>
+                            <li class="color-danger" *ngIf="wholeQues.answerMarks[k] == 0">{{wholeAns}}</li>
+                            <li class="color-partially-danger" *ngIf="wholeQues.answerMarks[k] < 0">{{wholeAns}}</li>
+                          </ul>
+                        </td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice'">
+                          <ul *ngFor="let wholeAnsMarks of wholeQues.answerMarks">
+                            <li>{{wholeAnsMarks}}</li>          
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!--all mcq table end-->
+            <div class="row"><!--single answer mcqs starts-->
+              <div id="tbl_single_mcqs" class="col-md-12 col-sm-12 col-xs-12 dis-none">
+                <div class="row padding-top-bottom-15">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="text-center"><b>Single Answer MCQs</b></h5>
+                    <span class="custom-span-1 color-success">Correct</span>
+                    <span class="custom-span-1 color-partially-success margin-left-10">Partially Correct</span>
+                    <span class="custom-span-1 color-danger margin-left-10">Incorrect</span>
+                    <span class="custom-span-1 color-partially-danger margin-left-10">Penalty</span>
+                  </div>
+                </div> 
+                <div class="col-md-12 col-sm-12 col-xs-12  div-style-1">        
+                  <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>#</th>
+                        <th>name</th>
+                        <th>Answers</th>
+                        <th>Grades</th>
+                      </tr>      
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let wholeQues of quizResults.allQues; let a = index">
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'single'">{{a+1}}</td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'single'">
+                          {{wholeQues.questionName}}</td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'single'">
+                          <ul *ngFor="let wholeAns of wholeQues.queAnswers ; let k = index">
+                            <li class="color-success" *ngIf="wholeQues.answerMarks[k] == 100">{{wholeAns}}</li>
+                            <li class="color-partially-success" *ngIf="wholeQues.answerMarks[k] < 100 && wholeQues.answerMarks[k] > 0">{{wholeAns}}</li>
+                            <li class="color-danger" *ngIf="wholeQues.answerMarks[k] == 0">{{wholeAns}}</li>
+                            <li class="color-partially-danger" *ngIf="wholeQues.answerMarks[k] < 0">{{wholeAns}}</li>
+                          </ul>
+                        </td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'single'">
+                          <ul *ngFor="let wholeAnsMarks of wholeQues.answerMarks">
+                            <li>{{wholeAnsMarks}}</li>          
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!--single answer mcqs ends-->
+            <div class="row"><!--multiple answer mcqs starts-->
+              <div id="tbl_multi_mcqs" class="col-md-12 col-sm-12 col-xs-12 dis-none">
+                <div class="row padding-top-bottom-15">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="text-center"><b>Multiple Answer MCQs</b></h5>
+                    <span class="custom-span-1 color-success">Correct</span>
+                    <span class="custom-span-1 color-partially-success margin-left-10">Partially Correct</span>
+                    <span class="custom-span-1 color-danger margin-left-10">Incorrect</span>
+                    <span class="custom-span-1 color-partially-danger margin-left-10">Penalty</span>
+                  </div>
+                </div> 
+                <div class="col-md-12 col-sm-12 col-xs-12  div-style-1"> 
+                  <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>#</th>
+                        <th>name</th>
+                        <th>Answers</th>
+                        <th>Grades</th>
+                      </tr>      
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let wholeQues of quizResults.allQues; let a = index">
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'multiple'">{{a+1}}</td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'multiple'">
+                          {{wholeQues.questionName}}</td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'multiple'">
+                          <ul *ngFor="let wholeAns of wholeQues.queAnswers ; let k = index">
+                            <li class="color-success" *ngIf="wholeQues.answerMarks[k] == 100">{{wholeAns}}</li>
+                            <li class="color-partially-success" *ngIf="wholeQues.answerMarks[k] < 100 && wholeQues.answerMarks[k] > 0">{{wholeAns}}</li>
+                            <li class="color-danger" *ngIf="wholeQues.answerMarks[k] == 0">{{wholeAns}}</li>
+                            <li class="color-partially-danger" *ngIf="wholeQues.answerMarks[k] < 0">{{wholeAns}}</li>
+                          </ul>
+                        </td>
+                        <td *ngIf="wholeQues.questionType == 'multichoice' && wholeQues.mcqType == 'multiple'">
+                          <ul *ngFor="let wholeAnsMarks of wholeQues.answerMarks">
+                            <li>{{wholeAnsMarks}}</li>          
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!--multiple answer mcqs ends-->
+            <div class="row">
+              <div id="tbl_correct_ques" class="col-md-12 col-sm-12 col-xs-12 dis-none">
+                <div class="row padding-top-bottom-15">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="text-center"><b>Valid Questions</b></h5>
+                  </div>
+                </div>
+                <div  class="col-md-12 col-sm-12 col-xs-12  div-style-1">                  
+                  <table class="table table-hover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Answer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let correctQues of quizResults.correctAnsQ" class="table-success">
+                        <td>{{correctQues.questionName}}</td>
+                        <td>
+                          <ul *ngFor="let correctAns of correctQues.queAnswers">
+                            <li>{{correctAns}}</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row padding-top-20">
+              <div id="tbl_incorrect_ques" class="col-md-12 col-sm-12 col-xs-12 dis-none">
+                <div class="row padding-top-bottom-15">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="text-center"><b>In valid Questions</b></h5>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 div-style-1">
+                  <table class="table table-hover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Answer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let incorrectQues of quizResults.incorrectAnsQ" class="table-danger">
+                        <td>{{incorrectQues.questionName}}</td>
+                        <td>
+                          <ul *ngFor="let incorrectAns of incorrectQues.queAnswers" >
+                            <li>{{incorrectAns}}</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
 
-        <a href="moodle" class="btn btn-primary" style="margin-top: 15px">Go back</a>
-        
+          </div> 
+        </div> 
+        <!-- ends custom quiz results -->
     </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+              Our Services
+            </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a href="moodle">Moodle Page Validation Service</a></li>
+                <li class="list-group-item"><a href="moodle">Moodle Quiz Validator</a></li>
+                <li class="list-group-item"><a href="#">MS DOC/PPT Validator</a></li>
+                <li class="list-group-item"><a href="#">Textual Resources Finder</a></li>
+                <li class="list-group-item"><a href="#">Video Resources Finder</a></li>
+              </ul>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              Question Type XML Formats
+            </div>
+            <div class="card-body">
+              <p class="card-text">Overall structure of XML file</p>
+              <img src="../../../assets/moodle-images/overall_1.png" width="70%" height="115px"/><hr>
+              <img src="../../../assets/moodle-images/overall_2.png" width="100%" height="150px"/><hr>
+              <img src="../../../assets/moodle-images/overall_3.png" width="100%" height="250px"/><hr>
+              <p class="card-text">Multiple Choice Type</p>
+              <img src="../../../assets/moodle-images/multi_choice.png" width="100%" height="300px"/><hr>
+              <p class="card-text"><small class="text-muted">References : <a href="https://docs.moodle.org">www.moodle.org</a></small></p>
+            </div> 
+          </div> 
+    </div>
+     
   </div>
 </div>

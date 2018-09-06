@@ -24,22 +24,19 @@ export class MoodleComponent implements OnInit {
   constructor(private moodleService: MoodleService, private router: Router,
     private moodleResultService: MoodleResultService, private moodleQuizService: MoodleQuizService) { }
 
+  //moodle
   checkValue = "";
   btnNeedsCredentials = "no_needs_cred";
   standardType = "moodle_standard_validation";
-  quizStdType = "basic_quiz_analyze";
+  creds :Credential[] = [];
+  resources : ResourcesList = new ResourcesList();
   // moodle fields
   moodleTopicType = "date_wise";
   weeklyDesc = "checked";
   resourcesName = "checked";
   resourcesDesc = "checked";
   lecturesName = "";
-// end moodle fields
-
-  creds :Credential[] = [];
-  quizStds: QuizStandards[] = [];
-  resources : ResourcesList = new ResourcesList();
-  quizes :  QuizResults = new  QuizResults();
+  // end moodle fields
 
   m_username ; m_loginUrl ; m_pwd ; m_pageUrl;
   
@@ -47,6 +44,20 @@ export class MoodleComponent implements OnInit {
   resNumCheck = "numAdd";
   resCharCheck = "none";
   testNum; testChar; 
+  //end moodle
+  
+  //quiz
+  quizStdType = "basic_quiz_analyze";
+  answersAmount = "1";
+  shuffledAnswers = "shuffled";
+
+  quizStds: QuizStandards[] = []; 
+  quizes :  QuizResults = new  QuizResults();
+
+  checkGrade = false;
+
+  all_ques_amount; no_of_mcqs; no_of_s_mcqs; no_of_m_mcqs;
+  //end quiz
 
   selectedOption(event) {
     this.checkValue = event.target.value;
@@ -90,7 +101,13 @@ export class MoodleComponent implements OnInit {
     this.quizStdType = event.target.value;
     // this.quizStdType = event.target.options[event.target.selectedIndex].text;   
   }
+  selectedAnswerAmount(event){
+    this.answersAmount = event.target.value;
+  }
 
+  selectedShuffled(event){
+    this.shuffledAnswers = event.target.value;
+  }
 
   //quizes ends
 
@@ -107,7 +124,37 @@ export class MoodleComponent implements OnInit {
   }
 
   credInfo(){
-    // alert('sfsd')
+    if($('#showAlertCred').hasClass('dis-none')){
+      $('#showAlertCred').removeClass('dis-none')
+      // console.log('true')
+    }else{
+      $('#showAlertCred').addClass('dis-none')
+      // console.log('false')
+    }
+  }
+
+  standardInfo(){
+    if($('#showAlertstdInfo').hasClass('dis-none')){
+      $('#showAlertstdInfo').removeClass('dis-none')
+    }else{
+      $('#showAlertstdInfo').addClass('dis-none')
+    }
+  }
+
+  standardQuizInfo(){
+    if($('#showAlertQuizstdInfo').hasClass('dis-none')){
+      $('#showAlertQuizstdInfo').removeClass('dis-none')
+    }else{
+      $('#showAlertQuizstdInfo').addClass('dis-none')
+    }
+  }
+  
+  fileFormatInfo(){
+    if($('#showAlertFormatInfo').hasClass('dis-none')){
+      $('#showAlertFormatInfo').removeClass('dis-none')
+    }else{
+      $('#showAlertFormatInfo').addClass('dis-none')
+    }
   }
 
   showPreviewRes(){
@@ -164,6 +211,9 @@ export class MoodleComponent implements OnInit {
     console.log(this.begin_string)
   }
 
+  testMe(){
+    alert(this.checkGrade)
+  }
 
   applyMoodleValidateSettings(){
 
@@ -204,10 +254,15 @@ export class MoodleComponent implements OnInit {
   // start quiz codes
   selectedFiles: FileList
   currentFileUpload: File
+  checkUploadDone: String
   progress: { percentage: number } = { percentage: 0 }
   
   selectFile(event) {
     this.selectedFiles = event.target.files;
+    // console.log(this.selectedFiles.item(0).name)
+
+    $('#customFile_quiz').next('.custom-file-label').html(this.selectedFiles.item(0).name);
+
   }
 
   upload() {
@@ -221,15 +276,18 @@ export class MoodleComponent implements OnInit {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
           console.log('File is completely uploaded!');
-        } 
+        }
+        this.checkUploadDone = "done"; 
       },err=>{
         console.log("Failed to complete Uploading!!!");
+        alert('Failed to complete Uploading!!!')
       })
     }else{
       alert("Invalid file format !!! \n Moodle XML files only....")
     }
     this.progress.percentage = 0;
     this.selectedFiles = undefined
+    this.checkUploadDone = undefined
   }
 
   displayMoodleQuizResults(): void{
@@ -254,6 +312,15 @@ export class MoodleComponent implements OnInit {
     const newQuizSetting: QuizStandards = new QuizStandards();
     newQuizSetting.analyzeType = this.quizStdType;
     
+    if(this.quizStdType == "custom_quiz_analyze"){
+      newQuizSetting.checkNoOfAllQues = this.all_ques_amount;
+      newQuizSetting.checkNoOfMCQs = this.no_of_mcqs;
+      newQuizSetting.checkNoOfSingleAns = this.no_of_s_mcqs;
+      newQuizSetting.checkNoOfMultiAns = this.no_of_m_mcqs;
+      newQuizSetting.checkNoOfAns = this.answersAmount;
+      // newQuizSetting.checkShuffled = this.shuffledAnswers;
+    }
+
     this.moodleQuizService.addQuizSettings(newQuizSetting).subscribe(quizSettings => {
         console.log("inserted settings");
         this.displayMoodleQuizResults();
@@ -263,8 +330,7 @@ export class MoodleComponent implements OnInit {
     );
     
   }
-
-
+  
   // end quiz analyze
   
   // End quiz codes
@@ -272,7 +338,7 @@ export class MoodleComponent implements OnInit {
 
   ngOnInit() {
     // this.displayMoodleResults();
-
+   
   }
 
 }
