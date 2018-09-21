@@ -55,8 +55,8 @@ export class AdminTemplateComponent implements OnInit {
 
     this.currentMasterSlideUpload = this.selectedMasterSlide.item(0);
 
-    if ((this.currentMasterSlideUpload.type === "application/vnd.ms-powerpoint") /* ||
-      (this.currentMasterSlideUpload.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation") */) {
+    if ((this.currentMasterSlideUpload.type === "application/vnd.ms-powerpoint")  ||
+      (this.currentMasterSlideUpload.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation") ) {
 
 
       this.slideService.pushMasterSlideToStorage(this.currentMasterSlideUpload).subscribe(event => {
@@ -163,7 +163,7 @@ export class AdminTemplateComponent implements OnInit {
     this.progressMasterSlide.percentageMasterSlide = 0;
 
     this.currentMasterSlideUpload = this.selectedMasterSlide.item(0);
-    if ( /*(this.currentMasterSlideUpload.type === "application/msword") || */
+    if ( (this.currentMasterSlideUpload.type === "application/msword") || 
       (this.currentMasterSlideUpload.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
 
       this.slideService.pushMasterDocToStorage(this.selectedMasterSlide).subscribe(event => {

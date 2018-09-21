@@ -208,8 +208,8 @@ export class SlideComponent implements OnInit {
     this.progress.percentage = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
 
-    if ((this.currentFileUpload.type === "application/vnd.ms-powerpoint") /* ||
-      (this.currentFileUpload.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation") */) {
+    if ((this.currentFileUpload.type === "application/vnd.ms-powerpoint")  ||
+      (this.currentFileUpload.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation") ) {
   
       this.slideService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
       //  $('#slideDocLoadingModal').modal('show');
@@ -449,7 +449,7 @@ export class SlideComponent implements OnInit {
     this.docProgress.docPercentage = 0;
     this.currentDocFileUpload = this.selectedDocFiles.item(0);
 
-    if ( /*(this.currentDocFileUpload.type === "application/msword") || */
+    if ( (this.currentDocFileUpload.type === "application/msword") || 
       (this.currentDocFileUpload.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
 
       this.slideService.pushFileToStorage(this.currentDocFileUpload).subscribe(event => {
