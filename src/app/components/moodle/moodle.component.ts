@@ -24,23 +24,40 @@ export class MoodleComponent implements OnInit {
   constructor(private moodleService: MoodleService, private router: Router,
     private moodleResultService: MoodleResultService, private moodleQuizService: MoodleQuizService) { }
 
+  //moodle
   checkValue = "";
+  btnNeedsCredentials = "no_needs_cred";
   standardType = "moodle_standard_validation";
-  quizStdType = "basic_quiz_analyze";
+  creds :Credential[] = [];
+  resources : ResourcesList = new ResourcesList();
   // moodle fields
   moodleTopicType = "date_wise";
   weeklyDesc = "checked";
   resourcesName = "checked";
-  recourcesDesc = "checked";
+  resourcesDesc = "checked";
   lecturesName = "";
-// end moodle fields
+  // end moodle fields
 
-  creds :Credential[] = [];
-  quizStds: QuizStandards[] = [];
-  resources : ResourcesList = new ResourcesList();
+  m_username ; m_loginUrl ; m_pwd ; m_pageUrl;
+  
+  begin_string; 
+  resNumCheck = "numAdd";
+  resCharCheck = "none";
+  testNum; testChar; 
+  //end moodle
+  
+  //quiz
+  quizStdType = "basic_quiz_analyze";
+  answersAmount = "1";
+  shuffledAnswers = "shuffled";
+
+  quizStds: QuizStandards[] = []; 
   quizes :  QuizResults = new  QuizResults();
 
-  m_username ; m_loginUrl ; m_pwd ; m_pageUrl; 
+  checkGrade = false;
+
+  all_ques_amount; no_of_mcqs; no_of_s_mcqs; no_of_m_mcqs;
+  //end quiz
 
   selectedOption(event) {
     this.checkValue = event.target.value;
@@ -62,18 +79,104 @@ export class MoodleComponent implements OnInit {
   getResCheck(event){
     this.resourcesName = event.target.value;
   }
+
   getResDescCheck(event){
-    this.recourcesDesc = event.target.value;
+    this.resourcesDesc = event.target.value;
   }
 
   selectedValidationOption(event){
 
   }
 
+  selectResNumType(event){
+    this.resNumCheck = event.target.value;
+  }
+
+  selectResCharType(event){
+    this.resCharCheck = event.target.value;
+  }
+
+  //quizes
   selectedQuizStd(event){
     this.quizStdType = event.target.value;
-    // this.quizStdType = event.target.options[event.target.selectedIndex].text;
-   
+    // this.quizStdType = event.target.options[event.target.selectedIndex].text;   
+  }
+  selectedAnswerAmount(event){
+    this.answersAmount = event.target.value;
+  }
+
+  selectedShuffled(event){
+    this.shuffledAnswers = event.target.value;
+  }
+
+  //quizes ends
+
+
+  enterLoginCreds(){
+    this.btnNeedsCredentials = "needs_cred";
+    $('#btn_cancel_cred').removeClass('dis-none')
+    $('#btn_enter_cred').addClass('dis-none')
+  }
+  cancelLoginCreds(){
+    this.btnNeedsCredentials = "no_needs_cred";
+    $('#btn_cancel_cred').addClass('dis-none')
+    $('#btn_enter_cred').removeClass('dis-none')
+  }
+
+  credInfo(){
+    if($('#showAlertCred').hasClass('dis-none')){
+      $('#showAlertCred').removeClass('dis-none')
+      // console.log('true')
+    }else{
+      $('#showAlertCred').addClass('dis-none')
+      // console.log('false')
+    }
+  }
+
+  standardInfo(){
+    if($('#showAlertstdInfo').hasClass('dis-none')){
+      $('#showAlertstdInfo').removeClass('dis-none')
+    }else{
+      $('#showAlertstdInfo').addClass('dis-none')
+    }
+  }
+
+  standardQuizInfo(){
+    if($('#showAlertQuizstdInfo').hasClass('dis-none')){
+      $('#showAlertQuizstdInfo').removeClass('dis-none')
+    }else{
+      $('#showAlertQuizstdInfo').addClass('dis-none')
+    }
+  }
+  
+  fileFormatInfo(){
+    if($('#showAlertFormatInfo').hasClass('dis-none')){
+      $('#showAlertFormatInfo').removeClass('dis-none')
+    }else{
+      $('#showAlertFormatInfo').addClass('dis-none')
+    }
+  }
+
+  showPreviewRes(){
+    $('#showResourcePreview').show();
+    $('#clsResPrew').removeClass('dis-none');
+
+    if(this.resNumCheck === 'numAdd')
+      this.testNum = "1";
+    else
+      this.testNum = "";
+    
+    if(this.resCharCheck === 'none')
+      this.testChar = ""
+    else
+      this.testChar = this.resCharCheck
+
+    $('#showResourcePreview').html(this.begin_string +' '+this.testNum +' '+this.testChar + ' xxxxxxxxxxxx')
+  }
+  
+  closePreviewRes(){
+    $('#clsResPrew').addClass('dis-none');
+    $('#showResourcePreview').hide();
   }
 
   displayMoodleResults(): void{
@@ -105,46 +208,61 @@ export class MoodleComponent implements OnInit {
   // }
 
   checkData(){
-    console.log(this.m_username)
+    console.log(this.begin_string)
   }
 
+  testMe(){
+    alert(this.checkGrade)
+  }
 
   applyMoodleValidateSettings(){
 
   }
 
-  startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl){
+  startMoodlePageValidation(pageUrl){
     const newMoodle: Credential = new Credential();
-    newMoodle.username = userName.value;
-    newMoodle.pwd = userPwd.value;
-    newMoodle.loginUrl = loginUrl.value;
     newMoodle.pageUrl = pageUrl.value;
     newMoodle.standardType = this.standardType;
+    newMoodle.credentialType = this.btnNeedsCredentials;
 
+    if(this.btnNeedsCredentials =="needs_cred"){
+      newMoodle.username = this.m_username;
+      newMoodle.pwd = this.m_pwd;
+      newMoodle.loginUrl = this.m_loginUrl;
+    }
+    
     if(this.standardType == "moodle_custom_validation"){
       newMoodle.moodleTopicType = this.moodleTopicType;
       newMoodle.weeklyDesc = this.weeklyDesc;
       newMoodle.resourcesName = this.resourcesName;
-      newMoodle.recourcesDesc = this.recourcesDesc;
+      newMoodle.resourcesDesc = this.resourcesDesc;
+      newMoodle.lecturesName = this.begin_string;
+      newMoodle.lectureNumber = this.resNumCheck;
+      newMoodle.lectureCharacter = this.resCharCheck;
     }
 
     this.moodleService.addValidateData(newMoodle).subscribe(insertedCred => {
         console.log("inserted credentials");
-      
+        this.displayMoodleResults();
       },err =>{
         alert("cannot connect to the moodle server !!!");
       }
     );
-    this.displayMoodleResults();
+    // this.displayMoodleResults();
   }
 
   // start quiz codes
   selectedFiles: FileList
   currentFileUpload: File
+  checkUploadDone: String
   progress: { percentage: number } = { percentage: 0 }
   
   selectFile(event) {
     this.selectedFiles = event.target.files;
+    // console.log(this.selectedFiles.item(0).name)
+
+    $('#customFile_quiz').next('.custom-file-label').html(this.selectedFiles.item(0).name);
+
   }
 
   upload() {
@@ -158,15 +276,18 @@ export class MoodleComponent implements OnInit {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
           console.log('File is completely uploaded!');
-        } 
+        }
+        this.checkUploadDone = "done"; 
       },err=>{
         console.log("Failed to complete Uploading!!!");
+        alert('Failed to complete Uploading!!!')
       })
     }else{
       alert("Invalid file format !!! \n Moodle XML files only....")
     }
     this.progress.percentage = 0;
     this.selectedFiles = undefined
+    this.checkUploadDone = undefined
   }
 
   displayMoodleQuizResults(): void{
@@ -191,17 +312,25 @@ export class MoodleComponent implements OnInit {
     const newQuizSetting: QuizStandards = new QuizStandards();
     newQuizSetting.analyzeType = this.quizStdType;
     
+    if(this.quizStdType == "custom_quiz_analyze"){
+      newQuizSetting.checkNoOfAllQues = this.all_ques_amount;
+      newQuizSetting.checkNoOfMCQs = this.no_of_mcqs;
+      newQuizSetting.checkNoOfSingleAns = this.no_of_s_mcqs;
+      newQuizSetting.checkNoOfMultiAns = this.no_of_m_mcqs;
+      newQuizSetting.checkNoOfAns = this.answersAmount;
+      // newQuizSetting.checkShuffled = this.shuffledAnswers;
+    }
+
     this.moodleQuizService.addQuizSettings(newQuizSetting).subscribe(quizSettings => {
         console.log("inserted settings");
-      
+        this.displayMoodleQuizResults();
       },err =>{
         alert("cannot connect to the moodle server !!!");
       }
     );
-    this.displayMoodleQuizResults();
+    
   }
-
-
+  
   // end quiz analyze
   
   // End quiz codes
@@ -209,6 +338,7 @@ export class MoodleComponent implements OnInit {
 
   ngOnInit() {
     // this.displayMoodleResults();
+   
   }
 
 }

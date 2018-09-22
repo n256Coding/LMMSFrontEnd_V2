@@ -33,6 +33,7 @@ export class MoodleService {
   }
 
 
-
+  // http://localhost:8080/moodle
+  // http://35.237.129.55:8082/moodle
 
 }

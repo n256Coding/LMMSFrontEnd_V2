@@ -1,60 +1,6 @@
-   
-   <!-- <div class="container" style="padding: 20px;">
-      <h2>Validation Report</h2>
-      <p>Following results are according to the predefined standards.</p>            
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Resources</th>
-            <th>Name standard</th>
-            <th>Description standard</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let eachResource of resources.resourcesList">
-            <td>{{eachResource.resourceName}}</td>
-            <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-warning" style="color: white">Incorrect</span></h5></td>
-            <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
-            
-            <td *ngIf="eachResource.description === 'no_recource_desc'"><h5><span class="badge badge-warning" style="color: white">Incorrect</span></h5></td>
-            <td *ngIf="eachResource.description === 'resource_desc'"><h5><span class="badge badge-success">Correct</span></h5></td>
-            
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row">
-      <div class="col-md-10 col-sm-10">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Topic Name</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let eachHeading of resources.headingDetailList">
-              <td>{{eachHeading.headingName}}</td>
-              <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'no_desc')">
-                <h5><span class="badge badge-warning" style="color: white">Not Included</span></h5>
-              </td>
-              <td *ngIf="(eachHeading.checkHeadingName === 'topic') && (eachHeading.checkheadingDesc === 'desc')">
-                <h5><span class="badge badge-success">Include</span></h5>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div> -->
 <div class="container-fluid main-margin">
   <div class="row">
-    <div class="col-md-12 col-sm-12 text-center">
-      <h3>Moodle Page Validation Results</h3><hr>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-sm-8">
+    <div class="col-md-9 col-sm-9 col-xs-9">
         <div class="card">
           <div class="card-header">
             Lecture presentation Format
@@ -107,7 +53,8 @@
               <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>Resources</th>
+                      <th>Resource</th>
+                      <th>Type</th>
                       <th>Name standard</th>
                       <th>Description standard</th>
                     </tr>
@@ -115,6 +62,7 @@
                   <tbody>
                     <tr *ngFor="let eachResource of resources.resourcesList">
                       <td>{{eachResource.resourceName}}</td>
+                      <td>{{eachResource.resourceType}}</td>
                       <td *ngIf="eachResource.name === 'incorrect_name_format'"><h5><span class="badge badge-danger" >Incorrect</span></h5></td>
                       <td *ngIf="eachResource.name === 'correct_name_format'"><h5><span class="badge badge-success">Correct</span></h5></td>
                       
@@ -128,8 +76,20 @@
           </div>
       
     </div> 
-    <div class="col-md-4 col-sm-4">
-        <div class="card">
+    <div class="col-md-3 col-sm-3 col-xs-9">
+      <div class="card">
+        <div class="card-header">
+          Our Services
+        </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a href="moodle">Moodle Page Validation Service</a></li>
+            <li class="list-group-item"><a href="moodle">Moodle Quiz Validator</a></li>
+            <li class="list-group-item"><a href="#">MS DOC/PPT Validator</a></li>
+            <li class="list-group-item"><a href="#">Textual Resources Finder</a></li>
+            <li class="list-group-item"><a href="#">Video Resources Finder</a></li>
+          </ul>
+      </div>
+        <!-- <div class="card">
             <div class="card-header">
               Overall Result
             </div>
@@ -140,17 +100,28 @@
               <p>Failed Resources   : <b>9</b></p>
               <p></p>
               <h6 class="card-title"><b>Graphical Represntation</b></h6><hr>
-              <canvas id="myChart" width="700" height="400"></canvas>
-
+              <canvas id="myChart" width="700" height="400"></canvas>  
             </div>
+          </div> -->
+        <div class="card">
+          <div class="card-header">
+            Standard Course pages
           </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-
-        <a href="moodle" class="btn btn-primary" style="margin-top: 15px">Go back</a>
-        
+          <div class="card-body">
+            <h6 class="card-title"><b>Full Page Structure</b></h6><hr>
+            <p style="color: blue;">Resources Names are checked according to following conditions.</p>
+            <p>Lecture 1 : name of the resource</p>
+            <p>Tutorial 1 : name of the resource</p>
+            <p>Lab 1 : name of the resource</p>
+            <p>Quiz 1 / Assignment 1 : name of the resource</p>
+            <img src="../../../assets/moodle-images/standard_template.png" width="100%" height="380px"/>
+            <p></p>
+            <h6 class="card-title"><b>Section Structure</b></h6><hr>
+            <p>Brief Descriptions for each weeks</p>
+            <p>Brief Descriptions for each resources.</p>
+            <img src="../../../assets/moodle-images/standard_template1.png" width="100%" height="200px"/>  
+          </div>
+        </div>
     </div>
   </div>
 </div>

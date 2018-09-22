@@ -2,17 +2,19 @@
 <div class="container main-view">
   <!-- start card -->
     <div class="card">
-        <div class="card-header">
-            <h3>Start Moodle Page validation Service</h3>
-        </div>
+        <!-- <div class="card-header">
+            <h3>Moodle Page and Question files validation Service</h3>
+        </div> -->
         <div class="card-body"> <!--start card body-->
-          <h5 class="card-title">Check your Moodle course page with predefined e-learning standards</h5>
-          <!-- <p class="card-text">These standards are founded by our research. Also you can customize the validation selections.</p> -->
+          <!-- <p class="card-title" *ngIf="checkValue === 'moodle_page_view' "><small> You can check your moodle page with our predifined
+            standards. Any login credential details are not saved in our server. Credentials are removed after validation process finished !!</small> </p>
+          <p class="card-title" *ngIf="checkValue === 'quiz_file_view' ">Get an analized report of your moodle quiz files. File format should be in Moodle xml formats only.</p> -->
+          <!-- <p class="card-text">These standards are predefined ones and Also you can customize the validation selections.</p> -->
           <div class="row" style="margin-top: 20px"> <!--start moodle section-->
               <div class="col-sm-12 col-xs-12">
                   <form>
                     <div class="form-group">
-                      <select class="form-control" id="selectOption" (change)="selectedOption($event)">
+                      <select class="custom-select my-1 mr-sm-2" id="selectOption" (change)="selectedOption($event)">
                         <option value="default">Select validation option</option>
                         <option value="moodle_page_view" >Moodle Page Validation</option>
                         <option value="quiz_file_view">Moodle Question File Validation</option>
@@ -24,65 +26,146 @@
           <!-- Moodle page validator row -->
   <div class="row" *ngIf="checkValue === 'moodle_page_view' ">
       <div class="col-sm-12 col-xs-12">
-          <form id="moodle-page-validator" #moodle="ngForm" (ngSubmit)="startMoodlePageValidation(loginUrl, userName, userPwd, pageUrl)">
-            <h4>Moodle Page Validator</h4>
-              <div class="form-group">
-                <label for="moodle_login_url">Moodle Login URL</label>
-                <input [(ngModel)]="m_loginUrl" name="m_loginUrl" #loginUrl="ngModel" type="url" class="form-control" id="moodle_login_url" pattern="(http:\/\/|https:\/\/).*" placeholder="http://example.com/login.php" required>
-                <div  *ngIf="loginUrl?.touched && loginUrl.errors?.required" class="invalid-message">
+          <form id="moodle-page-validator" #moodle="ngForm" (ngSubmit)="startMoodlePageValidation(pageUrl)">
+            <h4 class="margin-top-20"><b>Moodle Page Validator</b></h4>
+            <div class="form-group">
+              <label for="moodle_course_url">Moodle Course Page URL</label>
+              <input [(ngModel)]="m_pageUrl" name="m_pageUrl" #pageUrl="ngModel" type="url" class="form-control" id="moodle_course_url" pattern="(http:\/\/|https:\/\/).*" placeholder="http://example.com/course/view.php" required>
+              <div  *ngIf="pageUrl?.touched && pageUrl.errors?.required" class="invalid-message">
+                Moodle page URL required !!!
+              </div>
+              <div  *ngIf="pageUrl.errors?.pattern" class="invalid-message">
+                Invalid page URL !!!
+              </div>
+            </div>
+            <p style="color: green">
+              <button type="button" id="btn_enter_cred" class="badge badge-success" (click)="enterLoginCreds()">Enter Login Credentials</button>
+              <button type="button" id="btn_cancel_cred" class="badge badge-success dis-none" (click)="cancelLoginCreds()">Cancel Login Credentials</button>
+              <small class="margin-left-5">Click If you required to fill your moodle login Credentials.</small>
+              <i class="fa fa-info-circle margin-left-5 click-info" (click)="credInfo()"></i>
+            </p>
+            <div id="showAlertCred" class="alert alert-warning dis-none">
+              <p><small><b>Why we need your Login Credentials.</b></small></p>
+              <p><small>Some times for the authentication and authorization processes requires to get the information of your
+                moodle pages. Therefore we require login credentials of your LMS for that process.
+                 Also if your LMS doesn't want any logins your can simply add your moodle course page and start the analyze. Otherwise
+                  system will not show the correct results of your page.
+              </small></p>
+              <p><small><b>Important : Any of your Credential details are not saved in our servers.</b></small></p>
+            </div>
+            <div class="border-style-2 margin-bottom-10" *ngIf="btnNeedsCredentials === 'needs_cred' ">
+                 <!-- start  -->
+                <div class="form-group">
+                    <label for="moodle_login_url">Moodle Login URL</label>
+                    <input [(ngModel)]="m_loginUrl" name="m_loginUrl" #loginUrl="ngModel" type="url" class="form-control" id="moodle_login_url" pattern="(http:\/\/|https:\/\/).*" placeholder="http://example.com/login.php" required>
+                    <div  *ngIf="loginUrl?.touched && loginUrl.errors?.required" class="invalid-message">
                       Moodle site's login URL required !!!
-                </div>
-                <div  *ngIf="loginUrl.errors?.pattern" class="invalid-message">
-                  Invalid login URL !!!
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="moodle_login_username">User Name</label>
-                <input [(ngModel)]="m_username" name="m_username" #userName="ngModel" type="text"  class="form-control" id="moodle_login_username"  placeholder="user" required>
-
-                <div  *ngIf="userName?.touched && userName.errors?.required" class="invalid-message">
-                  Moodle site's username required !!!
-                </div>
-              </div>
-
-              <div class="form-group">
-                  <label for="moodle_login_pwd">Password</label>
-                  <input [(ngModel)]="m_pwd" name="m_pwd" #userPwd="ngModel" type="password" class="form-control" id="moodle_login_pwd" placeholder="Password" required>
-                  <div  *ngIf="userPwd?.touched && userPwd.errors?.required" class="invalid-message">
-                    Moodle site's password required !!!
+                    </div>
+                    <div  *ngIf="loginUrl.errors?.pattern" class="invalid-message">
+                      Invalid login URL !!!
+                    </div>
                   </div>
+                    <div class="form-group">
+                      <label for="moodle_login_username">User Name</label>
+                      <input [(ngModel)]="m_username" name="m_username" #userName="ngModel" type="text"  class="form-control" id="moodle_login_username"  placeholder="user" required>
+                      <div  *ngIf="userName?.touched && userName.errors?.required" class="invalid-message">
+                        Moodle site's username required !!!
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="moodle_login_pwd">Password</label>
+                      <input [(ngModel)]="m_pwd" name="m_pwd" #userPwd="ngModel" type="password" class="form-control" id="moodle_login_pwd" placeholder="Password" required>
+                      <div  *ngIf="userPwd?.touched && userPwd.errors?.required" class="invalid-message">
+                        Moodle site's password required !!!
+                      </div>
+                    </div>
+                    <!-- end -->
+            </div>
 
-                </div>
               <!-- <small id="emailHelp" class="form-text text-muted">Only for Login</small> -->
-              <div class="form-group">
-                  <label for="moodle_course_url">Moodle Course Page URL</label>
-                  <input [(ngModel)]="m_pageUrl" name="m_pageUrl" #pageUrl="ngModel" type="url" class="form-control" id="moodle_course_url" pattern="(http:\/\/|https:\/\/).*" placeholder="http://example.com/course/view.php" required>
-                  <div  *ngIf="pageUrl?.touched && pageUrl.errors?.required" class="invalid-message">
-                    Moodle page URL required !!!
-                  </div>
-                  <div  *ngIf="pageUrl.errors?.pattern" class="invalid-message">
-                    Invalid page URL !!!
-                  </div>
-              </div>
+
               <!-- validation type selection div -->
               <div class="border-style-1">
                 <div class="form-group">
                     <label for="standardType">select Validation Type</label>
-                    <select class="form-control" id="standardType" (change)="selectedMoodleStandard($event)">
+                    <select class="custom-select my-1 mr-sm-2" id="standardType" (change)="selectedMoodleStandard($event)">
                       <option value="moodle_standard_validation">Standard Validation</option>
                       <option value="moodle_custom_validation">Custom Validation</option>
                     </select>
+                    <p>
+                      <small id="emailHelp" class="form-text text-muted">
+                        More about standard types.
+                        <i (click)="standardInfo()" class="fa fa-info-circle margin-left-5 click-info"></i>
+                      </small>
+                    </p>
+                    <div id="showAlertstdInfo" class="alert alert-warning dis-none">
+                        <h6><small><b>Standard Validation</b></small></h6>
+                        <p>
+                          <small>
+                             Standard Validation is done according to following rules.
+                              These rules are created by our team after done the literature Reviews.
+                              You can customize the checking rules in <Strong>Custom Validation</Strong>.
+                              Resource can be pdf, file, assigments, quizes, videos, audios or folder.
+                             <ul>
+                               <li>Resource name : Lecture (number) : " Your Resource's name".</li>
+                               <li>Heading Type will be a any type(Topice or Week).</li>
+                               <li>Weekly Heading or Topic Heading must be included.</li>
+                               <li>Resource definition must be included below the file.</li>
+                               <li>News forum must included top of the page.</li>
+                             </ul>
+                          </small>
+                        </p>
+                        <h6><small><b>Custom Validation</b></small></h6>
+                        <p>
+                          <small>
+                            You can select what type of selections should included or not in for analyzing process.
+                          </small>
+                        </p>
+                    </div>
                 </div>
                  <!-- moodle settings  -->
                 <div>
                   <hr>
                     <div class="moodle-div-style" *ngIf="standardType === 'moodle_custom_validation' ">
                       <h4>Custom Validation Settings<hr></h4>
+                      <p><b>Resource Names Structure</b></p>
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="inputBeginString" >Begining String</label>
+                            <input [(ngModel)]="begin_string" name="begin_string" #beginString="ngModel" type="text" class="form-control margin-top-4" id="inputBeginString" required>
+                            <div *ngIf="beginString?.touched && beginString.errors?.required" class="invalid-message">
+                              Begining String is required !!!
+                            </div>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="inputState">Number</label>
+                            <select id="inputState" class="custom-select my-1 mr-sm-2" (change)="selectResNumType($event)">
+                              <option value="numAdd">added</option>
+                              <option value="numNotAdd">not added</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="inputChar">Characters</label>
+                            <select id="inputState" class="custom-select my-1 mr-sm-2" (change)="selectResCharType($event)">
+                              <option value="none">none</option>
+                              <option value=":">:</option>
+                              <option value="-">-</option>
+                              <option value="=">=</option>
+                              <!-- <option value="">{}</option> -->
+                            </select>
+                          </div>
+                          <p><span class="badge badge-info margin-left-10 click-info" (click)="showPreviewRes()">Preview</span></p>
+                          <p><span id="showResourcePreview"class="margin-left-10" style="color: forestgreen"></span>
+                          <i id="clsResPrew" class="fa fa-close margin-left-5 dis-none" (click)="closePreviewRes()" style="color: firebrick"></i></p>
+                        </div>
                       <div class="form-group row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <hr>
+                          <p><b>Other Settings</b></p>
+                        </div>
                         <label for="weekly_lesson_type" class="col-sm-9 col-xs-9 col-form-label">Weekly Lesson Type</label>
                         <div class="col-sm-3 col-xs-3">
-                          <select id="weekly_lesson_type" class="form-control" (change)="getTopicType($event)">
+                          <select id="weekly_lesson_type" class="custom-select my-1 mr-sm-2" (change)="getTopicType($event)">
                             <option value="date_wise">Date wise (ex:- 1 January - 7 January)</option>
                             <option value="topic_wise">Topic wise (ex:- Java Development)</option>
                           </select>
@@ -91,7 +174,7 @@
                       <div class="form-group row">
                           <label for="weekly_main_desc" class="col-sm-9 col-xs-9 col-form-label">Check main Weekly Description</label>
                           <div class="col-sm-3 col-xs-3">
-                            <select id="weekly_main_desc" class="form-control" (change)="getMainDescCheck($event)">
+                            <select id="weekly_main_desc" class="custom-select my-1 mr-sm-2" (change)="getMainDescCheck($event)">
                               <option value="checked">Yes</option>
                               <option value="not_checked">No</option>
                             </select>
@@ -100,7 +183,7 @@
                         <div class="form-group row">
                             <label for="check_resource_name" class="col-sm-9 col-xs-9 col-form-label">Check resource's naming convension</label>
                             <div class="col-sm-3 col-xs-3">
-                              <select id="check_resource_name" class="form-control" (change)="getResCheck($event)">
+                              <select id="check_resource_name" class="custom-select my-1 mr-sm-2" (change)="getResCheck($event)">
                                 <option value="checked">Yes</option>
                                 <option value="not_checked">No</option>
                               </select>
@@ -109,7 +192,7 @@
                           <div class="form-group row">
                               <label for="check_resource_desc" class="col-sm-9 col-xs-9 col-form-label">Check resources description</label>
                               <div class="col-sm-3 col-xs-3">
-                                <select id="check_resource_desc" class="form-control" (change)="getResDescCheck($event)">
+                                <select id="check_resource_desc" class="custom-select my-1 mr-sm-2" (change)="getResDescCheck($event)">
                                   <option value="checked">Yes</option>
                                   <option value="not_cheked">No</option>
                                 </select>
@@ -120,104 +203,193 @@
                 <!-- end moodle settings -->
               </div>
               <!-- end validation type selection div -->
-              <button type="submit" class="btn btn-primary margin-top-10" [disabled]="moodle.invalid">Submit & Analyze</button>
+              <button type="submit" class="btn btn-primary btn-style-1 margin-top-10" [disabled]="moodle.invalid"><i class="fa fa-angle-double-right margin-right-5"></i>Submit & Analyze</button>
               <!-- <small id="emailHelp" class="form-text text-muted">Credintials are not saving</small> -->
-              <!-- <button id="test" type="button" class="btn btn-primary margin-top-10" (click)="sendMoodleCredentials()">Submit</button> -->
-              <!-- <button type="button" class="btn btn-success margin-top-10 margin-left-10" (click)="displayMoodleResults()" >Start Analyze</button> -->
             </form>
       </div>
     </div>
     <!-- //moodle page validaton row -->
-        <!-- question file analyzer row -->
+
+    <!-- question file analyzer row -->
     <div class="row" *ngIf="checkValue === 'quiz_file_view' ">
       <div class="col-sm-12 col-xs-12">
-          <h4>Moodle Question File Analyzer</h4>
+        <form id="moodle-quiz-validator" #MoodleQuiz="ngForm">
+          <h4 class="margin-top-20"><b>Moodle Question File Analyzer</b></h4>
           <div id="question-file-validator" class="row">
-            <div class="col-md-9 col-sm-9 col-xs-12 file-uploader-style">
-              <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="selectFile($event)">
+            <div class="col-md-10 col-sm-10 col-xs-12 custom-file file-uploader-style">
+              <input type="file" class="custom-file-input" id="customFile_quiz" (change)="selectFile($event)">
+              <label class="custom-file-label" for="customFile_quiz">Choose file</label>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-12 ">
-              <button class="btn btn-primary  margin-left-10" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+            <div class="col-md-2 col-sm-2 col-xs-12 ">
+              <button class="btn btn-primary btn-style-1 margin-left-10" [disabled]="!selectedFiles" (click)="upload()"><i class="fa fa-upload margin-right-5"></i>Upload</button>
+              <i (click)="fileFormatInfo()" class="fa fa-question-circle margin-left-10 click-info" style="padding-top: 5px"></i>
+            </div>
+            <div id="showAlertFormatInfo" class="col-md-11 col-sm-11 col-xs-12 left-10 alert alert-warning dis-none">
+                <h6><small><b>Uploaded File formats should be in Moodle xml formats. Otherwise Uploading will not be done correctly.</b></small></h6>
             </div>
             <div class="col-sm-12 col-xs-12 ">
-                <div *ngIf="currentFileUpload" class="progress progress-bar-height">
-                  <div class="progress progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-                    aria-valuemin="0" aria-valuemax="100"
-                    [ngStyle]="{width:progress.percentage+'%'}">
-                    </div>
+              <div *ngIf="currentFileUpload" class="progress progress-bar-height">
+                <div class="progress progress-bar progress-bar-striped progress-bar-animated"
+                  role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                  aria-valuemin="0" aria-valuemax="100"
+                  [ngStyle]="{width:progress.percentage+'%'}">
                 </div>
+              </div>
             </div>
-      </div>
+          </div>
 
-      <!-- question settings -->
-      <div class="col-md-12 col-md-12 col-xs-12 ">
-        <hr>
-          <div class="quiz-div-style">
-            <h4>Question Analyzing Settings<hr></h4>
-            <div class="form-group">
-                <label for="quizStdType">Analyze Option</label>
-                <select class="form-control" id="quizStdType" (change)="selectedQuizStd($event)">
+          <!-- question settings -->
+          <div class="col-md-12 col-md-12 col-xs-12 ">
+            <div class="quiz-div-style">
+              <div class="form-group">
+                <label class="my-1 mr-2" for="quizStdType"><b>Analyze Option</b></label>
+                <select class="custom-select my-1 mr-sm-2" id="quizStdType" (change)="selectedQuizStd($event)">
                   <option value="basic_quiz_analyze" selected>Basic Analyze</option>
                   <option value="custom_quiz_analyze">Custom Analyze</option>
                 </select>
-            </div>
-            <!-- settings -->
-            <div *ngIf="quizStdType === 'custom_quiz_analyze' ">
-              <div class="form-group row">
-                <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">MCQ Question Type</label>
-                <div class="col-md-3 col-sm-3 col-xs-3">
-                  <select id="mcq_type" class="form-control">
-                    <option selected>Single Answers</option>
-                    <option>Multiple Answers</option>
-                  </select>
+                <p>
+                  <small class="form-text text-muted">
+                    More about Analyze types.
+                    <i (click)="standardQuizInfo()" class="fa fa-info-circle margin-left-5 click-info"></i>
+                  </small>
+                </p>
+                <div id="showAlertQuizstdInfo" class="alert alert-warning dis-none">
+                  <h6><small><b>Basic Analyze</b></small></h6>
+                  <p>
+                    <small>
+                      Basic Analyze only shows following categories.
+                      <ul>
+                        <li>Number of questions.</li>
+                        <li>Number of Question types.</li>
+                        <li>Question details.</li>
+                      </ul>
+                    </small>
+                  </p>
+                  <h6><small><b>Custom Analyze</b></small></h6>
+                  <p>
+                    <small>
+                      You can select what type of selections should included or not in for analyzing process.
+                    </small>
+                  </p>
                 </div>
               </div>
-              <div class="form-group row">
-                <label for="question_amount" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of questions</label>
-                <div class="col-md-3 col-sm-3 col-xs-3">
-                  <select id="question_amount" class="form-control">
-                    <option selected>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">Check no of answers (MCQ only)</label>
-                <div class="col-md-3 col-sm-3 col-xs-3">
-                  <select id="check_resource_name" class="form-control">
-                    <option selected>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers for each MCQ question</label>
-                <div class="col-md-3 col-sm-3 col-xs-3">
-                  <select id="check_resource_desc" class="form-control">
-                    <option selected>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                  </select>
-                </div>
-               </div>
-              </div>
-                <!-- settings ends-->
+              <!-- settings -->
+              <div class="border-style-2" *ngIf="quizStdType === 'custom_quiz_analyze' ">
                 <div class="form-group row">
-                      <div class="col-md-12 col-sm-12 col-xs-12">
-                        <!-- <button type="button" class="btn btn-primary margin-right-10" (click)="checkMe()">Apply Settings</button> -->
-                        <button type="button" class="btn btn-primary" (click)="startQuizAnalyze()">Start Analyze</button>
+                  <label for="mcq_type" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Overall Questions</label>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <input [(ngModel)]="all_ques_amount" name="all_ques_amount" #allQuesAmount="ngModel" type="text" class="form-control" pattern="[0-9]*" placeholder="ex : 20" required />
+                    <div  *ngIf="allQuesAmount?.touched && allQuesAmount.errors?.required" class="invalid-message">
+                      Questions amount required !!!
+                    </div>
+                    <div  *ngIf="allQuesAmount.errors?.pattern" class="invalid-message">
+                      Numbers only !!!
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <hr>
+                  <p><b>Multiple Choice Question Settings</b></p>
+                </div>
+                <div class="form-group row">
+                  <label for="question_amount" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Questions</label>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <input [(ngModel)]="no_of_mcqs" #mcqAmount="ngModel" type="text" class="form-control" name="no_of_mcqs" placeholder="ex : 20" pattern="[0-9]*" required />
+                    <div  *ngIf="mcqAmount?.touched && mcqAmount.errors?.required" class="invalid-message">
+                      Questions amount required !!!
+                    </div>
+                    <div  *ngIf="mcqAmount.errors?.pattern" class="invalid-message">
+                      Numbers only !!!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="check_resource_name" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Single Answer Questions</label>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <input [(ngModel)]="no_of_s_mcqs" name="no_of_s_mcqs" #singleQuesAmount="ngModel" type="text" class="form-control" placeholder="ex : 10" pattern="[0-9]*" required />
+                    <div  *ngIf="singleQuesAmount?.touched && singleQuesAmount.errors?.required" class="invalid-message">
+                      Questions amount required !!!
+                    </div>
+                    <div  *ngIf="singleQuesAmount.errors?.pattern" class="invalid-message">
+                      Numbers only !!!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="check_resource_desc" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Multiple Answer Questions</label>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <input [(ngModel)]="no_of_m_mcqs" name="no_of_m_mcqs" #multiQuesAmount="ngModel" type="text" class="form-control" placeholder="ex : 10" pattern="[0-9]*" required />
+                    <div  *ngIf="multiQuesAmount?.touched && multiQuesAmount.errors?.required" class="invalid-message">
+                      Questions amount required !!!
+                    </div>
+                    <div  *ngIf="multiQuesAmount.errors?.pattern" class="invalid-message">
+                      Numbers only !!!
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <hr>
+                  <p><b>Answers Settings</b></p>
+                </div>
+                <div class="form-group row">
+                  <label for="answers_amount" class="col-md-9 col-sm-9 col-xs-9 col-form-label">No of Answers per Question</label>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <select id="answers_amount" class="custom-select my-1 mr-sm-2" (change)="selectedAnswerAmount($event)">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- <div class="form-group row">
+                  <label for="shuffle_answers" class="col-sm-9 col-xs-9 col-form-label">All Answers are shuffled</label>
+                  <div class="col-sm-3 col-xs-3">
+                    <select id="shuffle_answers" class="form-control" (change)="selectedShuffled($event)">
+                      <option value="shuffled">True</option>
+                      <option value="not_shuffled">False</option>
+                    </select>
+                  </div>
+                </div> -->
+                <div class="form-group row">
+                  <div class="col-sm-11">Analyze Gradings
+                  </div>
+                  <div class="col-sm-1">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1" name="checkGrade" checked disabled>
+                      <label class="form-check-label" for="gridCheck1">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-11">Check whether Penalty marks are added for the incorrect answers.
+                      <small style="color: #c21010"> ( Multiple Answer Questions Only. !!! )</small>
+                    </div>
+                    <div class="col-sm-1">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1" name="checkGrade" checked disabled>
+                        <label class="form-check-label" for="gridCheck1">
+                        </label>
                       </div>
+                    </div>
+                  </div>
+              </div>
+              <!-- settings ends-->
+              <div class="form-group row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <button type="submit" class="btn btn-primary btn-style-1 margin-top-10" [disabled]="(!checkUploadDone || MoodleQuiz.invalid)" (click)="startQuizAnalyze()"><i class="fa fa-angle-double-right margin-right-5"></i>Start Analyze</button>
                 </div>
               </div>
+            </div>
           </div><!-- question settings end -->
-        </div><!-- //question file analyzer row -->
-      </div> <!--end start card body-->
-    </div>
-    <!--end start card -->
-
+        </form>
+      </div><!-- //question file analyzer row -->
+    </div> <!--end start card body-->
+  </div><!--end start card -->
 </div>
 <!-- //main -->
 
