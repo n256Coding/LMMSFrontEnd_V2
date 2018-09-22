@@ -75,7 +75,7 @@ import { MoodleQuizResultsComponent } from './components/moodle-quiz-results/moo
     RegisterComponent,
     RecommendationItemComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
     MoodleResultComponent,
     MoodleQuizResultsComponent
   ],

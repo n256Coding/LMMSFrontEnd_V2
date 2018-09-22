@@ -19,18 +19,18 @@ export class MoodleQuizService {
 
   pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
- 
+
     formdata.append('file', file);
- 
-    const req = new HttpRequest('POST', 'http://localhost:8080/moodle/upload', formdata, {
+
+    const req = new HttpRequest('POST', 'http://35.237.129.55:8082/moodle/upload', formdata, {
       reportProgress: true,
       responseType: 'text'
     });
- 
+
     return this.http.request(req);
-    
+
   }
- 
+
   // getFiles(): Observable<string[]> {
   //   return this.http.get('/getallfiles');
   // }
