@@ -166,6 +166,7 @@ export class SlideComponent implements OnInit {
     this.bcolor = event.target.value;
   }
 
+
   onNumbering(event) {
     console.log(event.target.value);
     this.numbering = event.target.value;

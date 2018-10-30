@@ -144,4 +144,8 @@ export class SlideStandardReportComponent implements OnInit {
     report(): void {
         this.BarChart.update();
     }
+
+      onPrint(){
+    window.print();
+}
 }

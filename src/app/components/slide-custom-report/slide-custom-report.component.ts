@@ -137,4 +137,8 @@ export class SlideCustomReportComponent implements OnInit {
     report(): void {
         this.BarChart.update();
     }
+
+      onPrint(){
+    window.print();
+}
 }
