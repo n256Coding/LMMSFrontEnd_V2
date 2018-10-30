@@ -22,7 +22,7 @@ export class MoodleQuizService {
 
     formdata.append('file', file);
 
-    const req = new HttpRequest('POST', 'http://35.237.129.55:8082/moodle/upload', formdata, {
+    const req = new HttpRequest('POST', 'http://localhost:8082/moodle/upload', formdata, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -36,14 +36,14 @@ export class MoodleQuizService {
   // }
 
   addQuizSettings(QuizSettings: QuizStandards):Observable<QuizStandards>{
-    return this.http.post<QuizStandards>('http://localhost:8080/moodle/savequizsettings',QuizSettings,httpOptions).pipe(
+    return this.http.post<QuizStandards>('http://localhost:8082/moodle/savequizsettings',QuizSettings,httpOptions).pipe(
       tap((moodleQuiz:QuizStandards) => console.log(`Inserted - ${JSON.stringify(moodleQuiz)}`)),
       catchError(error => of(new QuizStandards()))
     );
   }
 
   getMoodleQuizResults():Observable<QuizResults>{
-    return this.http.get<QuizResults>('http://localhost:8080/moodle/quizresults').pipe(
+    return this.http.get<QuizResults>('http://localhost:8082/moodle/quizresults').pipe(
       tap((validateResult => console.log(`validateQuizResults = ${JSON.stringify(validateResult)}`)),
     catchError(error => of()))
     );
