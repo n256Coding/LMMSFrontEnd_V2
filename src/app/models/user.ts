@@ -7,6 +7,7 @@ export class User {
     public userRoles: string[];
     public subjects: string[];
     public university: string;
+    public email: string;
 
     constructor() {
     }

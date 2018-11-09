@@ -42,7 +42,8 @@ export class HeadComponent implements OnInit {
   }
 
   isAdminUser(){
-    return this.userSession.isAdminUser() == null ? false : this.userSession.isAdminUser();
+    const isAdminUser = this.userSession.isAdminUser();
+    return isAdminUser == null ? false : isAdminUser;
   }
 
   authenticated() {

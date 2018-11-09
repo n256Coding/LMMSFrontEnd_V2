@@ -49,6 +49,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { MoodleQuizService } from './services/moodle-quiz.service';
 import { MoodleQuizResultsComponent } from './components/moodle-quiz-results/moodle-quiz-results.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { MoodleQuizResultsComponent } from './components/moodle-quiz-results/moo
     AboutComponent,
     ContactComponent,
     MoodleResultComponent,
-    MoodleQuizResultsComponent
+    MoodleQuizResultsComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,

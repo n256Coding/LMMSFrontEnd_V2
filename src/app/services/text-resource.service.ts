@@ -15,10 +15,26 @@ export class TextResourceService {
   }
 
   searchResource(keywords: string, ispdf: boolean, userId: string): Observable<InsiteSearchResult> {
-    return this.http.get<InsiteSearchResult>(this.textSearchUrl + '?q=' + keywords + '&pdf=' + ispdf + '&userId=' + userId);
+    return this.http.get<InsiteSearchResult>(this.textSearchUrl + '?q=' + encodeURIComponent(keywords) + '&pdf=' + ispdf + '&userId=' + userId);
   }
 
   setRating(rating: Rating): Observable<OperationStatus> {
     return this.http.put<OperationStatus>(this.textSearchUrl + '/rating', rating);
+  }
+
+  getTrustedSites(): Observable<TrustedSites[]> {
+    return this.http.get<TrustedSites[]>(this.textSearchUrl + '/trustedsites');
+  }
+
+  getTrustedSitesByKeyword(query: string): Observable<TrustedSites[]> {
+    return this.http.get<TrustedSites[]>(this.textSearchUrl + '/trustedsites?query=' + query);
+  }
+
+  addOrUpdateTrustedSites(trustedSites: TrustedSites): Observable<OperationStatus> {
+    return this.http.post<OperationStatus>(this.textSearchUrl + '/trustedsites', trustedSites);
+  }
+
+  deleteTrustedSites(keyword: string): Observable<OperationStatus> {
+    return this.http.delete<OperationStatus>(this.textSearchUrl + '/trustedsites?keyword='+ encodeURIComponent(keyword));
   }
 }

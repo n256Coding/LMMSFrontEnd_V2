@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-10">
+      <h1 >List of trusted online sources</h1>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-success mt-3" (click)="showUpdateDialog(null)">Add New Source</button>
+    </div>
+  </div>
+
+
+  <div class="row mt-5">
+    <div class="col-2">
+      Subject
+    </div>
+    <div class="col-4">
+      Identifiers
+    </div>
+    <div class="col-4">
+      Trusted Sites
+    </div>
+    <div class="col-2">
+      &nbsp;
+    </div>
+    <hr class="w-100"/>
+  </div>
+  <div class="row mt-4" *ngFor="let aTrustedSite of allTrustedSites">
+    <div class="col-2">
+      <input type="text" class="form-control" value="{{aTrustedSite.keyword}}" [disabled]="true"/>
+    </div>
+    <div class="col-4">
+      <span *ngFor="let synon of aTrustedSite.synons">
+        <h5 class="float-left"><span class="badge badge-primary m-1">{{synon}}</span></h5>
+      </span>
+      <!--<textarea class="form-control" [disabled]="true">{{aTrustedSite.synons}}</textarea>-->
+    </div>
+    <div class="col-4">
+      <div *ngFor="let site of aTrustedSite.sites">
+        <span class="badge badge-pill badge-info">{{site}}</span>
+      </div>
+      <!--<textarea class="form-control" [disabled]="true" (loadeddata)="">{{aTrustedSite.sites}}</textarea>-->
+    </div>
+    <div class="col-2">
+      <button class="btn btn-dark btn-sm mx-2 mb-2" (click)="showUpdateDialog(aTrustedSite)">Update</button>
+      <button class="btn btn-danger btn-sm mx-2" (click)="deleteTrustedSite(aTrustedSite.keyword)">Remove</button>
+    </div>
+    <hr class="w-100"/>
+  </div>
+  <div class="row mt-4">
+    <div class="col-2">
+    </div>
+  </div>
+
+
+  <!--Modal-->
+  <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+       aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Trusted Site Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="loadAllTrustedSites()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col-2">
+                <label for="keyword">Subject</label>
+                <input id="keyword" type="text" class="form-control" [(ngModel)]="trustedSite.keyword"
+                       [disabled]="!isNewSite" />
+
+              </div>
+              <div class="col-5">
+                <label for="sites">Identifiers (Separate using commas)</label>
+                <textarea id="synons" class="form-control" [(ngModel)]="trustedSite.synons"></textarea>
+              </div>
+              <div class="col-5">
+                <label for="sites">Sites (Separate using commas)</label>
+                <textarea id="sites" rows="8" class="form-control" [(ngModel)]="trustedSite.sites" required></textarea>
+                <p class="text-danger" *ngIf="!isWebAddressCorrect">
+                  One or more site address not in correct format.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="loadAllTrustedSites()">
+              Cancel
+            </button>
+            <input type="submit" class="btn btn-secondary" value="OK" (click)="addOrUpdateTrustedSite(trustedSite)"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

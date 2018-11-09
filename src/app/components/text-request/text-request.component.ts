@@ -55,7 +55,8 @@ export class TextRequestComponent implements OnInit {
       this.isPdf = false;
     }
 
-    this.textService.searchResource(this.inputValue, this.isPdf, this.user.id/*"5b4dc76baf2fc529d0510546"*/).subscribe(
+    //TODO: Change userID
+    this.textService.searchResource(this.inputValue, this.isPdf, /*this.user.id*/"5b4dc76baf2fc529d0510546").subscribe(
       data => {
         $('#exampleModal').modal('hide');
         this.dataService.changeResults(data);
@@ -71,7 +72,10 @@ export class TextRequestComponent implements OnInit {
     );
   }
 
-
+  isAdminUser(){
+    const isAdminUser = this.sessionService.isAdminUser();
+    return isAdminUser == null ? false : isAdminUser;
+  }
 
   ngOnInit() {
     this.user = this.sessionService.getCurrentUser();
