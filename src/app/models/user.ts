@@ -3,11 +3,13 @@ export class User {
     public userName: string;
     public password: string;
     public firstName: string;
+    public email: string;
     public lastName: string;
-    public userRoles: string[];
+
     public subjects: string[];
     public university: string;
-    public email: string;
+    public userRoles: string[];
+
 
     constructor() {
     }
