@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { postModel } from "../../models/searchPostModel";
 import { FilterDialog } from "./filter-dialog/filter-dialog.component";
@@ -14,7 +14,7 @@ declare var $: any;
   styleUrls: ['./video.component.css']
 })
 
-export class VideoComponent {
+export class VideoComponent implements OnInit{
 
   selectedFilters: string[];
   model: postModel;
@@ -32,15 +32,14 @@ export class VideoComponent {
   }
 
   getUser() {
-    this.userSession.currentMessage.subscribe(data => {
-      this.user = data;
-    });
+    this.user = this.userSession.getCurrentUser();
   }
 
   searchInDB() {
     this.model.userId = this.user.id;
     this.model.filters = this.selectedFilters;
     this.model.searchKeyword = this.searchKeyword;
+    console.log("user id : " + this.model.userId);
     $('#moodleLoadingModal').modal('show');
 
     this.videoService.searchVideosInDatabase(this.model)
@@ -79,6 +78,10 @@ export class VideoComponent {
     if (i >= 0) {
       this.selectedFilters.splice(i, 1);
     }
+  }
+
+  ngOnInit() {
+    this.getUser();
   }
 }
 
