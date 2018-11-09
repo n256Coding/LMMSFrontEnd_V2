@@ -37,11 +37,9 @@ export class VideoComponent implements OnInit{
 
   searchInDB() {
     this.model.userId = this.user.id;
-	
-	console.log("user id : " + this.model.userId);
-	
     this.model.filters = this.selectedFilters;
     this.model.searchKeyword = this.searchKeyword;
+    console.log("user id : " + this.model.userId);
     $('#moodleLoadingModal').modal('show');
 
     this.videoService.searchVideosInDatabase(this.model)
