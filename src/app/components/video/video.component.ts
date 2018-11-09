@@ -4,6 +4,8 @@ import { postModel } from "../../models/searchPostModel";
 import { FilterDialog } from "./filter-dialog/filter-dialog.component";
 import { videoService } from "../../services/video-service";
 import { listItem } from "../../models/ListItemModel";
+import { User } from '../../models/User';
+import { UserSessionService } from '../../services/user-session.service';
 
 @Component({
   selector: 'app-video',
@@ -22,12 +24,20 @@ export class VideoComponent {
   listItems: listItem[];
   message: string;
 
-  constructor(public dialog: MatDialog, private videoService: videoService) {
+  private user: User;
+
+  constructor(public dialog: MatDialog, private videoService: videoService, private userSession: UserSessionService) {
     this.model = new postModel();
   }
 
+  getUser() {
+    this.userSession.currentMessage.subscribe(data => {
+      this.user = data;
+    });
+  }
+
   searchInDB() {
-    this.model.userId = "u0001";
+    this.model.userId = this.user.id;
     this.model.filters = this.selectedFilters;
     this.model.searchKeyword = this.searchKeyword;
 
