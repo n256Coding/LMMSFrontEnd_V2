@@ -11,7 +11,6 @@ export class User {
     public userRoles: string[];
 
 
-
     constructor() {
     }
 }
