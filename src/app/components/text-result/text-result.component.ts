@@ -1,5 +1,5 @@
 import { Rating } from './../../models/rating';
-import { User } from './../../models/user';
+import { User } from '../../models/user';
 import { UserSessionService } from './../../services/user-session.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { TextResourceService } from '../../services/text-resource.service';

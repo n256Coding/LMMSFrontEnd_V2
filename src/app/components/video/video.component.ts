@@ -4,7 +4,7 @@ import { postModel } from "../../models/searchPostModel";
 import { FilterDialog } from "./filter-dialog/filter-dialog.component";
 import { videoService } from "../../services/video-service";
 import { listItem } from "../../models/ListItemModel";
-import { User } from '../../models/User';
+import { User } from '../../models/user';
 import { UserSessionService } from '../../services/user-session.service';
 
 declare var $: any;
