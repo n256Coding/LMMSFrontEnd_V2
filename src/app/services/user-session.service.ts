@@ -75,6 +75,7 @@ export class UserSessionService {
     user.lastName = currentUser.lastName;
     user.userRoles = currentUser.userRoles;
     user.university = currentUser.university;
+    user.email = currentUser.email;
     user.subjects = currentUser.subjects;
 
     return user;
