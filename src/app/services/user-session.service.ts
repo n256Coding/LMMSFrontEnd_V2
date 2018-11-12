@@ -8,7 +8,7 @@ import {SESSION_STORAGE, WebStorageService} from "angular-webstorage-service";
 @Injectable()
 export class UserSessionService {
 
-  hostname = "http://34.217.10.5:8085/";
+  hostname = "http://18.236.105.137:8085/";
 
   private messageSource = new BehaviorSubject(new User);
   currentMessage = this.messageSource.asObservable();
