@@ -10,6 +10,7 @@ export class User {
   public university: string;
   public userRoles: string[];
 
-    constructor() {
-    }
+
+  constructor() {
+  }
 }
